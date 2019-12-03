@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="import" href="../common/common.html"/>
+    <script src="../js/service/userInfoService.js"></script>
+    <script src="../js/controller/userInfoServiceController.js"></script>
+</head>
+<body class="h" ng-app="soiroc" ng-controller="userInfoServiceController">
+    <header class="header headerB">
+        <nav class="nav">
+            
+        </nav>
+        <div class="content">
+            <div class="marginAuto">
+                <div class="loginAlert hide">
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="jobLogin">
+        <div class="marginAuto">
+            <h1>求职者注册</h1>
+            <h2>精英人才100万+丨各类顾问1万+丨合作企业近千家</h2>
+            <div class="inputBox">
+                <dl>
+                    <dt>
+                        <i>*</i>手机号码
+                    </dt>
+                    <dd>
+                        <label for="">
+                            <input ng-model="entity.mobile" class="phone" type="text" placeholder="请输入手机号" maxlength="11">
+                            <span ng-bind="entity.errorMsg.mobile" class="error"></span>
+                        </label>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <i>*</i>验证码
+                    </dt>
+                    <dd>
+                        <label for="" class="vCodeBox">
+                            <input ng-model="entity.vCodeBox" class="vCode" type="text" placeholder="请输入图片验证码" maxlength="6">
+                            <span ng-bind="entity.errorMsg.vCodeBox" class="error"></span>
+                        </label>
+                        <canvas id="canvas"></canvas>
+                        
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <i>*</i>短信验证码
+                    </dt>
+                    <dd>
+                        <label for="">
+                            <input ng-model="entity.phoneCode" class="phoneCode" type="text" placeholder="请输入手机验证码" maxlength="6">
+                            <strong class="phoneCodeBtn" ng-click="codeSave($event)">获取验证码</strong>
+                            <span ng-bind="entity.errorMsg.phoneCode" class="error"></span>
+                        </label>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <i>*</i>设置密码
+                    </dt>
+                    <dd>
+                        <label for="">
+                            <input class="pass" type="password" placeholder="请输入密码" ng-model="entity.password">
+                            <span ng-bind="entity.errorMsg.password" class="error"></span>
+                        </label>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <i>*</i>确认密码
+                    </dt>
+                    <dd>
+                        <label for="">
+                            <input class="pass" type="password" placeholder="重复输入密码" ng-model="entity.password1">
+                            <span ng-bind="entity.errorMsg.password1" class="error"></span>
+                        </label>
+                    </dd>
+                </dl>         
+            </div>
+            <div class="agreement">
+                <input type="checkbox" id="agreement" ng-true-value="true" ng-false-value="false" ng-model="entity.agreement"><label class="label1" for="agreement"></label>
+                注册表示您同意 <a href="javascript:;">平台协议</a>
+                <span ng-bind="entity.errorMsg.agreement" class="error"></span>
+            </div>
+            <div class="btn">
+                <a ng-click="save()" href="javascript:;">注册</a>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        
+    </footer>
+    <div class="alertBox">
+
+    </div>
+</body>
+</html>

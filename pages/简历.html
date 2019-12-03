@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="import" href="../common/common.html"/>
+</head>
+<body class="h">
+    <header class="header headerB marginBottom">
+        <nav class="nav">
+            
+        </nav>
+        <div class="content">
+            <div class="marginAuto">
+                <div class="loginAlert hide">
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="must-resume">
+        <div class="marginAuto">
+            <form class="layui-form" action="">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i>*</i>姓名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required  lay-verify="required" placeholder="身份证中文名，无中文名可为护照上姓名" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i>*</i>性别</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="sex" value="男" title="男">
+                        <input type="radio" name="sex" value="女" title="女">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i>*</i>现在行业</label>
+                    <div class="layui-input-block">
+                        <select name="city" lay-verify="required">
+                            <option value=""></option>
+                            <option value="0">1</option>
+                            <option value="1">2</option>
+                            <option value="2">3</option>
+                            <option value="3">4</option>
+                            <option value="4">5</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-phone-item">
+                    <label class="layui-form-label"><i>*</i>手机号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        <span class="error">输入错误</span>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i>*</i>最近职位</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        <span class="error">输入错误</span>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-zn-item">
+                    <label class="layui-form-label"><i>*</i>现属职能</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        <span class="error">输入错误</span>
+                    </div>
+                </div>
+                <div class="btn">
+                    <a href="javascript:;">取消</a>
+                    <a href="javascript:;">保存</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="alertBox"></div>
+    <footer class="footer">
+        
+    </footer>
+</body>
+</html>

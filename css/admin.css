@@ -1,0 +1,799 @@
+.admin-header.layui-header {
+  background: #D23637;
+}
+
+.admin-header .layui-logo {
+  background: #393939;
+  width: 222px;
+}
+
+.admin-header .layui-logo img {
+  width: 169px;
+}
+
+.admin-header .layui-nav .layui-nav-item a {
+  font-size: 18px;
+  color: white;
+  padding: 0 25px;
+}
+
+.admin-header .layui-nav .i-second {
+  text-align: center;
+}
+
+.admin-header .layui-nav .i-second a {
+  color: #d23637;
+}
+
+.admin-header .layui-nav .layui-nav-more {
+  border-width: 10px;
+  margin-top: -5px;
+}
+
+.admin-header .layui-nav .layui-nav-more.layui-nav-mored {
+  margin-top: -15px;
+}
+
+.admin-header .layui-nav-bar {
+  display: none;
+}
+
+.admin-slide.layui-side {
+  width: 222px;
+}
+
+.admin-slide.layui-bg-black {
+  background: #393939 !important;
+}
+
+.admin-slide .layui-side-scroll {
+  width: 222px;
+}
+
+.admin-slide .layui-nav-tree {
+  width: 222px;
+}
+
+.admin-slide .layui-nav-tree.layui-nav {
+  background: #393939;
+}
+
+.admin-slide .layui-nav-tree.layui-nav .layui-nav-more {
+  background: url(../images/icon58.png) no-repeat;
+  border: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  right: 32px;
+  transform: rotate(-90deg);
+}
+
+.admin-slide .layui-nav-tree.layui-nav .layui-nav-itemed .layui-nav-more {
+  transform: rotate(0deg);
+}
+
+.admin-slide .layui-nav-tree .layui-nav-child dd.layui-this a {
+  background: #d23637;
+  border-color: #d23637;
+}
+
+.admin-slide .layui-nav-tree .layui-nav-child dd:hover {
+  background: #4D4D4D;
+}
+
+.admin-slide .layui-nav-tree .layui-nav-item a {
+  padding: 0;
+  text-align: center;
+  box-sizing: border-box;
+  border-left: 4px solid #393939;
+}
+
+.admin-slide .layui-nav-tree .layui-nav-item a:hover {
+  border-left: 4px solid #d23636;
+}
+
+.admin-slide .layui-nav-tree .layui-nav-itemed > .layui-nav-child {
+  background-color: inherit !important;
+}
+
+.admin-slide .layui-nav-tree .layui-nav-bar {
+  display: none;
+}
+
+.layui-body {
+  left: 222px;
+  box-sizing: border-box;
+  padding: 20px;
+  background: #f5f5f5;
+  height: 100%;
+}
+
+.admin-content {
+  background: #fff;
+  padding: 30px 20px;
+}
+
+.admin-content .admin-top-title {
+  position: relative;
+  padding-bottom: 18px;
+  border-bottom: 2px solid #DBDCE2;
+  margin-bottom: 18px;
+}
+
+.admin-content .admin-top-title .page-btn {
+  border: 1px solid #D8D8D8;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.admin-content .admin-top-title .page-btn a {
+  font-size: 14px;
+  color: #999999;
+  display: inline-block;
+  width: 100px;
+  line-height: 40px;
+  text-align: center;
+}
+
+.admin-content .admin-top-title .page-btn a:first-child {
+  border-right: 1px solid #D8D8D8;
+}
+
+.admin-content .admin-top-title .page-btn a:hover, .admin-content .admin-top-title .page-btn a.on {
+  background: #FEFBF9;
+  color: #D23637;
+}
+
+.admin-content .admin-top-title .title h1 {
+  font-size: 24px;
+  color: #333333;
+  text-align: center;
+}
+
+.admin-content .admin-top-title .issue-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.admin-content .admin-top-title .issue-btn a {
+  display: inline-block;
+  width: 100px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 14px;
+  color: #FFFFFF;
+  background: #D23637;
+}
+
+.admin-content .admin-top-title .money {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 24px;
+  color: #D23637;
+}
+
+.admin-content .tops {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 29px;
+  border-bottom: 2px solid #DBDCE2;
+}
+
+.admin-content .tops .date {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  color: #403D3D;
+}
+
+.admin-content .tops .date span {
+  display: inline-block;
+  margin: 0 20px;
+  width: 8px;
+  border-top: 1px solid #403D3D;
+}
+
+.admin-content .tops .date .wzlx {
+  margin-left: 40px;
+}
+
+.admin-content .tops .date input {
+  width: 190px;
+  height: 40px;
+  font-size: 14px;
+}
+
+.admin-content .tops .date input.data-input {
+  background: url(../images/icon59.png) no-repeat 150px center;
+}
+
+.admin-content .tops .date .layui-form-select dl dd.layui-this {
+  background-color: #D23637;
+}
+
+.admin-content .tops .search input {
+  width: 270px;
+  height: 40px;
+  border: 1px solid #979797;
+  font-size: 14px;
+  box-sizing: border-box;
+  padding-left: 20px;
+}
+
+.admin-content .tops .search button {
+  font-size: 16px;
+  color: #000000;
+  border: 1px solid #C0C0C1;
+  box-sizing: border-box;
+  width: 60px;
+  height: 40px;
+  background: #F8F9FB;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.admin-content .tops .search button:hover {
+  background: #D23637;
+  color: #fff;
+  border: 1px solid #D23637;
+}
+
+.admin-content .table .title h1 {
+  line-height: 63px;
+  text-align: center;
+  font-size: 24px;
+  color: #333333;
+}
+
+.admin-content .table .list table thead tr {
+  background: #F8F0F0;
+}
+
+.admin-content .table .list table thead tr th {
+  height: 80px;
+  font-size: 20px;
+  color: #666666;
+  border-right: 1px solid #DBDCE2;
+}
+
+.admin-content .table .list table thead tr th:last-child {
+  border-right: 0;
+}
+
+.admin-content .table .list table tr:nth-child(even) {
+  background: #FEFBF9;
+}
+
+.admin-content .table .list table tr td {
+  height: 80px;
+  font-size: 20px;
+  color: #666666;
+  text-align: center;
+  border-right: 1px solid #DBDCE2;
+}
+
+.admin-content .table .list table tr td.handle a {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.admin-content .table .list table tr td.handle a:hover {
+  color: #D23637;
+}
+
+.admin-content .table .list table tr td.a-red a {
+  color: #D23637;
+}
+
+.admin-content .table .list table tr td:last-child {
+  border-right: 0;
+}
+
+.admin-content .table .list #page, .admin-content .table .list #page1 {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.admin-content .table .list #page .layui-laypage a, .admin-content .table .list #page1 .layui-laypage a {
+  margin-right: 12px;
+}
+
+.admin-content .table .list #page .layui-laypage a:hover, .admin-content .table .list #page1 .layui-laypage a:hover {
+  color: #D23637;
+}
+
+.admin-content .table .list #page .layui-laypage > :first-child, .admin-content .table .list #page .layui-laypage-next, .admin-content .table .list #page .layui-laypage-skip, .admin-content .table .list #page1 .layui-laypage > :first-child, .admin-content .table .list #page1 .layui-laypage-next, .admin-content .table .list #page1 .layui-laypage-skip {
+  border: 0;
+  width: auto !important;
+}
+
+.admin-content .table .list #page .layui-laypage a, .admin-content .table .list #page .layui-laypage span, .admin-content .table .list #page1 .layui-laypage a, .admin-content .table .list #page1 .layui-laypage span {
+  padding: 0;
+  width: 30px;
+  text-align: center;
+  line-height: 30px;
+  height: 30px;
+  margin: 0 12px;
+  font-size: 14px;
+  color: #4A4A4A;
+}
+
+.admin-content .table .list #page .layui-laypage .layui-laypage-curr .layui-laypage-em, .admin-content .table .list #page1 .layui-laypage .layui-laypage-curr .layui-laypage-em {
+  background-color: #D23637;
+  color: #fff;
+}
+
+.admin-content .table .list #page .layui-laypage input, .admin-content .table .list #page1 .layui-laypage input {
+  width: 136px;
+  height: 30px;
+  font-size: 14px;
+}
+
+.admin-content .table .list #page .layui-laypage input:focus, .admin-content .table .list #page1 .layui-laypage input:focus {
+  border: 1px solid #D23637 !important;
+}
+
+.admin-content .table .list #page .layui-laypage-btn, .admin-content .table .list #page1 .layui-laypage-btn {
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #D23637;
+  padding: 0 20px;
+  margin-left: 26px;
+  color: #D23637;
+}
+
+.admin-joinSr .tops {
+  border-bottom: 0;
+}
+
+.del-alert {
+  width: 469px;
+  padding-bottom: 30px;
+}
+
+.del-alert .title {
+  background: #F8F0F0;
+  text-align: center;
+}
+
+.del-alert .title h1 {
+  font-size: 30px;
+  color: #9699AC;
+  line-height: 60px;
+}
+
+.del-alert .content {
+  text-align: center;
+}
+
+.del-alert .content p {
+  line-height: 100px;
+  font-size: #9699AC;
+  font-size: 24px;
+  color: #9699AC;
+}
+
+.del-alert .content .btn a {
+  display: inline-block;
+  font-size: 20px;
+  color: #000000;
+  width: 160px;
+  line-height: 40px;
+  background: #FEFBF9;
+  box-sizing: border-box;
+  border: 1px solid #979797;
+  margin: 0 15px;
+}
+
+.del-alert .content .btn a:hover {
+  background: #D23637;
+  border: 1px solid #D23637;
+  color: #fff;
+}
+
+.del-alert .content .btn a.layui-layer-close {
+  position: relative;
+}
+
+.admin-position {
+  font-size: 16px;
+  color: #D23637;
+  margin-bottom: 20px;
+}
+
+.admin-position a {
+  color: #D23637;
+}
+
+.admin-joinSr-issue {
+  padding-left: 200px;
+}
+
+.admin-joinSr-issue .layui-form .layui-form-item {
+  margin-bottom: 20px;
+}
+
+.admin-joinSr-issue .layui-form .layui-form-label {
+  text-align: left;
+  font-size: 20px;
+  color: #282828;
+  padding: 0 15px;
+  line-height: 50px;
+  width: 120px;
+  text-align: left;
+}
+
+.admin-joinSr-issue .layui-form .layui-input-block {
+  margin-left: 150px;
+  width: 500px;
+}
+
+.admin-joinSr-issue .layui-form .layui-form-select dl dd {
+  font-size: 20px;
+}
+
+.admin-joinSr-issue .layui-form .layui-form-text .layui-input-block {
+  width: 1172px;
+}
+
+.admin-joinSr-issue .layui-form .layui-form-text .layui-input-block .layui-textarea {
+  font-size: 20px;
+  height: 177px;
+}
+
+.admin-joinSr-issue .layui-form .ydl-item .layui-input-block {
+  width: 140px;
+}
+
+.admin-joinSr-issue .layui-form .layui-form-select dl dd.layui-this {
+  background-color: #D23637;
+}
+
+.admin-joinSr-issue .layui-form .layui-input {
+  height: 50px;
+  font-size: 20px;
+}
+
+.admin-joinSr-issue .layui-form .btn {
+  margin-left: 150px;
+}
+
+.admin-joinSr-issue .layui-form .btn a {
+  display: inline-block;
+  width: 160px;
+  line-height: 40px;
+  font-size: 20px;
+  color: #FFFFFF;
+  background: #C5C5C5;
+  text-align: center;
+  margin-right: 30px;
+}
+
+.admin-joinSr-issue .layui-form .btn a:hover {
+  background: #D23637;
+}
+
+.admin-news .tops {
+  margin-bottom: 13px;
+}
+
+.admin-news-add {
+  padding-left: 200px;
+}
+
+.admin-news-add .layui-form .layui-form-label {
+  text-align: left;
+  font-size: 20px;
+  color: #282828;
+  padding: 0 15px;
+  line-height: 50px;
+  width: 100px;
+  text-align: left;
+}
+
+.admin-news-add .layui-form .tit-item .layui-input-block {
+  width: 500px;
+}
+
+.admin-news-add .layui-form .zw-item .layui-input-block {
+  width: 1206px;
+}
+
+.admin-news-add .layui-form .sc-item .layui-btn {
+  width: 169px;
+  height: 177px;
+  background: url(../images/up1.jpg) no-repeat;
+}
+
+.admin-news-add .layui-form .layui-input-block {
+  margin-left: 130px;
+  width: 334px;
+}
+
+.admin-news-add .layui-form .layui-input {
+  height: 50px;
+  font-size: 20px;
+}
+
+.admin-news-add .layui-form .layui-form-select dl dd {
+  font-size: 20px;
+}
+
+.admin-news-add {
+  margin-bottom: 40px;
+}
+
+.admin-news-add .layui-form .btn {
+  margin-left: 130px;
+}
+
+.admin-news-add .layui-form .btn a {
+  display: inline-block;
+  width: 160px;
+  line-height: 40px;
+  font-size: 20px;
+  color: #FFFFFF;
+  background: #C5C5C5;
+  text-align: center;
+  margin-right: 30px;
+}
+
+.admin-news-add .layui-form .btn a:hover {
+  background: #D23637;
+}
+
+.gw-alert {
+  padding: 60px;
+  width: 620px;
+  height: 571px;
+  box-sizing: border-box;
+}
+
+.gw-alert .layui-tree-txt {
+  font-size: 20px;
+}
+
+.gw-alert .layui-tree-line .layui-tree-entry:hover .layui-tree-txt {
+  color: #D23637;
+  border-bottom: 0;
+  text-decoration: none;
+}
+
+.gw-alert .layui-form-checked[lay-skin=primary] i {
+  border-color: #D23637 !important;
+  background-color: #D23637;
+  color: #fff;
+}
+
+.set-price {
+  padding-bottom: 60px;
+}
+
+.set-price .admin-content {
+  background: none;
+}
+
+.set-price .admin-top-title {
+  border-bottom: 0;
+}
+
+.set-price .list-content .list ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.set-price .list-content .list ul li {
+  width: 789px;
+  background: #fff;
+  text-align: center;
+  margin-bottom: 55px;
+  padding-top: 33px;
+}
+
+.set-price .list-content .list ul li h1 {
+  font-size: 20px;
+  color: #D23637;
+  margin-bottom: 45px;
+}
+
+.set-price .list-content .list ul li .input-item {
+  font-size: 20px;
+  color: #666666;
+  margin-bottom: 30px;
+}
+
+.set-price .list-content .list ul li .input-item input {
+  width: 122px;
+  height: 40px;
+  margin: 0 8px;
+}
+
+.set-price .list-content .list .btn {
+  text-align: center;
+}
+
+.set-price .list-content .list .btn a {
+  display: inline-block;
+  font-size: 20px;
+  color: #FFFFFF;
+  background: #D23637;
+  padding: 5px 70px;
+}
+
+.user-management .admin-top-title .number {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 24px;
+  color: #D23637;
+}
+
+.user-management .table .passBtn {
+  position: relative;
+}
+
+.user-management .table .passBtn input {
+  font-size: 20px;
+  border: 0;
+  text-align: center;
+  background: none;
+}
+
+.user-management .table .passBtn i {
+  position: absolute;
+  top: 0;
+  right: 10%;
+  width: 20px;
+  height: 100%;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.user-management .table .passBtn i:hover::before {
+  content: "\e9ff";
+}
+
+.user-management .table .passBtn i::before {
+  content: "\e641";
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 0;
+  font-size: 20px;
+  font-family: "iconfont";
+}
+
+.user-management .table .operation {
+  position: relative;
+}
+
+.user-management .table .operation:hover ul {
+  display: block;
+}
+
+.user-management .table .operation i {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.user-management .table .operation ul {
+  display: none;
+  position: absolute;
+  left: 50px;
+  background: #fff;
+  border: 1px solid #979797;
+  width: 130px;
+  z-index: 1;
+}
+
+.user-management .table .operation ul li {
+  line-height: 30px;
+  font-size: 14px;
+  text-align: left;
+  padding: 0 5px;
+}
+
+.user-management .table .operation ul li a {
+  display: block;
+  color: #999999;
+}
+
+.user-management .table .operation ul li:hover {
+  background: #D23637;
+}
+
+.user-management .table .operation ul li:hover a {
+  color: #fff;
+}
+
+.invitation-run .invitation-link {
+  background: #fff;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 25px 0;
+}
+
+.invitation-run .invitation-link h1 {
+  font-size: 24px;
+  color: #D23637;
+  margin-bottom: 10px;
+}
+
+.invitation-run .invitation-link p {
+  font-size: 24px;
+  color: #666666;
+}
+
+.invitation-run .invitation-link p a {
+  margin-left: 30px;
+  display: inline-block;
+  font-size: 16px;
+  color: #FFFFFF;
+  background: #D23637;
+  padding: 5px 10px;
+}
+
+.invitation-run .run-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.invitation-run .run-content .slide-nav {
+  width: 379px;
+  background: #fff;
+  font-size: 20px;
+  color: #666666;
+  box-sizing: border-box;
+  padding: 43px 20px;
+}
+
+.invitation-run .run-content .slide-nav .layui-tree-entry {
+  height: 30px;
+}
+
+.invitation-run .run-content .slide-nav .layui-tree-icon {
+  width: 15px;
+  height: 15px;
+  line-height: 12px;
+}
+
+.invitation-run .run-content .slide-nav .layui-tree-icon .layui-icon {
+  font-size: 15px;
+}
+
+.invitation-run .run-content .slide-nav .layui-tree-iconClick .layui-icon-file {
+  display: none;
+}
+
+.invitation-run .run-content .slide-nav .layui-tree-line .layui-tree-entry:hover .layui-tree-txt {
+  color: #D23637;
+  border-bottom: 0;
+  text-decoration: none;
+}
+
+.invitation-run .run-content .admin-content {
+  width: 1216px;
+  padding: 20px 0;
+}
+
+.invitation-run .run-content .admin-content .admin-top-title .title h1 {
+  font-size: 20px;
+}
+
+.invitation-run .run-content .admin-content .admin-top-title .number {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  font-size: 20px;
+  color: #D23637;
+}
+
+.invitation-run .run-content .admin-content .tops {
+  padding: 0 20px 24px;
+  border-bottom: 0;
+}

@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="import" href="../common/common.html"/>
+    <script src="../js/service/usersService.js"></script>
+	<script src="../js/service/yingpinService.js"></script>
+	<script src="../js/service/collectionStationService.js"></script>
+    <script src="../js/service/recommendService.js"></script>
+	<script src="../js/service/personService.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/controller/yingpinController.js"></script>
+</head>
+<body ng-app="soiroc"  ng-controller="yingpinController" ng-init="loginInfo();jobDetails();selectCvAll()">
+    <header class="header marginBottom headerB" >
+        <nav class="nav">
+            
+        </nav>
+        <div class="content">
+            <div class="marginAuto">
+                <div class="loginAlert hide">
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="tips-positoin ">
+        <div class="marginAuto">
+            <span>当前位置：</span>职位—职位详情页
+        </div>
+    </div>
+    <div class="JobDetails" ng-repeat='item in initData.jobDetails'>
+        <!-- {{item}} -->
+        <div class="marginAuto">
+            <div class="JobDetailsContnet">
+                <div class="tops">
+                    <div class="tit">
+                        <h1>{{item.proName}}</h1>
+                        <h2>年薪{{item.release.minSalary}}  - {{item.release.maxSalary}}万   某地产公司</h2>
+                        <h3>{{areaDatalist[item.release.city]}}丨 {{item.release.minLimit}}-{{item.release.maxLimit}}年丨{{eduCatio[item.release.firstDegree]}}丨{{sexDatelist [item.release.gender]}}</h3>
+                        <h4>发布日期：2019-01-17</h4>
+                    </div>
+                    <div class="center">
+                        <h1><span>悬赏金￥{{item.release.estimateHeadhuntingFee}}</span><a class="zhuan" ng-click="zhuan()" href="javascript:;">赚</a></h1>
+                    </div>
+                    <div class="right">
+                        <div class="length"><i class="iconfont">&#xe9ff;</i>{{item.projectVistiNum}}</div>
+                        <div class="btn">
+                            <a href=""  ng-click="tjAdd(this)">推荐人选</a><a href=""   ng-click="ypAdd(entity._id)">应聘职位</a>
+                        </div>
+                        <div class="sc">
+                            <span ng-click="addperfavpro(entity._id,$event)"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="information">
+                    <div class="JobDetailsTitle">
+                        <h1>基本信息</h1>
+                    </div>
+                    <div class="list">
+                        <ul>
+                            <li>
+                                所属智能：<span>{{subordinateFunctions[item.release.positionList]}}</span>
+                            </li>
+                            <li>
+                                用人部门：<span>{{item.release.communicationDepartName}}</span>
+                            </li>
+                            <li>
+                                职位状态：<span>{{item.release.proState}}</span>
+                            </li>
+                            <li>
+                                直接上级：<span>{{item.release.directSuperior}}</span>
+                            </li>
+                            <li>
+                                悬赏金：<span>{{item.release.estimateHeadhuntingFee}}元</span><a href="javascript:;" class="zhuan" ng-click="zhuan()">赚</a>
+                            </li>
+                            <li>
+                                直接下级：<span>{{item.release.directSubordinates}}</span>
+                            </li>
+                            <li>
+                                悬赏金说明：<span>{{item.release.estimateHeadhuntingFeeExplain}}</span><a href="javascript:;" class="zhuan" ng-click="zhuan()">赚</a>
+                            </li>
+                            <li>
+                                初面时间：<span>{{item.release.firstInterviewTime}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="duty">
+                    <div class="JobDetailsTitle">
+                        <h1>工作职责</h1>
+                    </div>
+                    <div class="test">
+                        <h2>核心任务：</h2>
+                        <p>
+                           {{item.release.coreTasks}}
+                        </p>
+                        <h2>其他职责：</h2>
+                        <p>
+                           {{item.release.otherDuties}}
+                        </p>
+                    </div>
+                </div>
+                <div class="information">
+                    <div class="JobDetailsTitle">
+                        <h1>任职资格</h1>
+                    </div>
+                    <div class="list">
+                        <ul>
+                            <li>
+                                性别：<span>{{sexDateli[item.release.gender]}}</span>
+                            </li>
+                            <li>
+                                学校要求：<span>{{item.release.schoolRequired}}</span>
+                            </li>
+                            <li>
+                                年龄：<span>{{item.release.minAge-Release.maxAge}}</span>
+                            </li>
+                            <li>
+                                第一学历：<span>{{highestAcademicQualifications[item.release.firstDegree]}}</span>
+                            </li>
+                            <li>
+                                公司背景：<span>{{item.release.targetCompanies}}</span>
+                            </li>
+                            <li>
+                                最高学历：<span>{{highestAcademicQualifications[item.release.highestEducation]}}</span>
+                            </li>
+                            <li>
+                                个性要求：<span>{{item.elease.personalityRequirements}}</span>
+                            </li>
+                            <li>
+                                所属行业：<span>{{Industry[item.release.industryList]}}</span>
+                            </li>
+                            <li>
+                                其他要求：<span>{{item.release.otherRequirements[0]}}</span>
+                            </li>
+                            <li>
+                                语言要求：<span>英语{{item.release.languageAbility}}-{{item.release.languageGrade}}级</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="divideInto">
+                    <div class="JobDetailsTitle">
+                        <h1>悬赏金分成</h1>
+                    </div>
+                    <div class="test">
+                            <h1 ng-repeat='items in item.release.outRatios'><span>{{items.nodeName}}{{items.money}}  </span><a href="javascript:;">~详情</a><a class="zhuan" ng-click="zhuan()">赚</a></h1>
+                    </div>
+                </div>
+                <div class="explain">
+                    <div class="JobDetailsTitle">
+                        <h1>悬赏说明</h1>
+                    </div>
+                    <div class="test">
+                        <p>
+                                升级为猎头身份，参与人选运作，才能获得悬赏金哦———<a href="javascript:;">去升级</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="recommend {{loginInfos==false?'hide':''}}">
+                    <div class="JobDetailsTitle">
+                        <h1>您可能感兴趣：</h1>
+                    </div>
+                    <div class="list">
+                        <ul>
+                            <li ng-repeat="item in initData.interested[0].result">
+                                <a href="javascript:;">
+                                    <div class="tit">
+                                        <h1>{{item.proName}}</h1>
+                                        <h2>年薪{{item.money}}   {{item.customer}}</h2>
+                                    </div>
+                                    <h3>悬赏金￥{{item.ofMoney}}</h3>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="ltAdviser">
+                <div class="list">
+                    <ul>
+                        <li>
+                            <h1>猎头顾问</h1>
+                            <dl>
+                                <dt>
+                                    <img src="../images/one.jpg" alt="">
+                                </dt>
+                                <dd>
+                                    <h2>{{item.release.accountManager}}</h2>
+                                    <p>客户经理</p>
+                                </dd>
+                            </dl>
+                            <div class="btn">
+                                <a href="javascript:;">立即沟通</a><a href="javascript:;">加好友</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+
+    </footer>
+    <div class="alertBox"></div>
+
+
+    <!-- 投递多份简历弹窗 -->
+    <div class="selectCv hide">
+            <div class="title">
+                <h1>请选择简历</h1>
+                <i class="close layui-layer-close iconfont">&#xe60d;</i>
+            </div>
+            <div class="list layui-form">
+                <ul>
+                    <li ng-repeat="item in selectCvAll" ng-click="selectCvId(item.personId)">
+                        <input type="radio" name="jl" title="{{item.chineseName}}">
+                    </li>
+                </ul>
+            </div>
+            <div class="btn">
+                <a ng-click="selectCvSave()" href="javascript:;">确定</a>
+            </div>
+    </div>
+    
+
+    
+    <!-- 收益如下弹窗 -->
+    <div class="profit-alert hide">
+        <div class="title">
+            <h1>候选人从录入简历到过保，各阶段所得收益如下</h1>
+            <i class="close iconfont">&#xe60d;</i>
+        </div>
+        <div class="list">
+            <ul>
+                <li>
+                    <span>入库拥有者</span><span>￥10000</span>
+                </li>
+                <li>
+                    <span>精品简历拥有者</span><span>￥10000</span>
+                </li>
+                <li>
+                    <span>立即抢单</span><span>￥10000</span>
+                </li>
+                <li>
+                    <span>推荐至客户经理</span><span>￥10000</span>
+                </li>
+                <li>
+                    <span>约面</span><span>￥10000</span>
+                </li>
+                <li>
+                    <span>辅导/陪同</span><span>￥10000</span>
+                </li>
+                <li>
+                    <span>谈薪</span><span>￥10000</span>
+                </li>
+                <li>
+                    <span>签offer</span><span>￥10000</span>
+                </li>
+                <li>
+                    <span>背调</span><span>￥10000</span>
+                </li>
+                <li>
+                    <span>离职辅导</span><span>￥10000</span>
+                </li>
+                <li>
+                    <span>入职跟进</span><span>￥10000</span>
+                </li>
+                <li>
+                    <span>保用跟进</span><span>￥10000</span>
+                </li>
+                <li>
+                    <span>悬赏金合计</span><span>￥10000</span>
+                </li>
+            </ul>
+        </div>
+        <h2>注：所得悬赏金以客户实际回款为准！</h2>
+    </div>
+    <!-- 过保收益弹窗 -->
+    <div class="too-profit-alert hide">
+        <div class="title">
+            <h1>仅录入候选人”精品简历”，候选人过保，所得收益如下</h1>
+            <i class="close iconfont">&#xe60d;</i>
+        </div>
+        <div class="test">
+            <p>
+                    1、悬赏金6千(含6千)以内，所得收益为500元；<br />
+                    2、悬赏金在6千到1.5万(含1.5万)之间，所得收益为1000元；<br />
+                    3、悬赏金在1.5万到3万(含3万)之间，所得收益为2000元；<br />
+                    4、悬赏金在3万到6万(含6万)之间，所得收益为3000元；<br />
+                    5、悬赏金在6万以上，所得收益为5000元；
+            </p>
+            <h2>注：所得收益以客户实际为准</h2>
+        </div>
+    </div>
+    <div class="alertBox"></div>
+    <div class="jobsNewAlert hide">
+        <i class="layui-layer-close close iconfont">&#xe60d;</i>
+        <div class="pageBtn">
+            <a class="on" href="javascript:;">新增人选</a>
+            <a href="javascript:;">推荐已有</a>
+        </div>
+        <div class="content new">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i>*</i>人选姓名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input" ng-model="recommend.username">
+                        <div class="errorBox">输入错误</div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i>*</i>性别</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="sex" value="0" title="男" ng-model="recommend.gender">
+                        <input type="radio" name="sex" value="1" title="女" checked ng-model="recommend.gender">
+                        <div class="errorBox">输入错误</div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i>*</i>人选手机号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input" ng-model="recommend.phone">
+                        <div class="errorBox">输入错误</div>
+                    </div>
+                </div>
+                <div class="layui-form-item annualSalary">
+                    <label class="layui-form-label"><i>*</i>人选目前年薪</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input" ng-model="recommend.currentSalary">
+                        <span class="tips">万</span>
+                        <div class="errorBox">输入错误</div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i>*</i>人选最近职位</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input" ng-model="recommend.recentPosts">
+                        <div class="errorBox">输入错误</div>
+                    </div>
+                </div>
+                <div class="layui-form-item function-input-item">
+                    <label class="layui-form-label"><i>*</i>人选现属职能</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input functions" ng-model="recommend.currentFunctions">
+                        <div class="errorBox">输入错误</div>
+                    </div>
+                </div>
+                <div class="layui-form-item industry-input-item">
+                    <label class="layui-form-label"><i>*</i>人选现在行业</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input now-industry" ng-model="recommend.currentIndustry">
+                        <div class="errorBox">输入错误</div>
+                    </div>
+                </div>
+            </form>
+            <div class="strong">注:须经本人同意，您才可以推荐人选~</div>
+            <div class="btn">
+                <a href="javascript:;" ng-click="saveRecommend()">确认推荐</a>
+            </div>
+        </div>
+        <div class="content tj hide">
+            <div class="list layui-form">
+                <ul ng-repeat="iterm in recommends">
+                    <li>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <input type="radio" name="sex" value="0">
+                            </div>
+                        </div>
+                        <input type="radio" name="sex" value="0"><h1>人选姓名：{{iterm.obj.username}}</h1><h1>人员手机号:{{iterm.obj.phone}}</h1><a href="javascript:;">详情</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="strong">注:须经本人同意，您才可以推荐人选~</div>
+            <div class="btn">
+                <a href="javascript:;" ng-click="saveRecommend()">确认推荐</a>
+            </div>
+        </div>
+    </div>
+    <div class="topsAlert hide">
+        <span>猎头已为您推荐此职位，无需再次投递~</span>
+   </div>
+   <!-- 现属职能弹窗 -->
+   <div class="current-functions-alert hide">
+       <div class="title">
+           <h1>现属职能</h1>
+           <i class="layui-layer-close close iconfont">&#xe60d;</i>
+       </div>
+       <div class="content">
+           <div id="test1">
+
+           </div>
+       </div>
+   </div>
+   <!-- end -->
+   <!-- 现在行业弹窗 -->
+   <div class="now-industry-alert hide">
+       <div class="title">
+           <h1>现在行业</h1>
+           <i class="layui-layer-close iconfont">&#xe60d;</i>
+       </div>
+       <div class="list">
+           <ul>
+               <li ng-repeat="item in IndustryObj" ng-click="nowIndustry($event)">{{item.name}}</li>
+           </ul>
+       </div>
+   </div>
+   <!-- end -->
+
+   <!-- 期望行业弹窗 -->
+   <div class="expectation-industry-alert hide">
+       <div class="title">
+           <h1>现在行业</h1>
+           <i class="layui-layer-close iconfont">&#xe60d;</i>
+       </div>
+       <div class="list">
+           <ul>
+                   <li>地产</li>
+                   <li>商业</li>
+                   <li>互联网</li>
+                   <li>金融</li>
+                   <li>施工/路/桥</li>
+                   <li>硬件/集成</li>
+                   <li>IT/软件</li>
+                   <li>通信(设备.运营.手机)</li>
+                   <li>产业</li>
+                   <li>酒店</li>
+                   <li>文旅</li>
+                   <li>影视</li>
+                   <li>政府.非盈利</li>
+                   <li>快消</li>
+                   <li>教培.科研</li>
+                   <li>超市/连锁</li>
+                   <li>能源(电力.石油.水利)</li>
+                   <li>矿产/治炼/金属</li>
+                   <li>医疗设备.器械</li>
+                   <li>制药.生物工程</li>
+                   <li>航空/航天</li>
+                   <li>汽车/摩托(制.修.售)</li>
+                   <li>机械/机电/重工</li>
+                   <li>电子/微电子/芯片</li>
+                   <li>家电业</li>
+                   <li>医疗/美容/卫生</li>
+                   <li>广告/会展/公关</li>
+                   <li>媒体/出版/传播</li>
+                   <li>印刷.包装.造纸</li>
+                   <li>交通.运输.物流</li>
+                   <li>检验/检测/认证</li>
+                   <li>原材料/加工(木.橡.塑.玻)</li>
+                   <li>农.林.牧.渔</li>
+                   <li>食品</li>
+                   <li>环保</li>
+                   <li>灯饰/照明</li>
+                   <li>家居.室内设计.装潢</li>
+                   <li>家居/木材</li>
+                   <li>工艺/礼品/收藏</li>
+                   <li>服装/纺织</li>
+                   <li>贸易/批发/零售</li>
+                   <li>咨询</li>
+                   <li>中介服务</li>
+                   <li>外语/翻译</li>
+                   <li>商壤招聘</li>
+                   <li>商壤在职</li>
+           </ul>
+       </div>
+   </div>
+    <script>
+         $(function(){
+            layui.use(['layer','element','laydate', 'laypage','tree','table'], function(){
+                var layer = layui.layer,
+                    laydate = layui.laydate,
+                    laypage = layui.laypage,
+                    tree = layui.tree;
+                    talbe = layui.table;
+                    laydate.render({
+                        elem: '#moreTimes' //指定元素
+                    });
+                    talbe.render({
+                        //elem: '#listPersons'
+                        elem : '#page'
+                        ,height: 312
+                        ,url: $.host + "person" + "/findAll" //数据接口
+                        ,page: true //开启分页
+                        ,parseData : function(res){
+                            return {
+                                "code": res.code, //解析接口状态
+                                "msg": res.message, //解析提示文本
+                                "data": res.obj //解析数据列表
+                            };
+                        },
+                        cols: [
+                            [ //表头
+                                {field: 'id', title: '姓名', width:141, fixed: 'left'}
+                                ,{field: 'username', title: '性别', width:125}
+                                ,{field: 'username', title: '手机号', width:215}
+                                ,{field: 'sex', title: '最近公司', width:290, }
+                                ,{field: 'city', title: '目前年薪', width:159}
+                                ,{field: 'sign', title: '现在行业', width: 139}
+                                ,{field: 'experience', title: '最近职位', width: 271, }
+                                ,{field: 'score', title: '应聘时间', width: 266, sort: true}
+                            ]
+                        ],
+                    });
+
+
+
+
+                    // 现属职能数据
+                    var data = [{
+                    title: '现属职能'
+                    ,checked: true
+                    ,spread: true
+                    ,disabled: true
+                    ,children: [{
+                    title: 'CXO'
+                        ,children: [{
+                                title: 'CEO'
+                            },{
+                                title: 'COO'
+                            },{
+                                title: 'CFO'
+                            },{
+                                title: 'CTO'
+                            },{
+                                title: 'CIO'
+                            },{
+                                title: '总裁'
+                            },{
+                                title: '副总裁'
+                            },{
+                                title: '总经理'
+                            }]
+                    },{
+                        title:'地产'
+                        ,children: [{
+                                title: '市场'
+                            },{
+                                title: '销售'
+                            },{
+                                title: '拿地'
+                            },{
+                                title: '前期'
+                            },{
+                                title: '拆迁'
+                            },{
+                                title: '规划'
+                            },{
+                                title: '成本'
+                            },{
+                                title: '设计'
+                            },{
+                                title: '工程'
+                            }]
+                    },{
+                        title:'汽车'
+                    },{
+                        title:'教育'
+                    }]
+                }];
+
+
+                // 现属职能  树形统计
+                tree.render({
+                    elem: '#test1'
+                    ,data: data
+                    ,id: 'demoId1'
+                    ,showCheckbox: true  //是否显示复选框
+                    ,click: function(obj){
+
+                    },
+                    oncheck:function(obj){
+                        $("#test1 input[type=checkbox]").each(function(){
+                            if($(this).attr("checked") == "checked"){
+                                $(this).prop("checked", true);
+                            }else{
+                                $(this).prop("checked", false);
+                            }
+                        });
+
+                        $(".jobsNewAlert .new .layui-form input.functions").val(obj.data.title);
+                        console.log(obj.data); //得到当前点击的节点数据
+
+                    }
+                });
+                $(".jobsNewAlert .new .layui-form input.functions").click(function(){
+                    //现属职能弹窗
+                    layer.open({
+                        type: 1,
+                        title: false,
+                        closeBtn: 0,
+                        shadeClose: true,
+                        skin: '',
+                        area: 'auto',
+                        maxWidth :"auto",
+                        maxHeight : "auto",
+                        resize : false,
+                        content: $(".current-functions-alert"),
+                    });
+                });
+                $(".jobsNewAlert .new .layui-form input.now-industry").click(function(){
+                    layer.open({
+                        type: 1,
+                        title: false,
+                        closeBtn: 0,
+                        shadeClose: true,
+                        skin: '',
+                        area: 'auto',
+                        maxWidth :"auto",
+                        maxHeight : "auto",
+                        resize : false,
+                        content: $(".now-industry-alert"),
+                    });
+                });
+            });
+        });
+        // layui.use(['layer', 'form'], function(){
+        //     layer.open({   //投递多份简历弹窗
+        //         type: 1,
+        //         title: false,
+        //         closeBtn: 0,
+        //         shadeClose: true,
+        //         skin: '',
+        //         area: 'auto',
+        //         maxWidth :"auto",
+        //         maxHeight : "auto",
+        //         resize : false,
+        //         content: $(".selectCv")
+        //     });
+        //     layer.open({   //收益弹窗
+        //         type: 1,
+        //         title: false,
+        //         closeBtn: 0,
+        //         shadeClose: true,
+        //         skin: '',
+        //         area: 'auto',
+        //         maxWidth :"auto",
+        //         maxHeight : "auto",
+        //         resize : false,
+        //         content: $(".profit-alert")
+        //     });
+        //     layer.open({   //过保收益弹窗
+        //         type: 1,
+        //         title: false,
+        //         closeBtn: 0,
+        //         shadeClose: true,
+        //         skin: '',
+        //         area: 'auto',
+        //         maxWidth :"auto",
+        //         maxHeight : "auto",
+        //         resize : false,
+        //         content: $(".too-profit-alert")
+        //     });
+        // })
+    </script>
+</body>
+</html>

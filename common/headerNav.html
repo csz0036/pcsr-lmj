@@ -1,0 +1,106 @@
+<script src="../js/service/usersService.js"></script>
+<script src="../js/controller/usersController.js"></script>
+<div class="marginAuto" ng-controller="usersController">
+    <div class="logo">
+        <img src="../images/logo.png" alt="">
+    </div>
+    <div class="list start-list">
+        <ul>
+            <li>
+                <a href="../pages/首页.html">首页</a>
+            </li>
+            <li>
+                <a href="../pages/悬赏职位.html">悬赏职位</a>
+            </li>
+            <li>
+                 <a href="../pages/企业服务.html">企业服务</a>
+            </li>
+            <li>
+                <a href="../pages/商壤学院-猎头培训.html">商壤学院</a>
+                <ul class="nav2">
+                    <li><a href="../pages/商壤学院-猎头培训.html">猎头培训</a></li>
+                    <li><a href="../pages/商壤学院-人力培训.html">人力培训</a></li>
+                    <li><a href="../pages/商壤学院-培训管理.html">管理培训</a></li>
+                    <li><a href="../pages/商壤学院-领导力发展培训.html">领导力发展</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="../pages/新闻资讯.html">新闻资讯</a>
+            </li>
+            <li>
+                <a href="../pages/关于商壤-商壤简介.html">关于商壤</a>
+            </li>
+        </ul>
+    </div>
+    <div class="list resumelist2 hide">
+        <ul>
+            <li>
+                <a href="../pages/悬赏职位.html">职位</a>
+            </li>
+            <li>
+                <a href="javascript:;">消息</a>
+            </li>
+            <li>
+                <a href="../pages/简历-详情.html">简历</a>
+            </li>
+            <li>
+                <a href="../pages/应聘简历.html">应聘记录</a>
+            </li>
+            <li>
+                <a href="../pages/推荐职位.html">推荐记录</a>
+            </li>
+            <li>
+                <a href="javascritp:;">VIP服务</a>
+                <ul class="nav2">
+                    <li><a href="../pages/VIP服务-心理疏导.html">VIP服务-心理疏导</a></li>
+                    <li><a href="../pages/VIP服务-离职辅导.html">VIP服务-离职辅导</a></li>
+                    <li><a href="../pages/VIP服务-职业顾问.html">VIP服务-职业顾问</a></li>
+                    <li><a href="../pages/VIP服务-职涯规划.html">VIP服务-职涯规划</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="sign">
+        <div class="loggedIn" style="display: none">
+            <div class="title">
+                <h1>
+                    <span id="welcomeName">欢迎您:李磊</span>
+                    <ul>
+                        <li><a href="../pages/职位-个人中心.html">账号设置</a></li>
+                        <li><a href="javascript:;">切换为猎头</a></li>
+                        <li><a href="../pages/职位-我的订单.html">我的订单</a></li>
+                        <li><a href="../pages/职位-我的邀请顾问.html">我邀请的人</a></li>
+                        <li><a href="../pages/职位-我邀请的人.html">我的邀请链接</a></li>
+                        <li class="loginOut"><a href="">退出</a></li>
+                    </ul>
+                </h1>
+            </div>
+            <div class="up">
+                <a href="javascript:;">升级为猎头赚赏金</a>
+            </div>
+        </div>
+        <div class="notLogin" style="display: flex">
+            <span class="tel">010-84874980</span>
+            <div class="login">
+                <a class="loginBtn" href="javascript:;">登录</a><a class="registerBtn" href="javascript:;">注册</a>
+            </div>
+        </div>
+        <a href="javascript:;" class="phoneSr">手机商壤</a>
+    </div>
+ </div>
+  <script>
+      $('.sign .loggedIn .title .loginOut a').click(function(){
+        $.ajax({
+            type: "GET",  
+             url: "/api/logout?return=/",
+             dataType: "json",  
+             success: function(data){  
+               window.location.href="http://127.0.0.1:8082/pages/%E9%A6%96%E9%A1%B5.html"  
+            }, 
+             error:function(e){  
+                 alert('退出失败')
+            }  
+        })
+      })
+    
+  </script>      

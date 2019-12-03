@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="import" href="../common/common.html"/>
+    <script src="../js/service/orderManagerService.js"></script>
+	<script src="../js/controller/orderManagerController.js"></script>
+</head>
+<body class="h" ng-app="soiroc"  ng-controller="orderManagerController">
+    <header class="header headerB marginBottom">
+        <nav class="nav">
+            
+        </nav>
+        <div class="content">
+            <div class="marginAuto">
+                <div class="loginAlert hide">
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="my-order">
+        <div class="marginAuto">
+            <div class="tops">
+                <div class="btn">
+                    <a class="on" href="javascript:;" ng-click="tabChange(1)" >已支付订单</a>
+                    <a href="javascript:;" ng-click="tabChange(2)" >待支付订单</a>
+                </div>
+                <div class="tel">
+                    	客户电话：010-84874980
+                </div>
+            </div>
+            <div class="content table" id="yesPay">
+                <div class="nothing" style="display: {{nothing}}">
+                    <div class="nothingTest">
+                        <img src="../images/logo2.png" alt="">
+                        <h1>暂无订单</h1>
+                    </div>
+                </div>
+                <table border="0" ng-if="nothing=='none'">
+                    <tr>
+                        <th>订单编号</th>
+                        <th>日期</th>
+                        <th>姓名</th>
+                        <th>手机号</th>
+                        <th>服务类型</th>
+                        <th>顾问级别</th>
+                        <th>服务原价</th>
+                        <th>优惠价</th>
+                        <th>支付状态</th>
+                        <th>服务顾问</th>
+                        <th>支付方式</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr ng-repeat="entity in list | filterRow :'paymentStatus': '已支付'">
+                        <td>{{entity.orderNumber}}</td>
+                        <td>{{entity.orderTime}}</td>
+                        <td>{{entity.fullName}}</td>
+                        <td>{{entity.phone}}</td>
+                        <td>{{entity.serviceType}}</td>
+                        <td>{{entity.level}}</td>
+                        <td>{{entity.serviceOriginalPrice}}</td>
+                        <td>{{entity.concessionalRate}}</td>
+                        <td>{{entity.paymentStatus}}</td>
+                        <td>{{entity.serviceConsultant}}</td>
+                        <td>{{entity.paymentMethod}}</td>
+                        <td class="btn red" ng-click="dele(entity.id)">删除</td>
+                    </tr>
+                </table>
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+            <div class="content table hide" id="noPay">
+                <div class="nothing"  style="display: {{nothing}}">
+                    <div class="nothingTest">
+                        <img src="../images/logo2.png" alt="">
+                        <h1>暂无订单</h1>
+                    </div>
+                </div>
+                <table border="0" ng-if="nothing=='none'">
+                    <tr>
+                        <th>订单编号</th>
+                        <th>日期</th>
+                        <th>姓名</th>
+                        <th>手机号</th>
+                        <th>服务类型</th>
+                        <th>顾问级别</th>
+                        <th>服务原价</th>
+                        <th>优惠价</th>
+                        <th>支付状态</th>
+                        <th>服务顾问</th>
+                        <th>支付方式</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr ng-repeat="entity in list | filterRow :'paymentStatus': '待支付'">
+                        <td>{{entity.orderNumber}}</td>
+                        <td>{{entity.orderTime}}</td>
+                        <td>{{entity.fullName}}</td>
+                        <td>{{entity.phone}}</td>
+                        <td>{{entity.serviceType}}</td>
+                        <td>{{entity.level}}</td>
+                        <td>{{entity.serviceOriginalPrice}}</td>
+                        <td>{{entity.concessionalRate}}</td>
+                        <td>{{entity.paymentStatus}}</td>
+                        <td>{{entity.serviceConsultant}}</td>
+                        <td>{{entity.paymentMethod}}</td>
+                        <td class="btn red">删除</td>
+                    </tr>
+                </table>
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+        </div>
+    </div>
+    <div class="alertBox"></div>
+    <footer class="footer">
+        
+    </footer>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="import" href="../common/common.html"/>
+    <script src="../js/service/newsInformationService.js"></script>
+	<script src="../js/controller/newsInformationController.js"></script>
+    <!-- 当前页面 -->
+    <link rel="stylesheet" href="../lib/swiper/dist/css/swiper.min.css">
+        <!-- 当前页面 -->
+    <script src="../lib/swiper/dist/js/swiper.min.js"></script>
+</head>
+<body ng-app="soiroc"  ng-controller="newsInformationController">
+    <header class="header marginBottom">
+        <div class="banner">
+            <div class="swiper-container swiper-container1">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide "><a href="javascript:;">
+                        <img src="../images/newsKv.jpg" alt="">
+                    </a></div>
+                </div>
+            </div>
+        </div>
+        <nav class="nav">
+            
+        </nav>
+        <div class="content">
+            <div class="marginAuto">
+                <div class="loginAlert hide">
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="newsInformation">
+        <div class="marginAuto">
+            <div class="btn">
+                <a class="on" href="javascript:;">商壤新闻</a>
+                <a href="javascript:;">猎场分享</a>
+                <a href="javascript:;">职场管理</a>
+            </div>
+            <div class="list">
+                <ul>
+                    <li ng-repeat="(index,entity) in list">
+                        <a ng-href="商壤新闻-正文.html?id={{entity.id}}&prevId={{list[index - 1].id}}&prevTitle={{list[index - 1].articleTitle}}&nextId={{list[index + 1].id}}&nextTitle={{list[index + 1].articleTitle}}">
+                            <div class="img">
+                                <img ng-src="{{entity.imgPath}}" alt="">
+                            </div>
+                            <div class="test">
+                                <h1>{{entity.articleTitle}}</h1>
+                                <p>
+									{{entity.text | filterSubString}}<span>详情</span>
+                                </p>
+                                <div class="timeLength">
+                                    <span>{{entity.release}}  丨  浏览：{{entity.readingVolume}}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        
+    </footer>
+    <div class="alertBox">
+
+    </div>
+
+    <script>
+        $(function(){
+            var swiper = new Swiper('.swiper-container1', {
+                loop : true,
+                effect : 'fade',
+                autoplay: {
+                    delay: 5000,
+                    stopOnLastSlide: false,
+                    disableOnInteraction: true,
+                },
+            });  
+            layui.use('laypage', function(){
+                var laypage = layui.laypage;
+                laypage.render({
+                    elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
+                    ,count: 50 //数据总数，从服务端得到
+                    ,layout: [ 'prev', 'page', 'next', 'skip']
+                    ,jump: function(obj){    //分页回调
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

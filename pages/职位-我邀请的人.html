@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="import" href="../common/common.html"/>
+</head>
+<body class="h">
+    <header class="header headerB marginBottom">
+        <nav class="nav">
+            
+        </nav>
+        <div class="content">
+            <div class="marginAuto">
+                <div class="loginAlert hide">
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="inviters">
+        <div class="marginAuto">
+            <div class="tops">
+                <h1>我的邀请链接</h1>
+                <h2>复制链接发给朋友，邀请其注册，众多职位等TA来投</h2>
+                <div class="input-item">
+                    <input type="text"><button data-clipboard-text="">复制</button>
+                </div>
+                <div class="rule">
+                    <h3>规则：</h3>
+                    <p>
+                        1、分享专属链接给好友；<br />
+                        2、好友通过我的邀请链接即可注册求职者账号；
+                    </p>
+                </div>
+            </div>
+            <div class="list">
+                <h1>我邀请的人</h1>
+                <div class="tit">
+                    <span>头像</span>
+                    <span>用户</span>
+                    <span>手机号</span>
+                    <span>邀请时间</span>
+                    <span>&nbsp;</span>
+                </div>
+                <ul>
+                    <li>
+                        <span><img src="../images/tx.jpg" alt=""></span>
+                        <span>易躬侗</span>
+                        <span>15781391117</span>
+                        <span>2019-09-08</span>
+                        <span><a href="javascript:;">立即沟通</a></span>
+                    </li>
+                    <li>
+                        <span><img src="../images/tx.jpg" alt=""></span>
+                        <span>易躬侗</span>
+                        <span>15781391117</span>
+                        <span>2019-09-08</span>
+                        <span><a href="javascript:;">立即沟通</a></span>
+                    </li>
+                    <li>
+                        <span><img src="../images/tx.jpg" alt=""></span>
+                        <span>易躬侗</span>
+                        <span>15781391117</span>
+                        <span>2019-09-08</span>
+                        <span><a href="javascript:;">立即沟通</a></span>
+                    </li>
+                    <li>
+                        <span><img src="../images/tx.jpg" alt=""></span>
+                        <span>易躬侗</span>
+                        <span>15781391117</span>
+                        <span>2019-09-08</span>
+                        <span><a href="javascript:;">立即沟通</a></span>
+                    </li>
+                </ul>
+                <div id="page">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="alertBox"></div>
+    <footer class="footer">
+        
+    </footer>
+    <script src="js/clipboard.min.js"></script>
+    <script>
+        $(function(){
+            layui.use(['laypage'], function(){
+            var laypage = layui.laypage;
+            
+                laypage.render({
+                        elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
+                        ,count: 50 //数据总数，从服务端得到
+                        ,layout: [ 'prev', 'page', 'next', 'skip']
+                        ,jump: function(obj){    //分页回调
+                            console.log(obj)
+                        }
+                });
+            });
+            $(".tops .input-item button").click(function(){
+                $(this).attr("data-clipboard-text", $(".tops .input-item input").val());
+                var clipboard = new Clipboard('.tops button');
+            });
+        }) 
+    </script>
+</body>
+</html>

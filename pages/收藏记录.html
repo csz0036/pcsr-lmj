@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="import" href="../common/common.html"/>
+    <script src="../js/service/collectionStationService.js"></script>
+    <script src="../js/controller/collectionStationController.js"></script>
+    <!-- <script src="../js/controller/yingpinService.js"></script> -->
+	<style type="text/css">
+    	.jobReward .jobs .allJobs ul li {
+    		background :transparent;
+    	}
+    	.pagination{
+   		    display: flex;
+    	}
+    	.fastNav{
+   		    margin-top: 100px;
+    	}
+    </style>
+</head>
+<body class="h" ng-app="soiroc"  ng-controller="collectionStationController">
+    <header class="header headerB marginBottom">
+        <nav class="nav">
+            
+        </nav>
+        <div class="content">
+            <div class="marginAuto">
+                <div class="loginAlert hide">
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="tips-positoin borderBottom marginBottom">
+        <div class="marginAuto">
+            <span>当前位置：</span>职位—收藏的职位
+        </div>
+    </div>
+    <div class="collectionPosition">
+        <div class="marginAuto">
+            <div class="searchTop">
+                <input type="test" placeholder="请输入职位名称"><button><i class="iconfont"></i></button>
+            </div>
+             <div class="list">
+                <div class="nothingTest">
+                    <img src="../images/logo2.png" alt="">
+                    <h1>暂无收藏</h1>
+                </div>
+                <ul>
+                    <li ng-repeat = "entity in list">
+                        <div class="tit">
+                            <h1>{{entity.dept}}</h1>
+                            <h2>{{entity.yearSalary}}   {{entity.company}}</h2>
+                            <h3>{{entity.address}}丨 {{entity.workYear}}丨{{entity.edu}}丨{{entity.gender}}</h3>
+                        </div>
+                        <div class="center">
+                            <h1><span>悬赏金￥{{entity.price}}</span><a href="javascript:;">赚</a></h1>
+                        </div>
+                        <div class="right">
+                            <div class="length"><i class="iconfont">&#xe9ff;</i>2550</div>
+                            <div class="btn">
+                                <a href="javascript:;">推荐人选</a><a href="javascript:;">应聘职位</a>
+                            </div>
+                            <div class="sc" >
+                                <span  ng-click="addperfavpros(entity,$event)" class="on"></span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+        </div>
+    </div>
+    <div class="alertBox"></div>
+    <footer class="footer">
+        
+    </footer>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="import" href="../common/common.html"/>
+    <!-- 当前页面 -->
+    <link rel="stylesheet" href="../lib/swiper/dist/css/swiper.min.css">
+    <!-- 当前页面 -->
+    <script src="../lib/swiper/dist/js/swiper.min.js"></script>
+    <script src="../js/service/newsInformationService.js"></script>
+	<script src="../js/controller/newsInformationController.js"></script>
+</head>
+<body ng-app="soiroc"  ng-controller="newsInformationController" ng-init="findOne()">
+    <header class="header marginBottom">
+        <div class="banner">
+            <div class="swiper-container swiper-container1">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide "><a href="javascript:;">
+                        <img src="../images/newsKv.jpg" alt="">
+                    </a></div>
+                </div>
+            </div>
+        </div>
+        <nav class="nav">
+            
+        </nav>
+        <div class="content">
+            <div class="marginAuto">
+                <div class="loginAlert hide">
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="tips-positoin ">
+        <div class="marginAuto">
+            <span>当前位置：</span>商壤新闻—正文
+        </div>
+    </div>
+    <div class="newsContent">
+        <div class="marginAuto">
+            <div class="title">
+                <h1>{{entity.newsHeadlines}}</h1>
+                <div class="main">
+                    <span>时间：{{entity.releaseTime}}</span>
+                    <span>来源：{{entity.sourceOfArticles}}</span>
+                    <span><i class="iconfont">&#xe9ff;</i>{{entity.readingVolume}}</span>
+                </div>
+            </div>
+            <div class="content">
+                {{entity.text}}
+                <hr>
+                
+                <img alt="" ng-src="{{entity.imgPath}}">
+            </div>
+            <div class="newsPrevNext">
+                <a ng-href="商壤新闻-正文.html?id={{nextPrev.prevId}}">{{nextPrev.prevTitle}}</a>
+                <a ng-href="商壤新闻-正文.html?id={{nextPrev.nextId}}">{{nextPrev.nextTitle}}</a>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        
+    </footer>
+    <div class="alertBox">
+
+    </div>
+    
+    <script>
+        $(function(){
+            var swiper = new Swiper('.swiper-container1', {
+                loop : true,
+                effect : 'fade',
+                autoplay: {
+                    delay: 5000,
+                    stopOnLastSlide: false,
+                    disableOnInteraction: true,
+                },
+            });  
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="import" href="../common/common.html"/>
+    <script src="../js/service/recommendationRecordService.js"></script>
+    <script src="../js/service/usersService.js"></script>
+    <script src="../js/controller/recommendationRecordController.js"></script>
+</head>
+<body class="h" ng-app="soiroc"  ng-controller="recommendationRecordController" ng-init='getCurrentUser()'>
+    <header class="header headerB marginBottom" >
+        <nav class="nav">
+            
+        </nav>
+        <div class="content">
+            <div class="marginAuto">
+                <div class="loginAlert hide">
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="resume-records">
+        <div class="marginAuto">
+            <div class="search-black">
+                <div class="search-item">
+                    <input type="text" ng-model="searchEntity.proName"><button><i class="iconfont">&#xe665;</i></button>
+                </div>
+                <div class="screen layui-form" id="checkContent">
+                    <input type="checkbox" name="" title="全部" value="0" checked lay-filter="allCheck">
+                    <input type="checkbox" name="" title="被查看" value="01" checked lay-filter="allCheck">
+                    <input type="checkbox" name="" title="约面试" value="02" checked lay-filter="allCheck">
+                    <input type="checkbox" name="" title="发offer" value="03" checked lay-filter="allCheck">
+                    <input type="checkbox" name="" title="已入职" value="04" checked lay-filter="allCheck">
+                    <input type="checkbox" name="" title="不合适" value="05" checked lay-filter="allCheck">
+                </div>
+            </div> 
+            <div class="tableList">
+                <div class="tops">
+                    <span>人选姓名</span>
+                    <span>人选手机</span>
+                    <span>人选详情</span>
+                    <span>推荐公司</span>
+                    <span>推荐职位</span>
+                    <span>职位薪资</span>
+                    <span>人选推荐进度</span>
+                </div>
+				<div class="nothingTest "><!-- hide -->
+				    <img src="../images/logo2.png" alt="">
+				    <h1>暂无应聘记录</h1>
+				    <a href="javascript:;">浏览职位</a>
+				</div>
+                <ul id="pojoList">
+                    <!-- <li ng-repeat="pojo in list">
+                        <span>乔源</span>
+                        <span>18830149882</span>
+                        <span><a href="javascript:;">查看</a></span>
+                        <span>某地产公司</span>
+                        <span><a href="javascript:;">总经理</a></span>
+                        <span>年薪100-500w</span>
+                        <span>
+                            <h1>猎头顾问:赖畅畅<a href="javascript:;">立即沟通</a></h1>
+                            <dl>
+                                <dt class="on"><i>被查看</i></dt>
+                                <dt class="on"><i>约面试</i></dt>
+                                <dt class="on"><i>发offer</i></dt>
+                                <dt class="on"><i>已入职</i></dt>
+                            </dl>
+                        </span>
+                    </li> -->
+                </ul>
+
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+        </div>
+    </div>
+    <div class="alertBox"></div>
+    <!-- 推荐人选弹框 -->
+    <div class="resume-records-alert hide">
+        <div class="title">
+            <h1>推荐人选</h1>
+            <a class="layui-layer-close" href="javascript:;"><i class="iconfont">&#xe60d;</i></a>
+        </div>
+        <div class="content">
+           <dl>
+               <dt>
+                    <i>*</i>人选姓名
+               </dt>
+               <dd>
+                    谭帅帅
+               </dd>
+           </dl>
+           <dl>
+               <dt>
+                    <i>*</i>性别
+               </dt>
+               <dd>
+                    男
+               </dd>
+           </dl>
+           <dl>
+               <dt>
+                    <i>*</i>人选手机号
+               </dt>
+               <dd>
+                    15371458319
+               </dd>
+           </dl>
+           <dl>
+               <dt>
+                    <i>*</i>人选目前年薪
+               </dt>
+               <dd>
+                    100万
+               </dd>
+           </dl>
+           <dl>
+                <dt>
+                     <i>*</i>人选最近职位
+                </dt>
+                <dd>
+                        COO
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                     <i>*</i>人选现属职能
+                </dt>
+                <dd>
+                        运营
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                     <i>*</i>人选现在行业
+                </dt>
+                <dd>
+                        金融
+                </dd>
+            </dl>
+            <strong>注:须经本人同意，您才可以推荐人选~</strong>
+        </div>
+    </div>
+    <footer class="footer"></footer>
+    <script>
+        $(function(){
+            layui.use(['layer', 'form','laypage'], function(){
+                var layer = layui.layer
+                ,form = layui.form
+                ,laypage = layui.laypage;
+                // layer.open({     //推荐人选弹框
+                //     type: 1,
+                //     title: false,
+                //     closeBtn: 0,
+                //     shadeClose: true,
+                //     skin: '',
+                //     area: 'auto',
+                //     maxWidth :"auto",
+                //     maxHeight : "auto",
+                //     resize : false,
+                //     content: $(".resume-records-alert")
+                // });
+
+            });
+        })
+
+
+
+    </script>
+</body>
+</html>

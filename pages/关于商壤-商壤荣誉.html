@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="import" href="../common/common.html"/>
+    <!-- 当前页面 -->
+    <link rel="stylesheet" href="/lib/swiper/dist/css/swiper.min.css">
+</head>
+<body>
+    <header class="header headerH marginBottom">
+        <div class="banner">
+            <div class="swiper-container swiper-container1">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide "><a href="javascript:;">
+                        <img src="../images/gysr.png" alt="">
+                    </a></div>
+                </div>
+            </div>
+        </div>
+        <nav class="nav">
+            
+        </nav>
+        <div class="content">
+            <div class="marginAuto">
+                <div class="loginAlert hide">
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="srAbout">
+        <div class="marginAuto">
+            <div class="content">
+                <div class="slideNav">
+                    <a href="关于商壤-商壤简介.html">商壤简介</a>
+                    <a class="on" href="关于商壤-商壤荣誉.html">商壤荣誉</a>
+                    <a href="关于商壤-加入商壤.html">加入商壤</a>
+                    <a href="关于商壤-联系我们.html">联系我们</a>
+                    <a href="关于商壤-投诉与建议.html">投诉与建议</a>
+                </div> 
+                <div class="main">
+                    <div class="title">
+                        <h1>商壤荣誉</h1>
+                    </div>
+                    <div class="srHonorList">
+                        <ul>
+                            <li>
+                                <h1>北京地区猎头品牌10强</h1>
+                                <img src="../images/zs.jpg" alt="">
+                            </li>
+                            <li>
+                                <h1>北京地区猎头品牌10强</h1>
+                                <img src="../images/zs.jpg" alt="">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        
+    </footer>
+    <div class="alertBox">
+
+    </div>
+    <!-- 当前页面 -->
+    <script src="../lib/swiper/dist/js/swiper.min.js"></script>
+    <script>
+        $(function(){
+            var swiper = new Swiper('.swiper-container1', {
+                loop : true,
+                effect : 'fade',
+                autoplay: {
+                    delay: 5000,
+                    stopOnLastSlide: false,
+                    disableOnInteraction: true,
+                },
+            });  
+        });
+    </script>
+</body>
+</html>

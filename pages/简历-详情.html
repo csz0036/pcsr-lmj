@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="import" href="../common/common.html"/>
+    <script src="../js/service/personService.js"></script>
+    <script src="../js/service/usersService.js"></script>
+    <script src="../js/controller/personController.js"></script>
+    <script src="../js/controller/usersController.js"></script>
+</head>
+<body class="h"  ng-app="soiroc"  ng-controller="personController" ng-init="initPage();personList()">
+    <header class="header headerB marginBottom">
+        <nav class="nav">
+            
+        </nav>
+        <div class="content">
+            <div class="marginAuto">
+                <div class="loginAlert hide">
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="resume-content">
+        <div class="marginAuto">
+            <div class="slideList">
+                <div class="tops">
+                    <div class="btn">
+                        <a class="on" target="_black" href="简历-详情.html?preson=null">新增简历</a>
+                    </div>
+                    <div class="resumeText layui-form">
+                        <h1>
+                            <input type="text" value="" placeholder="简历名称" disabled ng-model="pName" ng-change="updatePersonName(pName)" >
+                            <i class="iconfont">&#xe661;</i>
+                        </h1>
+                        <div class="page">
+
+                            <select ng-options="c.personId as c.chineseName for c in persons" ng-model="editData.personId" ng-change="selectPersons()"></select>
+
+                            <span class="length">{{persons.length}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="tips">
+                            完善简历，求职率提升90%
+                            <div class="btn">
+                                <span class="bj" ng-click="edit()"><i class="iconfont">&#xe661;</i>编辑</span>
+                                <a class="cancel" href="javascript:;" ng-click="cancel()">取消</a>
+                                <a class="Preservation" href="javascript:;" ng-click="submit()" ng-if='!flaglast'>保存</a>
+                                <a class="Preservation" href="javascript:;"  ng-if='flaglast' ng-click="save()">保存</a>
+                                <!-- <span class="bj"  ><i class="iconfont">&#xe661;</i>编辑</span> -->
+                               
+                            </div>
+                    </div>
+                    <ul>
+                        <li>
+                            <div class="tit">
+                                <h1>基本信息</h1>
+                            </div>
+                            <div class="edit-exhibition ">
+                                <div class="tx">
+                                    <img ng-src="{{initData.headportrait[0].photoPath}}" alt="" >
+                                </div>
+                                <div class="edit-list">
+                                    <ul>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                    <i>*</i>姓名:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.chineseName}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                    <i>*</i>电话:
+                                                </dt>
+                                                <dd>
+                                                    <span>{{initData.phone[0]}}</span>
+                                                    
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                    <i>*</i>性别:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.gender}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                         <li>
+                                            <dl>
+                                                <dt>
+                                                    <i>*</i>所在城市:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.params.b_city[initData.city]}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                    出生日期:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.birthday}}      {{initData.timetype}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                    最近公司:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.recentUnit}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        第一学历:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.params.qualifications[initData.qualification]}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        <i>*</i>最近职位:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.params.position[initData.recentPosition]}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        <i>*</i>人才状态:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.params.personState[initData.personState]}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        <i>*</i>现属职能:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.incumbency}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                         <li>
+                                            <dl>
+                                                <dt>
+                                                        <i>*</i>现在行业:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.params.industry[initData.industry]}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="edit hide">
+                                <div class="input-list layui-form">
+                                    <div class="tx">
+                                            <img ng-src="{{editData.headportrait[0].photoPath}}" alt=""><a href="javascript:;" ng-click="uImg()">上传头像</a>
+                                            <input type="file" style="display: none;" id="userimg" accept="image/jpg,image/jpeg,image/png,image/PNG" onchange="angular.element(this).scope().onFileSelect(this)">
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label"><i>*</i>姓名</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="title" required ng-model="editData.chineseName"  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item layui-form-phone-item">
+                                                <label class="layui-form-label"><i>*</i>手机号</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="title" required ng-model="editData.phone" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label"><i>*</i>性别</label>
+                                                <div class="layui-input-block">
+                                                    <input type="radio" name="gender" value="男" ng-model="editData.gender" ng-checked="editData.gender == '男'" title="男">
+                                                    <input type="radio" name="gender" value="女" ng-model="editData.gender" ng-checked="editData.gender == '女'" title="女">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                    <label class="layui-form-label"><i>*</i>所在城市</label>
+                                                <div class="layui-input-block">
+                                                    <select name="city" lay-verify="required" ng-model="editData.city">
+                                                    <option value="{{index}}" ng-repeat="(index,item) in initData.params.b_city" ng-select="index == editData.city">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item layui-form-birth-item">
+                                                <label class="layui-form-label">出生日期</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" name="title" required ng-model="editData.birthday"  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                                    <select class="rl-item" name="timetype" lay-verify="required" ng-model="editData.timetype">
+                                                        <option value=""></option>
+                                                        <option value="0">公历</option>
+                                                        <option value="1">农历</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">最近公司</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="title" required ng-model="editData.recentUnit"  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">第一学历</label>
+                                                <div class="layui-input-block">
+                                                    <select name="city" lay-verify="required" ng-model="editData.qualification">
+                                                        <option value="{{index}}" ng-repeat="(index,item) in initData.params.qualifications">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label"><i>*</i>最近职位</label>
+                                                <div class="layui-input-block">
+                                                    <select name="city" lay-verify="required" ng-model="editData.recentPosition">
+                                                        <option value="{{index}}" ng-repeat="(index,item) in initData.params.position">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">人才状态</label>
+                                                <div class="layui-input-block">
+                                                    <select name="city" lay-verify="required" ng-model="editData.personState">
+                                                        <option value="{{index}}" ng-repeat="(index,item) in initData.params.personState">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>    
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item layui-edge-item">
+                                                <label class="layui-form-label"><i>*</i>现属职能</label>
+                                                <div class="layui-input-block">
+                                                        <input type="text" name="title" required ng-model="editData.incumbency"  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                                        <i class="layui-edge"></i>
+                                                </div>
+                                            </div>   
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item layui-edge-item">
+                                                <label class="layui-form-label"><i>*</i>现在行业</label>
+                                                <div class="layui-input-block">
+                                                    <select name="city" lay-verify="required" ng-model="editData.industry">
+                                                        <option value="{{index}}" ng-repeat="(index,item) in initData.params.industry">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="tit">
+                                <h1>求职意愿</h1>
+                            </div>
+                            <div class="edit-exhibition">
+                                <div class="edit-list">
+                                    <ul>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                    期望年薪:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.expyearsal}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                         <li>
+                                            <dl>
+                                                <dt>
+                                                        期望行业:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.params.industry[initData.hopeIndustry]}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        期望城市:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.params.b_city[initData.household]}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        期望职位:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.houseProject}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="edit hide">
+                                <div class="input-list layui-form">
+                                    <ul>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">期望年薪</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="title" required  lay-verify="required" ng-model="editData.expyearsal" placeholder="万/税前" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item layui-edge-item">
+                                                <label class="layui-form-label">期望行业</label>
+                                                <div class="layui-input-block">
+                                                    <select name="city" lay-verify="required" ng-model="editData.hopeIndustry">
+                                                        <option value="{{index}}" ng-repeat="(index,item) in initData.params.industry">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item layui-edge-item">
+                                                <label class="layui-form-label">期望城市</label>
+                                                <div class="layui-input-block">
+                                                    <select name="city" lay-verify="required" ng-model="editData.household">
+                                                        <option value="{{index}}" ng-repeat="(index,item) in initData.params.b_city">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">期望职位</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="title" required ng-model="editData.houseProject" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="tit">
+                                <h1>详细信息</h1>
+                            </div>
+                            <div class="edit-exhibition ">
+                                <div class="edit-list">
+                                    <ul>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                    邮箱:
+                                                </dt>
+                                                <dd>
+                                                    <span>{{initData.email}}</span>
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                    身高:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.height}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        国籍:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.params.country[initData.country]}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                         <li>
+                                            <dl>
+                                                <dt>
+                                                        职位级别:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.params.jobLeavl[initData.jobLeavl]}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        籍贯:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.params.b_city[initData.origin]}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        目前年薪:
+                                                </dt>
+                                                <dd>
+                                                     {{initData.curyearsal}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        政治面貌:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.params.politics[initData.politics]}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        最高学历:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.params.isdegree[initData.highlyEducated]}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        婚姻状况:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.params.marriage[initData.maritalStatus]}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        证件类型:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.params.certtype[initData.certtype]}}
+
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                         <li>
+                                            <dl>
+                                                <dt>
+                                                        海外经历:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.params.overseasExperience[initData.overseasExperience]}}
+
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        证件编码:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.certcode}} 
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="edit hide">
+                                <div class="input-list layui-form">
+                                    <ul>
+                                        <li>
+                                            <div class="layui-form-item layui-form-phone-item">
+                                                <label class="layui-form-label">邮箱</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="title" required ng-model="editData.email" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">身高</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="title" required ng-model="editData.height"  lay-verify="required" autocomplete="off" class="layui-input" placeholder="cm">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">国籍</label>
+                                                <div class="layui-input-block">
+                                                    <select name="city" lay-verify="required" ng-model="editData.country">
+                                                        <option value="{{index}}" ng-repeat="(index,item) in initData.params.country">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">职位级别</label>
+                                                <div class="layui-input-block">
+                                                    <select name="city" lay-verify="required" ng-model="editData.jobLeavl">
+                                                        <option value="{{index}}" ng-repeat="(index,item) in initData.params.jobLeavl">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item layui-edge-item">
+                                                <label class="layui-form-label">籍贯</label>
+                                                <div class="layui-input-block">
+                                                    <select name="city" lay-verify="required" ng-model="editData.origin">
+                                                        <option value="{{index}}" ng-repeat="(index,item) in initData.params.b_city">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                         <li>
+                                            <div class="layui-form-item nx-item">
+                                                <label class="layui-form-label">目前年薪</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="title" required ng-model="editData.curyearsal" lay-verify="required" placeholder="" autocomplete="off" class="layui-input w">
+                                                    <span>万*</span>
+                                                    <select class="y" name="city" lay-verify="required">
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="1">7</option>
+                                                        <option value="2">8</option>
+                                                        <option value="3">9</option>
+                                                        <option value="4">10</option>
+                                                        <option value="11">11</option>
+                                                        <option value="12">12</option>
+                                                    </select>
+                                                    <span>月+</span>
+                                                    <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input ww">
+                                                    <span>万=</span>
+                                                    <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input z" readonly>
+                                                    <span>万</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">政治面貌</label>
+                                                <div class="layui-input-block">
+                                                    <select name="city" lay-verify="required" ng-model="editData.politics">
+                                                        <option value="{{index}}" ng-repeat="(index,item) in initData.params.politics">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">最高学历</label>
+                                                <div class="layui-input-block">
+                                                    <select name="city" lay-verify="required" ng-model="editData.highlyEducated">
+                                                        <option value="{{index}}" ng-repeat="(index,item) in initData.params.isdegree">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">婚姻状况</label>
+                                                <div class="layui-input-block">
+                                                    <select name="city" lay-verify="required" ng-model="editData.maritalStatus">
+                                                        <option value="{{index}}" ng-repeat="(index,item) in initData.params.marriage">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">证件类型</label>
+                                                <div class="layui-input-block">
+                                                    <select name="city" lay-verify="required" ng-model="editData.certtype">
+                                                        <option value="{{index}}" ng-repeat="(index,item) in initData.params.certtype">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">海外经历</label>
+                                                <div class="layui-input-block">
+                                                    <select name="city" lay-verify="required" ng-model="editData.overseasExperience">
+                                                        <option value="{{index}}" ng-repeat="(index,item) in initData.params.overseasExperience">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">证件编码</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="title" required ng-model="editData.certcode"  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="tit">
+                                <h1>工作经历</h1>
+                                <div class="btn">
+                                    <span class="add" ng-click="addWorkExpRow()"><i class="iconfont">&#xe615;</i>添加</span>
+                                </div>
+                            </div>
+                            <div class="edit-exhibition">
+                                <div class="edit-list" ng-repeat=" item in initData.workExp">
+                                    <ul>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        时间:
+                                                </dt>
+                                                <dd>
+                                                    {{item.workStartTime}}-{{item.workEndTime}}
+                                                    {{item.soFar}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                         <li>
+                                            <dl>
+                                                <dt>
+                                                        职位名称:
+                                                </dt>
+                                                <dd>
+                                                    {{item.workComname}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        公司名称:
+                                                </dt>
+                                                <dd>
+                                                    {{item.workComname}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        所属职能:
+                                                </dt>
+                                                <dd>
+                                                    {{item.workExpValue['fb894fdb-8ae6-4f72-807c-c8476c7543cb']}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        所属行业:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.params.industry[item.workExpValue['815374f3-5cb7-48dd-8783-52308a7c8217']]}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        直接上级:
+                                                </dt>
+                                                <dd>
+                                                    {{item.workExpValue['efdd270f-fac2-46be-9a96-6990b919f78e']}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li class="zz">
+                                            <dl>
+                                                <dt>
+                                                        主要职责:
+                                                </dt>
+                                                <dd>
+                                                    {{item.mainDuty}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li class="yj">
+                                            <dl>
+                                                <dt>
+                                                        关键业绩:
+                                                </dt>
+                                                <dd>
+                                                    {{item.workBussdesc}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        离职说明:
+                                                </dt>
+                                                <dd>
+                                                    {{item.exitText}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="edit hide" >
+                                <div class="input-list layui-form" ng-repeat="item in editData.workExp track by $index">
+                                    <ul>
+                                        <li>
+                                            <div class="layui-form-item time-item">
+                                                <label class="layui-form-label">时间</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" class="layui-input timePicker" ng-model="item.workStartTime">
+                                                    <span>至</span> 
+                                                    <input type="text" class="layui-input timePicker" ng-model="item.workEndTime">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">职位名称</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="title" required ng-model="item.workExpValue['ddf4afda-9f15-41fd-ae1d-38bfcc50fc44']" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">公司名称</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="title" required ng-model="item.workComname" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">所属智能</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="title" required ng-model="item.workExpValue['fb894fdb-8ae6-4f72-807c-c8476c7543cb']" lay-verify="required" placeholder="填写直接上级的职位名，多个职位用逗号" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">所属行业</label>
+                                                <div class="layui-input-block">
+                                                    <select name="city" lay-verify="required" ng-model="item.workExpValue['815374f3-5cb7-48dd-8783-52308a7c8217']">
+                                                        <option value="{{index}}" ng-repeat="(index,item) in initData.params.industry">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">直接上级</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="title" required ng-model="item.workExpValue['efdd270f-fac2-46be-9a96-6990b919f78e']" lay-verify="required" placeholder="填写直接上级的职位名，多个职位用逗号" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="zz-item">
+                                           <div class="layui-form-item layui-form-text">
+                                                <label class="layui-form-label">主要职责</label>
+                                                <div class="layui-input-block">
+                                                <textarea name="desc" placeholder="请输入内容" ng-model="item.mainDuty" class="layui-textarea"></textarea>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="zz-item">
+                                           <div class="layui-form-item layui-form-text">
+                                                <label class="layui-form-label">关键业绩</label>
+                                                <div class="layui-input-block">
+                                                <textarea name="desc" placeholder="请输入内容" ng-model="item.workBussdesc" class="layui-textarea"></textarea>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="zz-item">
+                                           <div class="layui-form-item layui-form-text">
+                                                <label class="layui-form-label">离职说明</label>
+                                                <div class="layui-input-block">
+                                                <textarea name="desc" placeholder="请输入内容" ng-model="item.exitText" class="layui-textarea"></textarea>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="btn">
+                                        <span class="delete" ng-click="workDelrow($index)"><i class="iconfont">&#xe612;</i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="allBtn">
+                                <a href="javascript:;">查看全部</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="tit">
+                                <h1>项目经验</h1>
+                                <div class="btn">
+                                    <span class="add" ng-click="addProjectExpRow()"><i class="iconfont">&#xe615;</i>添加</span>
+                                </div>
+                            </div>
+                            <div class="edit-exhibition">
+                                <div class="edit-list" ng-repeat="item in initData.projectExp track by $index">
+                                    <ul>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        时间:
+                                                </dt>
+                                                <dd>
+                                                        {{item.proIntoTime}}   至   {{item.proOutTime}}
+                                                        {{sofar}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                         <li>
+                                            <dl>
+                                                <dt>
+                                                        项目名称:
+                                                </dt>
+                                                <dd>
+                                                    {{item.proName}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        项目角色:
+                                                </dt>
+                                                <dd>
+                                                    {{item.projectExpValue['77a7441a-23b4-4b7c-aa2c-269185db1c33']}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li class="zz">
+                                            <dl>
+                                                <dt>
+                                                        主要职责:
+                                                </dt>
+                                                <dd>
+                                                    {{item.proDescription}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="edit hide" >
+                                <div class="input-list layui-form"  ng-repeat="item in editData.projectExp track by $index">
+                                    <ul>
+                                        <li>
+                                            <div class="layui-form-item time-item">
+                                                <label class="layui-form-label">时间</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" class="layui-input timePicker" ng-model="item.proIntoTime">
+                                                    <span>至</span> 
+                                                    <input type="text" class="layui-input timePicker" ng-model="item.proOutTime">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="it-item-btn">
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">项目名称</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" name="title" required ng-model="item.proName"  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                                </div>
+                                                <div class="layui-form-mid layui-word-aux it-btn">
+                                                    <input type="checkbox" name="it" lay-filter="it" title="IT"  lay-skin="primary" ng-model="item.name"> 
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="it-item">
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">软件环境</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="title" required  lay-verify="required" ng-model="item.projectExpValue['e56dbbc6-a86b-437d-9de5-241929df991a']" placeholder="" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="it-item">
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">硬件环境</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="title" required  lay-verify="required" ng-model="item.projectExpValue['dbf1b67f-ac70-495a-be14-aaf08daa8bfd']" placeholder="" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="it-item">
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">开发环境</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="title" required  lay-verify="required" ng-model="item.projectExpValue['7099a588-7dd1-4fa7-aed5-64f096e618dc']" placeholder="" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="zz-item xmjs-item">
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">项目角色</label>
+                                                <div class="layui-input-block">
+                                                    <textarea name="desc" placeholder="请输入内容" class="layui-textarea" ng-model="item.projectExpValue['77a7441a-23b4-4b7c-aa2c-269185db1c33']"></textarea>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="zz-item">
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">项目业绩</label>
+                                                <div class="layui-input-block">
+                                                    <textarea name="desc" placeholder="请输入内容" class="layui-textarea" ng-model="item.proDescription"></textarea>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="btn">
+                                        <span class="delete" ng-click="projectDelrow($index)"><i class="iconfont">&#xe612;</i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="allBtn">
+                                <a href="javascript:;">查看全部</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="tit">
+                                <h1>教育背景</h1>
+                                <div class="btn">
+                                    <span class="add" ng-click="addeduBackgroundRow()"><i class="iconfont">&#xe615;</i>添加</span>
+                                </div>
+                            </div>
+                            <div class="edit-exhibition">
+                                <div class="edit-list" ng-repeat="item in initData.eduBackground  track by $index">
+                                    <ul>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        时间:
+                                                </dt>
+                                                <dd>
+                                                        {{item.eduStartTime}}   至   {{item.eduEndTime}}
+                                                        {{soFar}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                         <li>
+                                            <dl>
+                                                <dt>
+                                                        专业名称:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.params.major[item.eduValue['572266df-2bd8-4a46-be10-fd5f595bc4c4']]}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        学习名称:
+                                                </dt>
+                                                <dd>
+                                                        {{item.eduSchoolName}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        学历/学位:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.params.qualifications[item.eduValue['0b8b0f62-7d06-4b2f-8ef7-6ad703d9d67b']]}}
+
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="edit hide">
+                                <div class="input-list layui-form" ng-repeat="item in editData.eduBackground  track by $index">
+                                    <ul>
+                                        <li>
+                                            <div class="layui-form-item time-item">
+                                                <label class="layui-form-label">时间</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" class="layui-input" id="test3" ng-model="item.eduStartTime">
+                                                    <span>至</span> 
+                                                    <input type="text" class="layui-input" id="test4" ng-model="item.eduEndTime">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">专业名称</label>
+                                                <div class="layui-input-block">
+                                                    <select lay-verify="required" ng-model="item.eduValue['572266df-2bd8-4a46-be10-fd5f595bc4c4']">
+                                                        <option value="{{index}}" ng-repeat="(index,item) in initData.params.major">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="xxmc-item">
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">学校名称</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" name="title" required  lay-verify="required" ng-model="item.eduSchoolName" placeholder="最多12个字" autocomplete="off" class="layui-input" >
+                                                </div>
+                                                <div class="layui-form-mid layui-word-aux">
+                                                    <select name="city" lay-verify="required" ng-model="item.eduValue['572266df-2bd8-4a46-be10-fd5f595bc4c4']">
+                                                        <option value=""></option>
+                                                        <option value="0">北京</option>
+                                                        <option value="1">上海</option>
+                                                        <option value="2">广州</option>
+                                                        <option value="3">深圳</option>
+                                                        <option value="4">杭州</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="xl-item">
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">学历/学位</label>
+                                                <div class="layui-input-block">
+                                                    <select lay-verify="required" ng-model="item.eduValue['0b8b0f62-7d06-4b2f-8ef7-6ad703d9d67b']">
+                                                        <option value="{{index}}" ng-repeat="(index,item) in initData.params.qualifications">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="btn">
+                                        <span class="delete" ng-click="eduBackgroundDelrow($index)"><i class="iconfont">&#xe612;</i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="tit">
+                                <h1>语言水平</h1>
+                                <div class="btn">
+                                    <span class="add" ng-click="addlanguageExpRow()"><i class="iconfont">&#xe615;</i>添加</span>
+                                </div>
+                            </div>
+                            <div class="edit-exhibition">
+                                <div class="edit-list" ng-repeat="item in initData.languageExp  track by $index">
+                                    <ul>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                    语言种类:
+                                                </dt>
+                                                <dd>
+                                                    {{initData.params.name[item.languageType]}}
+
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                         <li>
+                                            <dl>
+                                                <dt>
+                                                    语言水平:
+                                                </dt>
+                                                <dd>
+                                                    {{item.languageLevel}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="edit hide">
+                                <div class="input-list layui-form" ng-repeat="item in editData.languageExp  track by $index">
+                                    <ul>
+                                       <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">语言种类</label>
+                                                <div class="layui-input-block">
+                                                    <select lay-verify="required" ng-model="item.languageType">
+                                                        <option value="{{index}}" ng-repeat="(index,item) in initData.params.name">{{item}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                       </li>
+                                       <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">语言水平</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" ng-model="item.languageLevel" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                       </li>
+                                    </ul>
+                                    <div class="btn">
+                                        <span class="delete" ng-click="languageExpDelrow($index)"><i class="iconfont">&#xe612;</i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="tit">
+                                <h1>专业资格</h1>
+                                <div class="btn">
+                                    <span class="add" ng-click="addmajorQualifyRow()"><i class="iconfont">&#xe615;</i>添加</span>
+                                </div>
+                            </div>
+                            <div class="edit-exhibition">
+                                <div class="edit-list" ng-repeat="item in initData.majorQualify  track by $index">
+                                    <ul>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        证件名称:
+                                                </dt>
+                                                <dd>
+                                                        {{item.papersName}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                         <li>
+                                            <dl>
+                                                <dt>
+                                                        获得时间:
+                                                </dt>
+                                                <dd>
+                                                        {{item.getTime}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <dl>
+                                                <dt>
+                                                        颁发机构:
+                                                </dt>
+                                                <dd>
+                                                        {{item.issuingAgency}}
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="edit hide">
+                                <div class="input-list layui-form" ng-repeat="item in editData.majorQualify  track by $index">
+                                    <ul>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">证件名称</label>
+                                                <div class="layui-input-block">
+                                                <input type="text" ng-model="item.papersName" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">获得时间</label>
+                                                <div class="layui-input-block">
+                                                        <input type="text" class="layui-input" id="test5" ng-model="item.getTime">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">颁发机构</label>
+                                                <div class="layui-input-block">
+                                                <input type="text" name="title" ng-model="item.issuingAgency" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="btn">
+                                        <span class="delete" ng-click="majorQualifyDelrow($index)"><i class="iconfont">&#xe612;</i>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+               
+            </div>
+            
+            <div class="slideStrong">
+                <div class="tops">
+                    <div class="tx">
+                        <img src="../images/one.jpg" alt="">
+                    </div>
+                    <div class="tit">
+                        <h1>谢奔庭</h1>
+                        <p>
+                            hi,谢奔庭<br />
+                            您的简历被浏览<font>100次</font>
+                        </p>
+                    </div>
+                </div>
+                <div class="vip-service">
+                    <div class="title">
+                        <h1>VIP服务</h1>
+                    </div>
+                    <div class="list">
+                        <ul>
+                            <li><a href="VIP服务-职涯规划.html">职涯规划</a></li>
+                            <li><a href="VIP服务-职业顾问.html">职业顾问</a></li>
+                            <li><a href="VIP服务-心理疏导.html">心理疏导</a></li>
+                            <li><a href="VIP服务-离职辅导.html">离职辅导</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="vip-service">
+                    <div class="title">
+                        <h1>就业服务</h1>
+                    </div>
+                    <div class="list">
+                        <ul>
+                            <li><a href="就业服务-简历定制.html">简历定制</a></li>
+                            <li><a href="就业服务-求职委托.html">求职委托</a></li>
+                            <li><a href="就业辅导-面试辅导.html">面试辅导</a></li>
+                            <li><a href="就业辅导-试用辅导.html">试用辅导</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- <div class="entrusted-resume">
+                    <div class="title">
+                        <h1>委托简历</h1>
+                    </div>
+                    <div class="list">
+                        <ul>
+                            <li class="on">
+                                    选择<br />
+                                    猎头顾问
+                            </li>
+                            <li>
+                                    待猎<br />
+                                    头接收
+                            </li>
+                            <li>
+                                    猎头<br />
+                                    反馈中
+                            </li>
+                        </ul>
+                    </div>
+                </div> -->
+                <div class="resume-hide">
+                    <div class="title">
+                        <h1>简历隐私设置</h1>
+                    </div>
+                    <div class="layui-form">
+                        <div class="open">
+                            <div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">求职简历:</label>
+                                    <div class="layui-input-block">
+                                        <select name="city" lay-verify="required">
+                                            <option value="">所有人公开</option>
+                                            <option value="0">仅商壤内部猎头顾问可见</option>
+                                            <option value="0">所有人保密</option>
+                                            <option value="0">更多隐私设置</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="strong">
+                                    <span>开放简历后，企业HR/猎头会为您持续推进好的工作机会</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hide-corporate">
+                            <div class="">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><i class="iconfont">&#xe65b;</i>屏蔽企业:</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux"><button>保存</button></div>
+                                </div>
+                            </div>
+                            <div class="list">
+                                <ul>
+                                    <li>融创集团</li>
+                                    <li>融创集团</li>
+                                    <li>融创集团</li>
+                                    <li>融创集团</li>
+                                    <li>融创集团</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="alertBox"></div>
+
+    <!-- 更多简历隐私设置弹窗 -->
+    <div class="more-set-alert hide">
+        <div class="title">
+            <h1>更多简历隐私设置</h1>
+            <a class="layui-layer-close" href="javascript:;"><i class="iconfont">&#xe60d;</i></a>
+        </div>
+        <div class="content layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">联系方式</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="lxfs" value="显示全部联系方式" title="显示全部联系方式" checked>
+                </div>
+                <div class="layui-input-block">
+                    <input type="radio" name="lxfs" value="仅显示手机" title="仅显示手机" >
+                </div>
+                <div class="layui-input-block">
+                    <input type="radio" name="lxfs" value="仅显示邮箱" title="仅显示邮箱" >
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">联系时间</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="lxsj" value="随时联系" title="随时联系" checked>
+                </div>
+                <div class="layui-input-block">
+                    <input type="radio" name="lxsj" value="08:00—12:00" title="08:00—12:00" >
+                </div>
+                <div class="layui-input-block">
+                    <input type="radio" name="lxsj" value="12:00—14:00" title="12:00—14:00" >
+                </div>
+                <div class="layui-input-block">
+                    <input type="radio" name="lxsj" value="14:00—18:00" title="14:00—18:00" >
+                </div>
+                <div class="layui-input-block">
+                    <input type="radio" name="lxsj" value="18:00之后" title="18:00之后" >
+                </div>
+                <div class="layui-input-block">
+                    <input type="radio" name="lxsj" value="仅周末" title="仅周末" >
+                </div>
+            </div>
+        </div>
+        <div class="btn">
+            <a href="javascript:;">确认</a>
+        </div>
+    </div>
+    <!-- 请选择猎头顾问 -->
+    <div class="opt-lt-adviser hide">
+        <div class="title">
+            <h1>请选择猎头顾问</h1>
+            <a class="layui-layer-close" href="javascript:;"><i class="iconfont">&#xe60d;</i></a>
+        </div>
+        <div class="content layui-form">
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input type="radio" name="xzltgw" lay-filter="xzltgw" value="系统随机选择" title="系统随机选择" checked>
+                    <input type="radio" name="xzltgw" lay-filter="xzltgw" value="邀请顾问" title="邀请顾问" >
+                    <input type="radio" name="xzltgw" lay-filter="xzltgw" value="指定猎头顾问" title="指定猎头顾问" >
+                </div>
+            </div>
+        </div>
+        <div class="list hide">
+            <ul>
+                <li>
+                    <div class="tx">
+                        <img src="../images/one.jpg" alt="">
+                    </div>
+                    <div class="tit">
+                        <h1>李磊     猎头顾问</h1>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="list hide">
+            <div class="search">
+                <input type="text"><button><i class="iconfont">&#xe665;</i></button>
+            </div>
+            <ul>
+                <li>
+                    <div class="tx">
+                        <img src="../images/one.jpg" alt="">
+                    </div>
+                    <div class="tit">
+                        <h1>李磊     猎头顾问</h1>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="btn">
+            <a href="javascript:;">确认委托</a>
+        </div>
+    </div>
+    <!-- 猎头顾问详情 -->
+    <div class="lt-details-alert hide">
+        <div class="title">
+            <h1>猎头顾问详情</h1>
+            <a class="layui-layer-close" href="javascript:;"><i class="iconfont">&#xe60d;</i></a>
+        </div>
+        <div class="list">
+            <ul>
+                <li>
+                    <div class="tx">
+                        <img src="../images/one.jpg" alt="">
+                    </div>
+                    <div class="tit">
+                        <h1>李磊     猎头顾问</h1>
+                        <a href="javascript:;">立即沟通</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 解析简历 -->
+    <div class="analysis-resume-alert hide">
+        <div class="title">
+            <h1>解析简历</h1>
+            <a class="layui-layer-close" href="javascript:;"><i class="iconfont">&#xe60d;</i></a>
+        </div>
+        <div class="content">
+            <div class="btn">
+                <h1>请<a href="javascript:;" id="test6">上传简历文件</a></h1>
+                <h2>注：支持pdf、doc、txt、html文件</h2>
+            </div>
+        </div>
+    </div>
+    <!-- end -->
+    <footer class="footer">
+        
+    </footer>
+</body>
+<script>
+    window.addEventListener("load",function(){
+        let urlData = this.location.href.split('.html');
+        console.log(urlData);
+        var bj=document.getElementsByClassName("bj")[0]
+        var cancel=document.getElementsByClassName("cancel")[0]
+        var Preservation=document.getElementsByClassName("Preservation")[0]
+        console.log(bj,cancel,Preservation)
+        if(urlData[1]){ // 新增简历
+            bj.style.display='none';
+            cancel.style.display='inline-block';
+            Preservation.style.display='inline-block';
+        } else { // 查看简历
+            bj.style.display='inline-block';
+            cancel.style.display='none';
+            Preservation.style.display='none';
+        }
+    })
+
+</script>
+</html>

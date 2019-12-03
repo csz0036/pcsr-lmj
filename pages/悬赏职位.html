@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="import" href="../common/common.html"/>
+    <script src="../js/service/usersService.js"></script>
+	<script src="../js/service/yingpinService.js"></script>
+	<script src="../js/service/collectionStationService.js"></script>
+    <script src="../js/service/recommendService.js"></script>
+	<script src="../js/service/personService.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/controller/yingpinController.js"></script>
+    <style type="text/css">
+    	.jobReward .jobs .allJobs ul li {
+    		background :transparent;
+    	}
+    	.pagination{
+   		    display: flex;
+    	}
+    </style>
+
+</head>
+<!-- <body class="h" ng-app="soiroc"  ng-controller="yingpinController"> -->
+    <body class="h" ng-app="soiroc" ng-cloak  ng-controller="yingpinController" ng-init="collectionStationProjectFindAll();collectionStationFindAll();findRecommends();findHotStationList();selectCvAll();loginInfo()">
+    <header class="header headerB marginBottom">
+        <nav class="nav">
+            
+        </nav>
+        <div class="content">
+            <div class="marginAuto">
+                <div class="loginAlert hide">
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="jobReward">
+        <div class="marginAuto">
+            <div class="optionBtn">
+                <div class="searchTop">
+                    <input type="test" placeholder="请输入职位名称" ng-model="initData.jobName"><button ng-click="search(1,10,initData.jobName)"><i class="iconfont">&#xe665;</i></button>
+                </div>
+                <ul>
+                    <li>
+                        <h1>城市</h1>
+                        <div class="d1 btn1 cityBox">
+                            <dt ng-repeat="item in initData.cityList track by $index" class="{{initData.cityCurrent==$index?'on':''}}" ng-click="selectCity(item,$index)">{{item.name}}</dt>
+                        </div>
+                        <div class="cityPageBtn">
+                            <dt class="on onselectw" ng-click="selectCityType(0)">按区域划分</dt>
+                            <dt class= "onselect" ng-click="selectCityType(1)">按地铁沿线</dt>
+                        </div>
+                        <div class="cityMetro city btn1 mertocity">
+                            <dt ng-repeat="(index,item) in initData.provinceList" ng-click="selectProvince(item,$index)" class="{{initData.provinceCurrent == index?'on':''}}">{{item.name}}</dt>
+                        </div>
+                        <div class="cityMetro metro btn1 hide">
+                            <dt ng-repeat="(index,item) in initData.lineList" ng-click="selectLine(item.lineName,index)" class="{{initData.lineCurrent==$index?'on':''}}">{{item.lineName}}</dt>
+                        </div>
+                        <div class="metroList hide">
+                            <dt ng-repeat="(index,item) in initData.lineadrsList" ng-click="selectLineAdrs(item.stepName,index)" class="{{initData.lineadrsCurrent==$index?'on':''}}">{{item.stepName}}</dt>
+                        </div>
+                    </li>
+                    <li>
+                        <h1>职能：</h1>
+                        <div class="d1 secondBox btn1">
+                            <div  ng-repeat="item in initData.jobList track by $index" class="d1 secondBox btn1">
+                                <dt class="{{item.list.length>0?'second':''}}" ng-click="selectJob($index)">
+                                    {{item.name}}
+                                </dt>
+                                <div class="secondList">
+                                    <span ng-repeat="items in item.list track by $index"  class="{{initData.jobListCurrent==$index?'on':''}}" ng-click="selectJobItem($index)">{{items.name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <h1>年薪</h1>
+                        <div class="d1 btn1">
+                            <dt ng-repeat="item in initData.deptList track by $index" class="{{initData.deptCurrent==$index?'on':''}}" ng-click="selectGongzi($index)">{{item}}</dt>
+                        </div>
+                    </li>
+                    <li class="retract">
+                        <h1>更多：</h1>
+                        <div class="more">
+                            <div class="layui-form">
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <select name="city" lay-verify="required" ng-blur="moreBlur('time')">
+                                            <option value=""></option>
+                                            <option value="不限">不限</option>
+                                            <option value="今天">今天</option>
+                                            <option value="本周">本周</option>
+                                            <option value="本月">本月</option>
+                                        </select>
+                                        <!-- <input type="text" class="layui-input" ng-model="initData.more.city" ng-blur="moreBlur('city')"> -->
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <select name="city" lay-verify="required" ng-blur="moreBlur('city')">
+                                            <option value=""></option>
+                                            <option value="本科-统招">本科-统招</option>
+                                            <option value="本科-非统招">本科-非统招</option>
+                                            <option value="大专-统招">大专-统招</option>
+                                            <option value="大专-非统招">大专-非统招</option>
+                                            <option value="职高">职高</option>
+                                            <option value="高中">高中</option>
+                                            <option value="其他">其他</option>
+                                        </select>
+                                        <!-- <input type="text" class="layui-input" ng-model="initData.more.city" ng-blur="moreBlur('city')"> -->
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <select name="city" lay-verify="required" ng-blur="moreBlur('province')">
+                                            <option value=""></option>
+                                            <option value="男">男</option>
+                                            <option value="女">女</option>
+                                            <option value="男女不限">男女不限</option>
+                                        </select>
+                                        <!-- <input type="text" class="layui-input" ng-model="initData.more.province" ng-blur="moreBlur('province')"> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="retract">
+                        <h1>订阅：</h1>
+                        <div class="Subscribe">
+                            <span>期望职位<input type="text" placeholder="多个职位用空格隔开" ng-model="initData.subscribe.hopeIndustry"></span>
+                            <span>期望年薪<input type="text" placeholder="" ng-model="initData.subscribe.expyearsalStart"> 万 — <input type="text" placeholder="" ng-model="initData.subscribe.expyearsalEnd"> 万</span>
+                            <span>期望行业<input type="text" placeholder="" ng-model="initData.subscribe.houseProject"></span>
+                            <span>期望城市<input type="test" ng-model="initData.subscribe.household"></span>
+                            <button ng-click="subscribe()">订阅</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="optionOpen">
+                <a class="stopBtn"><span>展开</span><i class="iconfont">&#xe6c8;</i></a>
+            </div>
+            <div class="ScreeningConditions">
+                <h1>已筛选条件:</h1>
+                <span ng-repeat="(key,value) in select" ng-if="value !== undefined" ng-click="delItem(key)">{{value}}</span>
+            </div>
+            <div class="jobs">
+                <div class="allJobs">
+                    <div class="tops">
+                        <h1>
+                            <span ng-show="!flag"  ng-click='allJob()' class="on faskk">全部职位</span>
+                            &nbsp;&nbsp;&nbsp;
+                            <span class="fasta" ng-click='subscriptionPosition()'>订阅职位&nbsp;&nbsp;&nbsp;</span>
+                            <span ng-click='allJob()'  ng-show="flag">全部职位</span>
+                            </h1>
+                        <span>共{{totalRows}}个职位</span>
+                    </div>
+                    <div class="list" >
+                        <ul ng-repeat="entity in list">
+                            <li>
+                                <!-- <a href="职位-职位详情页.html"> -->
+                                <a ng-href="职位-职位详情页.html?id={{entity._id}}&projectVistiNum={{entity.projectVistiNum}}">
+                                    <div class="tit">
+                                        <h1>{{entity.proName}}</h1>
+                                        <h2>年薪{{entity.release.minSalary}}  - {{entity.release.maxSalary}}万 某地产公司</h2>
+                                        <h3>{{areaData[entity.release.city]}}丨 {{entity.release.minLimit}}-{{entity.release.maxLimit}}丨{{eduCation[entity.release.firstDegree]}}丨{{sexDate[entity.release.gender]}}</h3>
+                                    </div>
+                                    <div class="center">
+                                        <h1><span>悬赏金￥{{entity.release.estimateHeadhuntingFee}}</span><i class="zhuan" ng-click="zhuan()" href="javascript:;">赚</i></h1>
+                                        <div class="dlList">
+                                            <dl>
+                                                <dt>
+                                                    <img src="../images/touxiang.png" alt="">
+                                                </dt>
+                                                <dd>
+                                                    <h2>{{entity.release.communicationDepartName}}</h2>
+                                                    <h3>{{entity.release.customerId}}</h3>
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <div class="length"><i class="iconfont">&#xe9ff;</i>{{entity.projectVistiNum}}</div>
+                                    </div>
+                                </a>
+                                <div class="btn">
+                                    <span class="tj" ng-click="tjAdd(this)">推荐人选</span><span class="yp"  ng-click="ypAdd(entity._id)">应聘职位</span>
+                                </div>
+                                <div class="sc">
+                                    <span ng-click="addperfavpro(entity,$event)"></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                	<tm-pagination conf="paginationConf"></tm-pagination>
+                </div>
+                <div class="collectionJobs">
+                    <div class="hots-list">
+                        <div class="tops">
+                            <h1>热门职位</h1>
+                        </div>
+                        <div class="list">
+                            <ul >
+                                <li ng-repeat="pojo in hotStationList | limitTo: 4">
+                                    <a href="javascript:;">
+                                        <div class="tit">
+                                            <h1>{{pojo.proName}}</h1>
+                                        </div>
+                                        <div class="money">
+                                                {{pojo.money}}
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="collectionJobs-list">
+                        <div class="tops">
+                            <h1>收藏职位 (<span> {{collectionStationCount.length}}</span> )</h1>
+                            <a href="收藏记录.html">更多</a>
+                        </div>
+                        <div class="search">
+                            <input type="text" placeholder="请输入职位名称"><button><i class="iconfont">&#xe665;</i></button>
+                        </div>
+                        <div class="list">
+                            <ul >
+                                <li ng-repeat="pojo in collectionStationList | limitTo: 4">
+                                    <a href="javascript:;">
+                                        <div class="tit">
+                                            <h1>proid:{{pojo.proId}}</h1>
+                                            <h2>userid:{{pojo.userId}}</h2>
+                                        </div>
+                                        <div class="money">
+                                                等待接口
+                                                {{pojo.workYear}}
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="alertBox"></div>
+    <div class="jobsNewAlert hide">
+        <i class="layui-layer-close close iconfont">&#xe60d;</i>
+        <div class="pageBtn">
+            <a class="on" href="javascript:;">新增人选</a>
+            <a href="javascript:;">推荐已有</a>
+        </div>
+        <div class="content new">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i>*</i>人选姓名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input" ng-model="recommend.username">
+                        <div class="errorBox">输入错误</div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i>*</i>性别</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="sex" value="0" title="男" ng-model="recommend.gender">
+                        <input type="radio" name="sex" value="1" title="女" ng-model="recommend.gender">
+                        <div class="errorBox">输入错误</div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i>*</i>人选手机号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input" ng-model="recommend.phone">
+                        <div class="errorBox">输入错误</div>
+                    </div>
+                </div>
+                <div class="layui-form-item annualSalary">
+                    <label class="layui-form-label"><i>*</i>人选目前年薪</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input" ng-model="recommend.currentSalary">
+                        <span class="tips">万</span>
+                        <div class="errorBox">输入错误</div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i>*</i>人选最近职位</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input" ng-model="recommend.recentPosts">
+                        <div class="errorBox">输入错误</div>
+                    </div>
+                </div>
+                <div class="layui-form-item function-input-item">
+                    <label class="layui-form-label"><i>*</i>人选现属职能</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input functions" ng-model="recommend.currentFunctions">
+                        <div class="errorBox">输入错误</div>
+                    </div>
+                </div>
+                <div class="layui-form-item industry-input-item">
+                    <label class="layui-form-label"><i>*</i>人选现在行业</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input now-industry" ng-model="recommend.currentIndustry">
+                        <div class="errorBox">输入错误</div>
+                    </div>
+                </div>
+            </form>
+            <div class="strong">注:须经本人同意，您才可以推荐人选~</div>
+            <div class="btn">
+                <a href="javascript:;" ng-click="saveRecommend()">确认推荐</a>
+            </div>
+        </div>
+        <div class="content tj hide">
+            <div class="list layui-form">
+                <ul>
+                    <li ng-repeat="iterm in recommends">
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <input type="radio" name="sex" value="0">
+                            </div>
+                        </div>
+                        <h1>人选姓名：{{iterm.obj.username}}</h1><h1>人员手机号:{{iterm.obj.phone}}</h1><a href="http://127.0.0.1:8082/pages/%E6%8E%A8%E8%8D%90%E8%81%8C%E4%BD%8D.html">详情</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="strong">注:须经本人同意，您才可以推荐人选~</div>
+            <div class="btn">
+                <a href="javascript:;" ng-click="saveRecommendadd()">确认推荐</a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- tips弹窗 -->
+    <div class="topsAlert hide">
+         <span>猎头已为您推荐此职位，无需再次投递~</span>
+    </div>
+    <!-- 现属职能弹窗 -->
+    <div class="current-functions-alert hide">
+        <div class="title">
+            <h1>现属职能</h1>
+            <i class="layui-layer-close close iconfont">&#xe60d;</i>
+        </div>
+        <div class="content">
+            <div id="test1">
+
+            </div>
+        </div>
+    </div>
+    <!-- end -->
+    <!-- 现在行业弹窗 -->
+    <div class="now-industry-alert hide">
+        <div class="title">
+            <h1>现在行业</h1>
+            <i class="layui-layer-close iconfont">&#xe60d;</i>
+        </div>
+        <div class="list">
+            <ul>
+                <li ng-repeat="item in IndustryObj" ng-click="nowIndustry($event)">{{item.name}}</li>
+            </ul>
+        </div>
+    </div>
+    <!-- end -->
+
+    <!-- 期望行业弹窗 -->
+    <div class="expectation-industry-alert hide">
+        <div class="title">
+            <h1>现在行业</h1>
+            <i class="layui-layer-close iconfont">&#xe60d;</i>
+        </div>
+        <div class="list">
+            <ul>
+                    <li ng-repeat='industry in IndustryObj'>{{industry.name}}</li>
+                   
+            </ul>
+        </div>
+    </div>
+    <!-- end -->
+
+    <!-- 切换身份弹窗 -->
+    <div class="identity-switching">
+        <i class="layui-layer-close close-style iconfont">&#xe60d;</i>
+        <h1>是否切换为猎头身份？</h1>
+        <h2>注:升级为猎头身份，赚赏金</h2>
+        <div class="btn">
+            <a class="layui-layer-close" href="javascript:;">取消</a>
+            <a href="javascript:;">确认</a>
+        </div>
+    </div>
+    <!-- end -->
+
+    <!-- 切换身份-登录 -->
+    <div class="identity-switching-login">
+        <i class="layui-layer-close close-style iconfont">&#xe60d;</i>
+        <div class="btn layui-form">
+            <a href="javascript:;"><input type="radio" name="lt">个人猎头</a>
+            <a href="javascript:;"><input type="radio" name="lt">企业猎头</a>
+        </div>
+    </div>
+    <!-- end -->
+
+    <!-- 投递多份简历弹窗 -->
+    <div class="selectCv hide">
+        <div class="title">
+            <h1>请选择简历</h1>
+            <i class="close layui-layer-close iconfont">&#xe60d;</i>
+        </div>
+        <div class="list layui-form">
+            <ul>
+                <li ng-repeat="item in selectCvAll" ng-click="selectCvId(item.personId)">
+                    <input type="radio" name="jl" title="{{item.chineseName}}">
+                </li>
+            </ul>
+        </div>
+        <div class="btn">
+            <a ng-click="selectCvSave()" href="javascript:;">确定</a>
+        </div>
+    </div>
+    <footer class="footer">
+
+    </footer>
+    <script>
+        $(function(){
+            layui.use(['layer','element','laydate', 'laypage','tree','table'], function(){
+                var layer = layui.layer,
+                    laydate = layui.laydate,
+                    laypage = layui.laypage,
+                    tree = layui.tree;
+                    talbe = layui.table;
+                    laydate.render({
+                        elem: '#moreTimes' //指定元素
+                    });
+                    talbe.render({
+                        //elem: '#listPersons'
+                        elem : '#page'
+                        ,height: 312
+                        ,url: $.host + "person" + "/findAll" //数据接口
+                        ,page: true //开启分页
+                        ,parseData : function(res){
+                            return {
+                                "code": res.code, //解析接口状态
+                                "msg": res.message, //解析提示文本
+                                "data": res.obj //解析数据列表
+                            };
+                        },
+                        cols: [
+                            [ //表头
+                                {field: 'id', title: '姓名', width:141, fixed: 'left'}
+                                ,{field: 'username', title: '性别', width:125}
+                                ,{field: 'username', title: '手机号', width:215}
+                                ,{field: 'sex', title: '最近公司', width:290, }
+                                ,{field: 'city', title: '目前年薪', width:159}
+                                ,{field: 'sign', title: '现在行业', width: 139}
+                                ,{field: 'experience', title: '最近职位', width: 271, }
+                                ,{field: 'score', title: '应聘时间', width: 266, sort: true}
+                            ]
+                        ],
+                    });
+
+
+
+                    
+                     // 现属职能数据
+                     var datalist = [{
+                    title: '现属职能'
+                    ,checked: true
+                    ,spread: true
+                    ,disabled: true
+                    ,children: [{
+                         title: 'CXO'
+                        ,children: [{
+                                title: 'CEO'
+                            },{
+                                title: 'COO'
+                            },{
+                                title: 'CFO'
+                            },{
+                                title: 'CTO'
+                            },{
+                                title: 'CIO'
+                            },{
+                                title: '总裁'
+                            },{
+                                title: '副总裁'
+                            },{
+                                title: '总经理'
+                            }]
+                    },{
+                        title:'地产'
+                        ,children: [{
+                                title: '市场'
+                            },{
+                                title: '销售'
+                            },{
+                                title: '拿地'
+                            },{
+                                title: '前期'
+                            },{
+                                title: '拆迁'
+                            },{
+                                title: '规划'
+                            },{
+                                title: '成本'
+                            },{
+                                title: '设计'
+                            },{
+                                title: '工程'
+                            }]
+                    },{
+                        title:'汽车'
+                    },{
+                        title:'教育'
+                    }]
+                }];
+               var jobList=[];
+                $.ajax({
+                    type: "GET",  
+                    url: "/api/api/getZtreeById?ztreeId=position",
+                    dataType: "json",  
+                    success: function(response){  
+                            if (response.success) {
+                            let data = JSON.parse(response.obj);
+                            let newData = [];
+
+                            for (let i = 0; i < data.length; i++) {
+                                data[i].list = [];
+                            }
+                            for (let i = 0; i < data.length; i++) {
+                                for (let n = 0; n < data.length; n++) {
+                                    if (data[i].id == data[n].pId) {
+                                        data[i].list.push(data[n]);
+                                    }
+                                }
+                                // $scope.initData.jobList.list=data[i].children;
+                            }
+                            for (let i = 0; i < data.length; i++) {
+                                if (data[i].list.length !== 0) {
+                                    newData.push(data[i]);
+                                }
+                            }
+                            newData.forEach((element,i)=>{
+                                datalist[0].children[i]={"title":element.name,"children":[]};
+                                element.list.forEach((elements,j)=>{
+                                    datalist[0].children[i].children[j]={"title":elements.name}
+                                })
+                            })
+                        console.log(datalist,"只能2")
+                        tree.render({
+                    elem: '#test1'
+                    ,data: datalist
+                    ,id: 'demoId1'
+                    ,showCheckbox: true  //是否显示复选框
+                    ,click: function(obj){
+                        // debugger;
+                        console.log(obj,"obj1")
+                    },
+                    oncheck:function(obj){
+                    //    debugger;
+                        console.log(datalist,"obj2")
+                        $("#test1 input[type=checkbox]").each(function(){
+                            if($(this).attr("checked") == "checked"){
+                                $(this).prop("checked", true);
+                            }else{
+                                $(this).prop("checked", false);
+                            }
+                        });
+
+                        $(".jobsNewAlert .new .layui-form input.functions").val(obj.data.title);
+                        console.log(obj.data); //得到当前点击的节点数据
+
+                    }
+                });
+                            // console.log($scope.initData.jobList)
+                        }
+                    }, 
+                    error:function(e){  
+                        
+                    }  
+                })
+                // 现属职能  树形统计
+              
+                $(".jobsNewAlert .new .layui-form input.functions").click(function(){
+                    //现属职能弹窗
+                    layer.open({
+                        type: 1,
+                        title: false,
+                        closeBtn: 0,
+                        shadeClose: true,
+                        skin: '',
+                        area: 'auto',
+                        maxWidth :"auto",
+                        maxHeight : "auto",
+                        resize : false,
+                        content: $(".current-functions-alert"),
+                    });
+                });
+                $(".jobsNewAlert .new .layui-form input.now-industry").click(function(){
+                    layer.open({
+                        type: 1,
+                        title: false,
+                        closeBtn: 0,
+                        shadeClose: true,
+                        skin: '',
+                        area: 'auto',
+                        maxWidth :"auto",
+                        maxHeight : "auto",
+                        resize : false,
+                        content: $(".now-industry-alert"),
+                    });
+                });
+
+                //   layer.open({
+                //     type: 1,
+                //     title: false,
+                //     closeBtn: 0,
+                //     shadeClose: true,
+                //     skin: '',
+                //     area: 'auto',
+                //     maxWidth :"auto",
+                //     maxHeight : "auto",
+                //     resize : false,
+                //     content: $(".expectation-industry-alert"),
+                // });
+
+                //   layer.open({
+                //     type: 1,
+                //     title: false,
+                //     closeBtn: 0,
+                //     shadeClose: true,
+                //     skin: '',
+                //     area: 'auto',
+                //     maxWidth :"auto",
+                //     maxHeight : "auto",
+                //     resize : false,
+                //     content: $(".identity-switching"),
+                // });
+                // layer.open({
+                //     type: 1,
+                //     title: false,
+                //     closeBtn: 0,
+                //     shadeClose: true,
+                //     skin: '',
+                //     area: 'auto',
+                //     maxWidth :"auto",
+                //     maxHeight : "auto",
+                //     resize : false,
+                //     content: $(".identity-switching-login"),
+                // });
+            });
+        });
+    </script>
+</body>
+</html>

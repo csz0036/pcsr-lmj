@@ -1,0 +1,186 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.mask {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.05)
+}
+
+.con {
+    display: flex;
+    position: fixed;
+    z-index: 5000;
+    width: 80%;
+    max-width: 900px;
+    min-height: 420px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.left {
+    width: 398px;
+    height: 420px;
+    /* background: red; */
+}
+
+.left-box {
+    width: 398px;
+    margin-top: 40px;
+    border-right: solid 1px #C3C3C3;
+    height: 320px;
+}
+
+.left-box>img {
+    width: 170px;
+    height: 169px;
+    margin-top: 48px;
+}
+
+.left-box>p {
+    margin-top: 10px;
+    font-size: 20px;
+    color: #666666;
+}
+
+.right {
+    width: 501px;
+    height: 420px;
+}
+
+.right>h1 {
+    margin-top: 36px;
+    margin-left: 75.5px;
+    text-align: center;
+    width: 350px;
+    height: 31px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.right>h1>a {
+    font-size: 18px;
+    text-decoration: none;
+    line-height: 31px;
+    color: #333333;
+}
+
+.right>h1>a.active {
+    font-size: 24px;
+}
+
+.aaa {
+    margin-left: 25px;
+    margin-right: 22px;
+}
+
+.box>h2 {
+    margin-top: 20px;
+    margin-left: 121.5px;
+    display: flex;
+    margin-bottom: 35px;
+}
+
+.box>h2>a {
+    margin-left: 28px;
+    margin-right: 28px;
+    font-size: 14px;
+    text-decoration: none;
+    padding-bottom: 2px;
+    color: #666666;
+    /* border-bottom: solid 1px #D23637; */
+}
+
+.right>.box>h2>a.active {
+    color: #D23637;
+    border-bottom: solid 1px #D23637;
+}
+
+.form {
+    margin-left: 79px;
+    /* text-align: center; */
+    width: 343px;
+    /* height: 130px; */
+    margin-bottom: 40px;
+}
+
+.form>input {
+    width: 343px;
+    height: 40px;
+    outline: none;
+    border-radius: 5px;
+}
+
+.form>a {
+    display: block;
+    float: right;
+    margin-top: 9px;
+    width: 80px;
+    font-size: 16px;
+    color: #D23637;
+    height: 21px;
+    text-decoration: none;
+    margin-bottom: 30px;
+}
+
+.inp {
+    margin-bottom: 20px;
+    background: url("../images/person.png");
+    background-repeat: no-repeat;
+    background-position: 5px center;
+    text-indent: 30px;
+    border: solid 1px #DDDDDD;
+}
+
+.p2{
+    cursor: pointer;
+    margin: 2px 10px;
+    width: 10px;
+    height: 10px;
+    font-size: 20px;
+    color: #D8D8D8;
+    float: right;
+}
+.inpt {
+    background: url("../images/lock.png");
+    background-position: 5px center;
+    background-repeat: no-repeat;
+    text-indent: 30px;
+    border: solid 1px #DDDDDD;
+}
+
+.inputBox>button {
+
+    width: 343px;
+    height: 40px;
+    background: #D23637;
+    border: 0;
+    border-radius: 5px;
+    font-size: 18px;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.inputBox>p {
+    font-size: 16px;
+    color: #666666;
+}
+
+.inputBox>p>a {
+    font-size: 16px;
+    color: #D23637;
+    text-decoration: none;
+}
+
+.a1 {
+    margin-top: 20px;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="import" href="../common/common.html"/>
+    <!-- 当前页面 -->
+    <link rel="stylesheet" href="lib/swiper/dist/css/swiper.min.css">
+</head>
+<body>
+    <header class="header marginBottom">
+        <div class="banner">
+            <div class="swiper-container swiper-container1">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide "><a href="javascript:;">
+                        <img src="../images/jldz.png" alt="">
+                    </a></div>
+                </div> 
+            </div> 
+            <div class="bannerBtn">
+                <a href="javascript:;">立即购买</a>
+            </div>
+        </div>
+        <nav class="nav">
+            
+        </nav>
+        <div class="content">
+            <div class="marginAuto">
+                <div class="loginAlert hide">
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="tips-positoin ">
+        <div class="marginAuto">
+            <span>当前位置：</span>VIP—简历定制
+        </div>
+    </div>
+    <footer class="footer">
+        
+    </footer>
+    <div class="alertBox">
+
+    </div>
+    <!-- 当前页面 -->
+    <script src="../lib/swiper/dist/js/swiper.min.js"></script>
+    <script>
+        $(function(){
+            var swiper = new Swiper('.swiper-container1', {
+                loop : true,
+                effect : 'fade',
+                autoplay: {
+                    delay: 5000,
+                    stopOnLastSlide: false,
+                    disableOnInteraction: true,
+                },
+            });  
+        });
+    </script>
+</body>
+</html>

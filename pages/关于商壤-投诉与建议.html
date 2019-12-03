@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="import" href="../common/common.html"/>
+    <script src="../js/service/complaintSuggestionService.js"></script>
+	<script src="../js/controller/complaintSuggestionController.js"></script>
+    <!-- 当前页面 -->
+    <link rel="stylesheet" href="../lib/swiper/dist/css/swiper.min.css">
+    <!-- 当前页面 -->
+    <script src="../lib/swiper/dist/js/swiper.min.js"></script>
+</head>
+<body ng-app="soiroc"  ng-controller="complaintSuggestionController">
+    <header class="header headerH marginBottom">
+        <div class="banner">
+            <div class="swiper-container swiper-container1">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide "><a href="javascript:;">
+                        <img src="../images/gysr.png" alt="">
+                    </a></div>
+                </div>
+            </div>
+        </div>
+        <nav class="nav">
+            
+        </nav>
+        <div class="content">
+            <div class="marginAuto">
+                <div class="loginAlert hide">
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="srAbout">
+        <div class="marginAuto">
+            <div class="content">
+                <div class="slideNav">
+                    <a href="关于商壤-商壤简介.html">商壤简介</a>
+                    <a href="关于商壤-商壤荣誉.html">商壤荣誉</a>
+                    <a href="关于商壤-加入商壤.html">加入商壤</a>
+                    <a href="关于商壤-联系我们.html">联系我们</a>
+                    <a class="on" href="关于商壤-投诉与建议.html">投诉与建议</a>
+                </div> 
+                <div class="main">
+                    <div class="title">
+                        <h1>投诉与建议</h1>
+                    </div>
+                    <div class="complaint">
+                        <div class="from">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><i>*</i>邮箱</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" required ng-model="entity.email"  lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+                                        <div class="errorBox" ng-bind="entity.errorMsg.email"></div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><i>*</i>您的姓名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" required ng-model="entity.userName" lay-verify="required" placeholder="请输入您的姓名" autocomplete="off" class="layui-input">
+                                        <div class="errorBox" ng-bind="entity.errorMsg.userName"></div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><i>*</i>手机</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" required ng-model="entity.phone" lay-verify="required" placeholder="请输入手机号码" autocomplete="off" class="layui-input">
+                                        <div class="errorBox" ng-bind="entity.errorMsg.phone"></div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><i>*</i>建议</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" required ng-model="entity.proposal" lay-verify="required" placeholder="请输入建议" autocomplete="off" class="layui-input">
+                                        <div class="errorBox" ng-bind="entity.errorMsg.proposal"></div>
+                                    </div>
+                                </div>
+                            <div class="btn">
+                                <a ng-click="save()">提交</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        
+    </footer>
+    <div class="alertBox">
+
+    </div>
+
+    <script>
+        $(function(){
+            var swiper = new Swiper('.swiper-container1', {
+                loop : true,
+                effect : 'fade',
+                autoplay: {
+                    delay: 5000,
+                    stopOnLastSlide: false,
+                    disableOnInteraction: true,
+                },
+            });  
+        });
+    </script>
+</body>
+</html>

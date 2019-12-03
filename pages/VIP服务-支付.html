@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="import" href="../common/common.html"/>
+    <!-- 当前页面 -->
+    <link rel="stylesheet" href="../lib/swiper/dist/css/swiper.min.css">
+</head>
+<body class="h">
+    <header class="header headerB marginBottom">
+        <nav class="nav resume-nav">
+            
+        </nav>
+        <div class="content">
+            <div class="marginAuto">
+                <div class="loginAlert hide">
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="vip-payment">
+        <div class="marginAuto">
+            <div class="servicePrice vip-payment-servicePrice">  
+                <div class="marginAuto">
+                    <div class="title">
+                        <h1>选择简历服务</h1>
+                    </div>
+                    <div class="list">
+                        <ul>
+                            <li class="on">
+                                <h1>首席顾问</h1>
+                                <h2>优化时间：3天内</h2>
+                                <h3>现价￥799 <span>原价￥931</span></h3>
+                            </li>
+                            <li>
+                                <h1>首席顾问</h1>
+                                <h2>优化时间：3天内</h2>
+                                <h3>现价￥799 <span>原价￥931</span></h3>
+                            </li>
+                            <li>
+                                <h1>首席顾问</h1>
+                                <h2>优化时间：3天内</h2>
+                                <h3>现价￥799 <span>原价￥931</span></h3>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="vip-payment-form">
+                <label for="name"><i>*</i>姓名</label>
+                <input type="text" name="name" id="">
+                <label for="phone"><i>*</i>手机号</label>
+                <input type="text" name="phone" id="">
+            </div>
+            <div class="cost">
+                <h1>支付费用</h1>
+                <h2>订单单号：<font>23003784654783685</font></h2>
+                <h3>付款方式：<span class="iconfont"><img src="../images/weixin_.png" alt="">扫码支付</span><span><img src="../images/zhifubao_.png" alt=""> 扫码支付</span></h3>
+                <div class="qrCode">
+                    <h1>应付金额：￥398</h1>
+                    <img src="../images/" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        
+    </footer>
+    <div class="alertBox">
+
+    </div>
+
+    <!-- 支付成功弹框 -->
+    <div class="payment-order-alert hide">  
+        <div class="title">
+            <h1>支付订单</h1>
+        </div>
+        <i class="layui-layer-close close-style iconfont">&#xe60d;</i>
+        <div class="main">
+            <img src="../images/zfcg_.png" alt="">
+            <h1>您已支付成功</h1>
+            <a href="javascript:;">查看订单</a>
+        </div>
+    </div>
+
+    <!-- 当前页面 -->
+    <script src="../lib/swiper/dist/js/swiper.min.js"></script>
+    <script>
+        $(function(){
+            var swiper = new Swiper('.swiper-container1', {
+                loop : true,
+                effect : 'fade',
+                autoplay: {
+                    delay: 5000,
+                    stopOnLastSlide: false,
+                    disableOnInteraction: true,
+                },
+            });
+            var swiper2 = new Swiper('.swiper-container2', {
+                slidesPerView: 5,
+                slidesPerColumn: 2,
+                spaceBetween: 40,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+            });
+
+            layui.use(['layer','form'], function(){
+                // layer.open({      //启动支付弹框
+                //     type: 1,
+                //     title: false,
+                //     closeBtn: 0,
+                //     shadeClose: true,
+                //     skin: '',
+                //     area: 'auto',
+                //     maxWidth :"auto",
+                //     maxHeight : "auto",
+                //     resize : false,
+                //     content: $(".payment-order-alert"),
+                // });
+            });
+        });
+    </script>
+</body>
+</html>

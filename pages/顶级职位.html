@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="import" href="../common/common.html"/>
+    <script src="../js/service/indexService.js"></script>
+    <script src="../js/controller/indexController.js"></script>
+</head>
+<body class="h" ng-app="soiroc" ng-controller="indexController" ng-init="topPosts('487181981')">
+    <header class="header headerB">
+        <nav class="nav">
+
+        </nav>
+        <div class="content">
+            <div class="marginAuto">
+                <div class="loginAlert hide">
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="topPosts">
+        <div class="marginAuto">
+            <div class="slideNav">
+                <a href="javascript:;" ng-repeat="p in topPostsObj track by $index" ng-click="topPosts(p.id)" ng-class="{true:'active',false:'close'}[$index==0]">{{p.name}}</a>
+            </div>
+            <div class="content">
+                <div class="position">
+                    <span>当前位置：<a href="/index">首页</a>>><a href="javascript:;">顶级职位</a></span>
+                    <div class="length">
+                        共1000个中职位
+                    </div>
+                </div>
+                <div class="list">
+                    <ul>
+                        <li ng-repeat="pojo in list">
+                            <div class="text">
+                                <h1>{{pojo.release.directSuperior}}</h1>
+                                <h2>年薪100-150万 {{pojo.customerId}}</h2>
+                                <h3>北京丨 10-12年丨大专统招丨{{pojo.release.gender}}</h3>
+                            </div>
+                            <div class="money">
+                                    悬赏金￥80000
+                            </div>
+                            <div class="r">
+                                <div class="browse"><i class="iconfont">&#xe9ff;</i>2550</div>
+                                <div class="btn">
+                                    <a href="javascript:;">推荐人选</a>
+                                    <a href="javascript:;">应聘职位</a>
+                                </div>
+                                <div class="collection">
+                                    <a href="javascript:;"><img src="../images/icon8.png" alt=""></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+
+    </footer>
+    <div class="alertBox">
+
+    </div>
+
+
+
+    <!-- alert -->
+</body>
+</html>

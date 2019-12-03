@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="import" href="../common/common.html"/>
+    <!-- 当前页面 -->
+    <link rel="stylesheet" href="/lib/swiper/dist/css/swiper.min.css">
+    <script src="../js/service/joinSoirocService.js"></script>
+    <script src="../js/controller/joinSoirocController.js"></script>
+</head>
+<body ng-app="soiroc" ng-controller="joinSoirocController" ng-init='oinSoiroc()'>
+    <header class="header headerH marginBottom">
+        <div class="banner">
+            <div class="swiper-container swiper-container1">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide "><a href="javascript:;">
+                        <img src="../images/gysr.png" alt="">
+                    </a></div>
+                </div>
+            </div>
+        </div>
+        <nav class="nav">
+            
+        </nav>
+        <div class="content">
+            <div class="marginAuto">
+                <div class="loginAlert hide">
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="srAbout">
+        <div class="marginAuto">
+            <div class="content">
+                <div class="slideNav">
+                    <a href="关于商壤-商壤简介.html">商壤简介</a>
+                    <a href="关于商壤-商壤荣誉.html">商壤荣誉</a>
+                    <a class="on" href="关于商壤-加入商壤.html">加入商壤</a>
+                    <a href="关于商壤-联系我们.html">联系我们</a>
+                    <a href="关于商壤-投诉与建议.html">投诉与建议</a>
+                </div> 
+                <div class="main">
+                    <div class="title">
+                        <h1>加入商壤</h1>
+                    </div>
+                    <div class="jop">
+                        <div class="btn">
+                            <a class="on" ng-click="oinSoiroc(4,1)" href="javascript:;">加入商壤</a>
+                            <a href="javascript:;">职业发展</a>
+                            <a href="javascript:;">人才理念</a>
+                        </div> 
+                        <div class="jopPage">
+                            <div class="addSr">
+                                <div class="table">
+                                    <table id="table1" lay-filter="table1"> </table>
+                                    <table cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <th>职位名称</th>
+                                            <th>职位类型</th>
+                                            <th>工作地点</th>
+                                            <th>发布时间</th>
+                                            <th>&nbsp;</th>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                        <tr>
+                                            <td>测试</td>
+                                            <td>技术类</td>
+                                            <td>北京</td>
+                                            <td>2019-07-12</td>
+                                            <td>已投递</td>
+                                            <td><i class="iconfont">&#xe6c8;</i></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="addContent hide">
+                                    <h1>岗位职责</h1>
+                                    <p>
+                                            1、研究行业技术发展趋势。确保公司技术领先；<br />
+                                            2、负责技术开发团队的运营管理‘<br />
+                                            3、领导公司的产品设计和开发；<br />
+                                            4、协调技术部与相关部门的工作；<br />
+                                            5、主导公司和行业伙伴的技术合作；
+                                    </p>
+                                    <h1>任职资格</h1>
+                                    <p>
+                                            1、至少2年100人技术团队管理经验；<br />
+                                            2、熟悉移动互联网技术：
+                                    </p>
+                                    <p>
+                                            <strong>求职邮件：gmo@soiroc.com</strong>
+                                    </p>
+                                    <a href="javascript:;" ng-if="flag" ng-click="yingpin">应聘职位</a>
+                                    <a href="javascript:;" ng-if="!flag" ng-click="yingpins">应聘职位</a>
+                                </div>
+                            </div>
+                            <div class="addFrom hide">
+                                <div class="addFromTit">
+                                    <h1>测试</h1>
+                                </div>
+                                <form class="layui-form" lay-filter="formTest" action="">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label"><i>*</i>姓名</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="username" ng-model="entity.username" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                                            <div class="errorBox" ng-bind="entity.errorMsg.username"></div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label"><i>*</i>单选框</label>
+                                        <div class="layui-input-block">
+                                            <input type="radio" name="gender" ng-model="entity.gender" value="男" title="男">
+                                            <input type="radio" name="gender" ng-model="entity.gender" value="女" title="女">
+                                            <div class="errorBox" ng-bind="entity.errorMsg.gender"></div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label"><i>*</i>手机号</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="phone" ng-model="entity.phone" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+                                            <div class="errorBox" ng-bind="entity.errorMsg.phone"></div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label"><i>*</i>最近公司</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="recentCompany" ng-model="entity.recentCompany" placeholder="请输入最近公司" autocomplete="off" class="layui-input">
+                                            <div class="errorBox" ng-bind="entity.errorMsg.recentCompany"></div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label"><i>*</i>最近职位</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="recentPosts" ng-model="entity.recentPosts" placeholder="请输入最近职位" autocomplete="off" class="layui-input">
+                                            <div class="errorBox" ng-bind="entity.errorMsg.recentPosts"></div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item annualSalary">
+                                        <label class="layui-form-label"><i>*</i>目前年薪</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="currentSalary" ng-model="entity.currentSalary" placeholder="请输入目前年薪" autocomplete="off" class="layui-input"><span class="tips">万</span>
+                                            <div class="errorBox" ng-bind="entity.errorMsg.currentSalary"></div>
+                                        </div>
+                                    </div>
+                                     <div class="layui-form-item">
+                                        <label class="layui-form-label"><i>*</i>现在行业</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="currentIndustry" ng-model="entity.currentIndustry" placeholder="请输入现在行业" autocomplete="off" class="layui-input">
+                                            <div class="errorBox" ng-bind="entity.errorMsg.currentIndustry"></div>
+                                        </div>
+                                    </div>
+                                    <div class="addBtn">
+                                        <a href="javascript:;" ng-click="save()">确认</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="jopPage hide">
+                            <div class="cDevelopment">
+                                <h1>人生成长计划</h1>
+                                <p>
+                                        为帮助员工成长，公司人力资源会制定详尽的人才成长计划，针对骨干员工，还会量身打造培养计划。商壤猎头方面
+                                        的人才主要从专业、管理两个方向发展。
+                                </p>
+                                <p>
+                                    <img src="../images/cDevelopment1.jpg" alt="">
+                                </p>
+                                <p>
+                                    <img src="../images/cDevelopment2.jpg" alt="">
+                                </p>
+                                <p>
+                                        针对不适合在商壤继续发展或有其他发展计划的员工，商壤也会给予从行业、专业、人力等方面的培训，以使他们在
+                                        以后寻找适合自己事业的时候能更有效，更有竞争力，从而，在今后的事业，能有更好地发展。
+                                </p>
+                                <p>
+                                        无论是公司现有员工，还是商壤工作过的员工，商壤公司都希望他们在商壤的经历足以成为其职业生涯中最宝贵，最
+                                        有收获，最能让自身增值的经历。做一个对员工有成长价值，有高收入回报的事业平台是商壤公司的人才发展的重要
+                                        使命。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="jopPage hide">
+                            <div class="talentIdea">
+                                <p>
+                                        商壤珍视人才，并严格履行一个企业公民的社会责任。公司的人才理念：为人才创造职业机会，帮人才搭建事业平台，
+                                        与人才共享业绩成果。
+                                </p>
+                                <p>
+                                        在人才的选拨上，商壤恪守"诚信、奋进、担当、有为"的选人标准。 
+                                </p>
+                                <p>
+                                        在人才的培养上，公司以“价值驱导、理念引导、导师辅导、规范传导”的模式，帮助员工树立正确的价值观，建立
+                                        领先的职业理念，同时采取将导师的传帮带和团队成员的实践分享辅导相结合的实战训练，此外，将公司的业务规范、
+                                        工作标准体系注入到员工的日常工作中。商壤公司为了快速孕育人才，采取全业务流程进行人才培养，使公司的员工
+                                        成长后都能独挡一面。
+                                </p>
+                                <p>
+                                    <img src="../images/talentIdea.jpg" alt="">
+                                </p>
+                                <p>
+                                        在管理层的遴选上，我们着力选拔那些“有格局、有抱负、有贡献、有能力”的优秀员工，用成果来衡量能力，使一
+                                        大批优秀人才成为公司的栋梁。  
+                                </p>
+                                <p>
+                                        在报酬体系上，公司每年末进行一次行业薪酬调查，以确保公司始终保持领先的薪酬竞争力。公司每每半年一次的贡
+                                        献值评估，及对应的人员薪酬调整，也及时反映了人才的成长情况。 此外， 公司的快速发展、壮大也为广大员工提
+                                        供了非常广阔的事业平台。 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        
+    </footer>
+    <div class="alertBox">
+
+    </div>
+    <!-- 当前页面 -->
+    <script src="../lib/swiper/dist/js/swiper.min.js"></script>
+    <script>
+        // $(function(){
+        //     var swiper = new Swiper('.swiper-container1', {
+        //         loop : true,
+        //         effect : 'fade',
+        //         autoplay: {
+        //             delay: 5000,
+        //             stopOnLastSlide: false,
+        //             disableOnInteraction: true,
+        //         },
+        //     });
+        //     layui.use(['table','form'], function(){
+        //         var table = layui.table,
+        //             form = layui.form;
+        //         var table1 = table.render({
+        //             elem: '#table1',
+        //             id : "table_e1"
+        //             ,url: "/api/joinsoiroc/search"
+        //             ,method : 'get'
+        //             ,contentType : 'application/json;charset=UTF-8'
+        //             ,parseData : function(res){
+        //                 return {
+        //                     "code": res.code, //解析接口状态
+        //                     "msg": res.message, //解析提示文本
+        //                     "data": res.obj.rows, //解析数据列表
+        //                     "count": res.obj.total,
+        //                 };
+        //             },
+        //             request: {
+        //                 pageName: "page" //页码的参数名称，默认：page
+        //                 ,limitName: "rows" //每页数据量的参数名，默认：limit
+        //             },
+        //             page: {
+        //                 layout: [ 'prev', 'page', 'next', 'skip'], //自定义分页布局
+        //                 prev : "上一页",
+        //                 next : "下一页",
+        //             }, //开启分页
+        //             cols: [
+        //                 [ //表头
+        //                     {field: 'jobTitle', title: '职位名称', width:153,align:'center' }
+        //                     ,{field: 'jobType', title: '职位类型', width:150,align:'center'}
+        //                     ,{field: 'workingPlace', title: '工作地点', width:161,align:'center'}
+        //                     ,{field: 'updateTime', title: '发布时间', width:178,align:'center'}
+        //                     ,{field: '', title: '&nbsp;', width:113,align:'center'} 
+        //                     ,{field: '', title: '&nbsp;', width: 65,align:'center',templet:function(){
+        //                         return '<div><i class="iconfont">&#xe6c8;</i></div>'
+        //                     }}
+        //                     ,{field: '', title: '&nbsp;', width: 0,align:'center',hide:true,templet: function(d){
+        //                         return '<div class="duty">'+d.duty+'</div>'
+        //                     }}
+        //                     ,{field: '', title: '&nbsp;', width: 0,align:'center',hide:true,templet: function(d){
+        //                         return '<div class="qualification">'+d.qualification+'</div>'
+        //                     }}
+        //                 ]
+        //             ],
+        //             done:function(){
+                        
+        //             }
+        //         });
+        //         table.on('row(table1)', function(obj){
+        //             var duty = obj.data.duty;
+        //             var qualification = obj.data.qualification;
+        //             var _html = "<div class='addContent'> " + 
+        //                             " <h1>岗位职责</h1>" + 
+        //                             "<p>"+obj.data.duty+"</p>" +
+        //                             "<h1>任职资格</h1>" + 
+        //                             "<p>"+obj.data.qualification+"</p>" +
+        //                             "<p><strong>求职邮件：gmo@soiroc.com</strong></p>"+
+        //                             "<a href='javascript:;'>应聘职位</a>" +
+        //                         "</div>";
+        //             // $(".addContent").remove();
+        //             if(obj.tr.hasClass("addHtml")){
+        //                 $(".addContent").remove();
+        //                 obj.tr.removeClass("addHtml");
+        //             }else{
+        //                 obj.tr.addClass("addHtml");
+        //                 obj.tr.after(_html);
+        //             }
+                    
+                   
+        //         });
+        //         $(".table").on("click",".addContent a",function(){
+        //             $(this).addClass("on");
+        //             $(".table").hide();
+        //             $(".addFrom").show();
+        //         });
+                
+               
+        //     });
+        // });
+    </script>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Document</title>
+    <link rel="import" href="../common/common.html" />
+    <!-- <link rel="stylesheet" href="../css/style.css"> -->
+    <script src="../js/service/indexService.js"></script>
+    <script src="../js/service/usersService.js"></script>
+    <script src="../js/service/newsInformationService.js"></script>
+    <script src="../js/controller/indexController.js"></script>
+    <!-- 当前页面 -->
+    <link rel="stylesheet" href="../lib/swiper/dist/css/swiper.min.css">
+</head>
+<script type='text/javascript'>
+    (function(m, ei, q, i, a, j, s) {
+        m[i] = m[i] || function() {
+            (m[i].a = m[i].a || []).push(arguments)
+        };
+        j = ei.createElement(q),
+            s = ei.getElementsByTagName(q)[0];
+        j.async = true;
+        j.charset = 'UTF-8';
+        j.src = 'https://static.meiqia.com/dist/meiqia.js?_=t';
+        s.parentNode.insertBefore(j, s);
+    })(window, document, 'script', '_MEIQIA');
+    _MEIQIA('entId', 160710);
+    _MEIQIA('withoutBtn');
+</script>
+<body ng-app="soiroc" ng-controller="indexController" ng-init="highEndJobs('106');getUserInfo();iNews('商壤新闻',0)">
+    <header class="header">
+        <div class="banner">
+            <div class="swiper-container swiper-container1">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide "><a href="javascript:;">
+                            <img src="../images/banner1.png" alt="">
+                        </a></div>
+                    <div class="swiper-slide "><a href="javascript:;">
+                            <img src="../images/banner2.png" alt=""></a>
+                    </div>
+                    <div class="swiper-slide "><a href="javascript:;">
+                            <img src="../images/banner3.png" alt="">
+                        </a></div>
+                    <div class="swiper-slide "><a href="javascript:;">
+                            <img src="../images/banner4.png" alt="">
+                        </a></div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        <nav class="nav">
+
+        </nav>
+        <div class="content">
+            <div class="marginAuto">
+                <div class="loginAlert hide">
+
+                </div>
+            </div>
+        </div>
+        <div class="bottomTest">
+            <div>
+                <span><i>1</i>万+</span>
+                <p>各类顾问</p>
+            </div>
+            <div>
+                <span><i>100</i>万+</span>
+                <p>精英人才</p>
+            </div>
+            <div>
+                <span><i>1千</i>+</span>
+                <p>合作企业</p>
+            </div>
+            <div>
+                <span><i>3</i>万+ </span>
+                <p>成功案例</p>
+            </div>
+        </div>
+    </header>
+    <div class="top_position">
+        <div class="index_title">
+            <span>顶级职位</span>
+        </div>
+        <div class="marginAuto">
+            <div class="swiper-container swiper-container2">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <a href="顶级职位.html">
+                            <h1>CEO</h1>
+                            <H2>现有3个职位</H2>
+                        </a>
+
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="顶级职位.html">
+                            <h1>COO</h1>
+                            <H2>现有3个职位</H2>
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="顶级职位.html">
+                            <h1>CFO</h1>
+                            <H2>现有3个职位</H2>
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="顶级职位.html">
+                            <h1>CTO</h1>
+                            <H2>现有3个职位</H2>
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="顶级职位.html">
+                            <h1>CIO</h1>
+                            <H2>现有3个职位</H2>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+    <div class="highPost">
+        <div class="marginAuto">
+            <div class="index_title"><span>高端职位</span></div>
+            <div class="highPostBtn">
+                <a href="javascript:;" ng-repeat="p in highEndJobsObj track by $index" ng-click="highEndJobs(p.id)"
+                    ng-class="{true:'on',false:'close'}[$index==0]">{{p.name}}</a>
+            </div>
+            <div class="highPostContent">
+                <div class="list">
+                    <ul>
+                        <li ng-repeat="pojo in list">
+                            <img src="../images/highPost1.jpg" alt="">
+                            <div class="test">
+                                <h1>
+                                    融资负责人<strong>悬赏金{{pojo.release.minSalary}}元</strong>
+                                </h1>
+                                <h2>
+                                    <span><i class="iconfont">&#xe72c;</i>{{pojo.release.city}}</span>
+                                    <span><i
+                                            class="iconfont">&#xe72b;</i>{{pojo.release.minSalary}}-{{pojo.release.maxSalary}}万</span>
+                                    <span><i class="iconfont">&#xe72a;</i>{{pojo.release.firstDegree}}</span>
+                                </h2>
+                                <div class="btn">
+                                    <a href="javascript:;">推荐人选</a>
+                                    <a href="javascript:;">应聘职位</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="more">
+                            <a href="javascript:;" id="triggerBtn">更多职位</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="news">
+        <div class="marginAuto">
+            <div class="index_title">
+                <span>新闻资讯</span>
+            </div>
+            <div class="newsBtn">
+                <a ng-repeat="title in newsTitle" ng-class="{on:$index==index}" ng-click="iNews(title.title,$index)" href="javascript:;">{{title.title}}</a>
+            </div>
+            <div class="list">
+                <ul>
+                    <li ng-repeat="entity in newslist">
+                        <a ng-href="商壤新闻-正文.html?id={{entity.id}}">
+                            <img ng-src="{{entity.imgPath}}" alt="">
+                            <div class="test">
+                                <h1>{{entity.articleTitle}}</h1>
+                                <span>{{entity.updateTime}}</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="services">
+        <div class="marginAuto">
+            <div class="index_title">
+                <span>企业服务</span>
+            </div>
+            <div class="list">
+                <ul>
+                    <li>
+                        <h1>高级人才寻访</h1>
+                        <p>
+                            服务对象：100万年薪以上岗位<br />
+                            典型职位：各类总经理、副总经理<br />
+                            寻猎时间：独家委托<br />
+                            保用期限：6个月<br />
+                            寻猎时间：二周内推荐人选，一到三个月完成项目
+                        </p>
+                        <a href="企业服务-服务详情页.html#tab1">查看详情</a>
+                    </li>
+                    <li>
+                        <h1>招聘服务外包流程</h1>
+                        <p>
+                            服务对象：有大量各级别人才需求的大中型企业集团<br />
+                            寻猎时间：根据客户的项目情况签订完成日程<br />
+                            保用期限：3个月<br />
+                            寻猎时间：根据客户的项目情况签订完成日程
+                        </p>
+                        <a href="企业服务-服务详情页.html#tab3">查看详情</a>
+                    </li>
+                    <li class="on">
+                        <h1>人才背景调查</h1>
+                        <p>
+                            聘用调查：对客户拟聘请人选进行工作履历、贡献值、职业口碑调查<br />
+                            离职调查：对企业核心离职人员的去向，离职后是否和原有企业有竞争性经营行为等调查<br />
+                            完成时间：1-2周
+                        </p>
+                        <a href="企业服务-服务详情页.html#tab4">查看详情</a>
+                    </li>
+                    <li>
+                        <h1>薪酬调查服务</h1>
+                        <p>
+                            竞争调查：帮助企业调查竞争对手进而采取科学的发展策略超越对手<br />
+                            行业调查：对企业所处行业的薪酬调查<br />
+                            涉足行业：本项调查目前主要提供地产、能源、金融、电商这几个行业
+                        </p>
+                        <a href="企业服务-服务详情页.html#tab5">查看详情</a>
+                    </li>
+                    <li>
+                        <h1>顶级人才寻访</h1>
+                        <p>
+                            服务对象：1000万年薪以上岗位<br />
+                            典型职位：CEO、CFO<br />
+                            寻猎时间：2周推荐，1-3月完成项目<br />
+                            保用期限：6个月<br />
+                            收费标准：候选人税前年薪的35%其中启动金占总服务费的30%
+                        </p>
+                        <a href="企业服务-服务详情页.html#tab2">查看详情</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="TalentService">
+        <div class="marginAuto">
+            <div class="index_title">
+                <span>人才服务</span>
+            </div>
+            <div class="list">
+                <ul>
+                    <li>
+                        <h1>简历定制</h1>
+                        <p>没有好简历怎会有好工作！</p>
+                        <a href="vip服务-简历定制.html">查看详情</a>
+                    </li>
+                    <li class="on">
+                        <h1>面试辅导</h1>
+                        <p>进名企最重要的一关是面试！<br />我们来帮你顺利过关</p>
+                        <a href="就业辅导-面试辅导.html">查看详情</a>
+                    </li>
+                    <li>
+                        <h1>职涯规划</h1>
+                        <p>让每一份努力，都不白费</p>
+                        <a href="VIP服务-职涯规划.html">查看详情</a>
+                    </li>
+                    <li>
+                        <h1>职业顾问</h1>
+                        <p>每个人都应该有自己的专属职业顾问</p>
+                        <a href="VIP服务-职业顾问.html">查看详情</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="srStudent">
+        <div class="marginAuto">
+            <div class="index_title">
+                <span>
+                    商壤学员
+                </span>
+            </div>
+            <div class="list">
+                <ul>
+                    <li>
+                        <a href="商壤学院-猎头培训.html">
+                            <h1>猎头培训</h1>
+                            <p>专注于提升猎头的职业技能</p>
+                            <span>查看详情</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="商壤学院-人力培训.html">
+                            <h1>人力培训</h1>
+                            <p>人力资源（HR）技能提升研修班</p>
+                            <span>查看详情</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="商壤学院-培训管理.html">
+                            <h1>管理培训</h1>
+                            <p>专注于提升企业中高层管理能力<br />为企业发展赋能</p>
+                            <span>查看详情</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="商壤学院-领导力发展培训.html">
+                            <h1>领导力发展</h1>
+                            <p>国际一流的领导力发展课程体系<br /> 成就你的非凡</p>
+                            <span>查看详情</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="enterprise">
+        <div class="marginAuto">
+            <div class="index_title">
+                <span>合作名企</span>
+            </div>
+            <div class="list">
+                <div class="swiper-container swiper-container3">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="javascript:;"><img src="../images/zgzt.png" alt=""></a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="javascript:;"><img src="../images/zgzt.png" alt=""></a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="javascript:;"><img src="../images/jd.png" alt=""></a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="javascript:;"><img src="../images/jd.png" alt=""></a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="javascript:;"><img src="../images/hxyh.png" alt=""></a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="javascript:;"><img src="../images/hxyh.png" alt=""></a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="javascript:;"><img src="../images/bbw.png" alt=""></a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="javascript:;"><img src="../images/bbw.png" alt=""></a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="javascript:;"><img src="../images/wdjt.png" alt=""></a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="javascript:;"><img src="../images/wdjt.png" alt=""></a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="javascript:;"><img src="../images/xlhqyjt.png" alt=""></a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="javascript:;"><img src="../images/xlhqyjt.png" alt=""></a>
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="spread">
+        <div class="index_title">
+            <span>业务分布</span>
+        </div>
+        <div class="map">
+            <img src="../images/map.png" alt="">
+            <div class="list">
+                <div class="btn">
+                    <span>多伦多</span>
+                    <i></i>
+                </div>
+                <div class="btn">
+                    <span>新加坡</span>
+                    <i></i>
+                </div>
+                <div class="btn">
+                    <span>新加坡</span>
+                    <i></i>
+                </div>
+                <div class="btn">
+                    <span>华盛顿</span>
+                    <i></i>
+                </div>
+                <div class="btn">
+                    <span>孟加</span>
+                    <i></i>
+                </div>
+                <div class="btn">
+                    <span>圣保罗</span>
+                    <i></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <footer class="footer">
+
+    </footer>
+
+    <div class="alertBox">
+
+    </div>
+    <div class="fixed-right">
+        <a class="kf" href="javascript:;">
+            <i class="iconfont">&#xe61b;</i>
+        </a>
+        <a class="scrollTop" href="javascript:;">
+            <i class="iconfont">&#xea00;</i>
+            TOP
+        </a>
+    </div>
+    <!-- 当前页面 -->
+    <script src="../lib/swiper/dist/js/swiper.min.js"></script>
+    <script> 
+        $(function () {
+            var swiper = new Swiper('.swiper-container1', {
+                loop: true,
+                effect: 'fade',
+                autoplay: {
+                    delay: 5000,
+                    stopOnLastSlide: false,
+                    disableOnInteraction: true,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+            });
+            var swiper2 = new Swiper('.swiper-container2', {
+                loop: true,
+                autoplay: {
+                    delay: 2000,
+                },
+                slidesPerView: 5,
+                spaceBetween: 33,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+
+            var swiper3 = new Swiper('.swiper-container3', {
+                slidesPerView: 6,
+                slidesPerColumn: 2,
+                spaceBetween: 0,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+            });
+            layui.use(['layer', 'form', 'laypage'], function () {
+                var layer = layui.layer;
+                //  找回密码
+                // layer.open({
+                //     type: 1,
+                //     title: false,
+                //     closeBtn: 0,
+                //     shadeClose: true,
+                //     skin: 'yourclass',
+                //     area: 'auto',
+                //     maxWidth :"auto",
+                //     maxHeight : "auto",
+                //     resize : false,
+                //     content: $(".getPass")
+                // });
+            });
+
+
+        });
+    </script>
+</body>
+
+</html>
