@@ -18,6 +18,7 @@ app.service('yingpinService',function($http){
 			return $http.get("/api/yingpin/deleteyingpinByIds?ids="+ids);
 		}
 		this.search=function(page,rows,param){
+			console.log('页码',page)
 			return $http.post("/api/yingpin/search?page="+page+"&rows="+rows,param);
 		}
 		this.jobDetails=function(id){

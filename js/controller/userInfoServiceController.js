@@ -1,13 +1,13 @@
 app.controller("userInfoServiceController",function($scope,userInfoService){
     var entity = $scope.entity={};
     var show_num = [];
-    $("#canvas").on('click',function(){
+    $("#userSignCanvas").on('click',function(){
         draw(show_num);
     })
     function draw(show_num) {
-        var canvas_width=$('#canvas').width();
-        var canvas_height=$('#canvas').height();
-        var canvas = document.getElementById("canvas");//获取到canvas的对象，演员
+        var canvas_width=$('#userSignCanvas').width();
+        var canvas_height=$('#userSignCanvas').height();
+        var canvas = document.getElementById("userSignCanvas");//获取到canvas的对象，演员
         var context = canvas.getContext("2d");//获取到canvas画图的环境，演员表演的舞台
         canvas.width = canvas_width;
         canvas.height = canvas_height;
@@ -61,7 +61,35 @@ app.controller("userInfoServiceController",function($scope,userInfoService){
 
     }
 
-
+    function getUrlParams(name) { // 不传name返回所有值，否则返回对应值
+        var url = window.location.search;
+        if (url.indexOf('?') == 1) { return false; }
+        url = url.substr(1);
+        url = url.split('&');
+        var name = name || '';
+        var nameres;
+        // 获取全部参数及其值
+        for(var i=0;i<url.length;i++) {
+            var info = url[i].split('=');
+            var obj = {};
+            obj[info[0]] = decodeURI(info[1]);
+            url[i] = obj;
+        }
+        // 如果传入一个参数名称，就匹配其值
+        if (name) {
+            for(var i=0;i<url.length;i++) {
+                for (const key in url[i]) {
+                    if (key == name) {
+                        nameres = url[i][key];
+                    }
+                }
+            }
+        } else {
+            nameres = url;
+        }
+        // 返回结果
+        return nameres;
+    }
 
     var validCode=true;
     $scope.codeSave=function($event){
@@ -75,6 +103,8 @@ app.controller("userInfoServiceController",function($scope,userInfoService){
             return; 
         }else if(entity.vCodeBox == undefined){
             entity.errorMsg.vCodeBox = '请输入图形验证码';
+        }else if(!entity.userName){
+            entity.errorMsg.userName = '请输入姓名';
         }else if(entity.vCodeBox != num){
             entity.errorMsg.vCodeBox = '请输入正确的验证码';
             $(".vCode").val('');
@@ -94,7 +124,7 @@ app.controller("userInfoServiceController",function($scope,userInfoService){
                         $($event.target).text("获取验证码");
                         validCode=true;
                     }
-                },100)
+                },1000)
             }
             
             
@@ -113,6 +143,9 @@ app.controller("userInfoServiceController",function($scope,userInfoService){
             return; 
         }else if(entity.vCodeBox == undefined){
             entity.errorMsg.vCodeBox = '请输入图形验证码';
+            return; 
+        }else if(entity.userName == undefined){
+            entity.errorMsg.userName = '请输入姓名';
             return; 
         }else if(entity.vCodeBox != num){
             entity.errorMsg.vCodeBox = '请输入正确的验证码';
@@ -135,7 +168,13 @@ app.controller("userInfoServiceController",function($scope,userInfoService){
             var data = {
                 mobile : entity.mobile,
                 password : entity.password,
-                identyCode : entity.phoneCode
+                identyCode : entity.phoneCode,
+                displayName: entity.userName,
+                username: entity.userName,
+            }
+            // 获取邀请链接邀请id
+            if(getUrlParams('parentId')){
+                data.parentId = getUrlParams('parentId')
             }
             var object;
             object=userInfoService.save(data);
@@ -144,8 +183,10 @@ app.controller("userInfoServiceController",function($scope,userInfoService){
                     if(response.success){
                         console.log(response);
                         layer.msg('提交成功');
-                        location.reload() 
+                        localStorage.setItem('userId',response.obj.id)
+                        location.href = "../../pages/首页.html"
                     }else{
+                        layer.msg(response.message);
                         console.log(response.message);
                     }
                 }

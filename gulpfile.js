@@ -25,7 +25,7 @@ gulp.task('webserver', function() {
             proxies: [
                 {
                     source: '/api', 
-                    target: 'http://122.14.198.240:9002'
+                    target: 'http://www.soiroc.com:9002'
                 },
                 
             ]

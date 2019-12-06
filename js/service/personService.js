@@ -34,5 +34,13 @@ app.service('personService',function($http){
 		return $http.get("/api/api/proVisitorNum?proId="+proId + "&perIds=" + perIds + '&' + params);
 	}
 
+	this.saveShieldCompany=function(param){
+		return $http.post("/api/shieldcompany/add",param);
+	}
+
+	this.getShieldCompany=function(){
+		return $http.get("/api/shieldcompany/findAll?type=pro");
+	}
+
 	// http://www.soiroc.com:9002/api/selectPersonByMy?pageNo=1&pageSize=10
 })

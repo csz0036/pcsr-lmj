@@ -199,7 +199,7 @@
                                             <div class="layui-form-item layui-form-phone-item">
                                                 <label class="layui-form-label"><i>*</i>手机号</label>
                                                 <div class="layui-input-block">
-                                                    <input type="text" name="title" required ng-model="editData.phone" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                                    <input type="text" name="title" required ng-model="editData.phone" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                                                 </div>
                                             </div>
                                         </li>
@@ -226,7 +226,7 @@
                                             <div class="layui-form-item layui-form-birth-item">
                                                 <label class="layui-form-label">出生日期</label>
                                                 <div class="layui-input-inline">
-                                                    <input type="text" name="title" required ng-model="editData.birthday"  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                                    <input type="text" name="title" required ng-model="editData.birthday"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                                                     <select class="rl-item" name="timetype" lay-verify="required" ng-model="editData.timetype">
                                                         <option value=""></option>
                                                         <option value="0">公历</option>
@@ -239,7 +239,7 @@
                                             <div class="layui-form-item">
                                                 <label class="layui-form-label">最近公司</label>
                                                 <div class="layui-input-block">
-                                                    <input type="text" name="title" required ng-model="editData.recentUnit"  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                                    <input type="text" name="title" required ng-model="editData.recentUnit"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                                                 </div>
                                             </div>
                                         </li>
@@ -277,7 +277,7 @@
                                             <div class="layui-form-item layui-edge-item">
                                                 <label class="layui-form-label"><i>*</i>现属职能</label>
                                                 <div class="layui-input-block">
-                                                        <input type="text" name="title" required ng-model="editData.incumbency"  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                                        <input type="text" name="title" required ng-model="editData.incumbency"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                                                         <i class="layui-edge"></i>
                                                 </div>
                                             </div>   
@@ -528,7 +528,7 @@
                                             <div class="layui-form-item layui-form-phone-item">
                                                 <label class="layui-form-label">邮箱</label>
                                                 <div class="layui-input-block">
-                                                    <input type="text" name="title" required ng-model="editData.email" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                                    <input type="text" name="title" required ng-model="editData.email" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                                                 </div>
                                             </div>
                                         </li>
@@ -1015,7 +1015,7 @@
                                         <li>
                                             <dl>
                                                 <dt>
-                                                        学习名称:
+                                                        学校名称:
                                                 </dt>
                                                 <dd>
                                                         {{item.eduSchoolName}}
@@ -1145,7 +1145,7 @@
                                             <div class="layui-form-item">
                                                 <label class="layui-form-label">语言水平</label>
                                                 <div class="layui-input-block">
-                                                    <input type="text" ng-model="item.languageLevel" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                                    <input type="text" ng-model="item.languageLevel" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                                                 </div>
                                             </div>
                                        </li>
@@ -1206,7 +1206,7 @@
                                             <div class="layui-form-item">
                                                 <label class="layui-form-label">证件名称</label>
                                                 <div class="layui-input-block">
-                                                <input type="text" ng-model="item.papersName" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                                <input type="text" ng-model="item.papersName" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                                                 </div>
                                             </div>
                                         </li>
@@ -1222,7 +1222,7 @@
                                             <div class="layui-form-item">
                                                 <label class="layui-form-label">颁发机构</label>
                                                 <div class="layui-input-block">
-                                                <input type="text" name="title" ng-model="item.issuingAgency" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                                <input type="text" name="title" ng-model="item.issuingAgency" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                                                 </div>
                                             </div>
                                         </li>
@@ -1303,7 +1303,7 @@
                         <h1>简历隐私设置</h1>
                     </div>
                     <div class="layui-form">
-                        <div class="open">
+                        <!-- <div class="open">
                             <div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">求职简历:</label>
@@ -1320,24 +1320,20 @@
                                     <span>开放简历后，企业HR/猎头会为您持续推进好的工作机会</span>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="hide-corporate">
                             <div class="">
                                 <div class="layui-form-item">
                                     <label class="layui-form-label"><i class="iconfont">&#xe65b;</i>屏蔽企业:</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                        <input ng-model='saveProName' type="text" name="title" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
                                     </div>
-                                    <div class="layui-form-mid layui-word-aux"><button>保存</button></div>
+                                    <div ng-click="saveShieldCompany()" class="layui-form-mid layui-word-aux"><button>保存</button></div>
                                 </div>
                             </div>
                             <div class="list">
                                 <ul>
-                                    <li>融创集团</li>
-                                    <li>融创集团</li>
-                                    <li>融创集团</li>
-                                    <li>融创集团</li>
-                                    <li>融创集团</li>
+                                    <li ng-repeat="x in shieldCompanyList">{{ x }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -1480,11 +1476,11 @@
 <script>
     window.addEventListener("load",function(){
         let urlData = this.location.href.split('.html');
-        console.log(urlData);
+        console.log('urlData',urlData);
         var bj=document.getElementsByClassName("bj")[0]
         var cancel=document.getElementsByClassName("cancel")[0]
         var Preservation=document.getElementsByClassName("Preservation")[0]
-        console.log(bj,cancel,Preservation)
+        console.log('urlData11111111111111',bj,cancel,Preservation)
         if(urlData[1]){ // 新增简历
             bj.style.display='none';
             cancel.style.display='inline-block';

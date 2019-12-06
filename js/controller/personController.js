@@ -8,7 +8,14 @@ app.controller("personController",function($scope,personService,usersService){
     $scope.flaglast =false;
     $scope.initData = {};
     $scope.editData = {};
-    //选择简历信息 初始化数据
+    $scope.saveProName = '';
+    $scope.shieldCompanyList = [
+        '华为荣耀',
+        '华为法务部',
+        '小米雷布斯',
+        '一加爱黑莓'
+    ]
+    //选择简历信息 初始化数
     $scope.selectPersons = function(){
 
         var personId = $scope.editData.personId;
@@ -20,6 +27,20 @@ app.controller("personController",function($scope,personService,usersService){
             }
         }
         
+    }
+
+    $scope.getShieldCompany = function(){
+        personService.getShieldCompany().success()
+    }
+
+    $scope.saveShieldCompany = function(){
+        console.log('保存屏蔽公司',$scope.saveProName)
+        var param = {
+            proName: $scope.saveProName
+        }
+        personService.saveShieldCompany(param).success(
+            layer.msg('屏蔽成功')
+        )
     }
 
     /**获取当前用户的所有简历信息*/
@@ -47,6 +68,8 @@ app.controller("personController",function($scope,personService,usersService){
             }
            
         )
+
+        personService.getShieldCompany().success()
     }
 
 
@@ -429,18 +452,19 @@ app.controller("personController",function($scope,personService,usersService){
 		$scope.editData = {}
         let location_ = window.location.href.split('.html');
         if(location_[1]){
-            window.history.go(-1)
+            window.location.href = "../../pages/简历-详情.html"
         }
 	}
 	// 新增或者更新
 	$scope.save=function(){
         // console.log(222);
+        console.log('立即提交了',$scope.flaglast);
 		if(getUrlParam("preson") == "null"){
 			funcUrlDel('preson');
 			return;
         }
         if($scope.editData.chineseName !== '') {
-            if($scope.editData.phone.length != 0 && !(/^1[3456789]\d{9}$/.test(phone))) {
+            if($scope.editData.phone.length != 0 && (/^1[3456789]\d{9}$/.test($scope.editData.phone))) {
                 // if($scope.editData.gender == ''){
                     if($scope.editData.city !== ''){
                         if($scope.editData.recentPosition !== ''){
@@ -449,13 +473,20 @@ app.controller("personController",function($scope,personService,usersService){
                                     personService.save($scope.editData).success(
                                         function(response){
                                             if(response.success){
-                                                window.location.reload();
+                                                layer.msg("保存成功")
+                                                window.location.href = "../../pages/简历-详情.html"
                                             }else{
+                                                layer.msg("保存失败")
                                                 console.log(response.message);
                                             }
                                         },
                                          $scope.initData = $scope.editData
-                                     )
+                                     ).fail(
+                                         function(){
+                                            
+                                                layer.msg("保存失败")
+                                             
+                                     })
                                 }else{
                                     layer.msg("现在行业不能为空")
                                 }
@@ -480,7 +511,7 @@ app.controller("personController",function($scope,personService,usersService){
             layer.msg("姓名不能为空")
         }
 		
-		$scope.editData = {}
+		// $scope.editData = {}
 
 
 	}
@@ -488,7 +519,7 @@ app.controller("personController",function($scope,personService,usersService){
 	$scope.submit=function(){
 		console.log($scope.editData)
         if($scope.editData.chineseName !== '') {
-            if($scope.editData.phone.length != 0 && !(/^1[3456789]\d{9}$/.test(phone))) {
+            if($scope.editData.phone.length != 0 && (/^1[3456789]\d{9}$/.test($scope.editData.phone))) {
                 // if($scope.editData.gender == ''){
                     if($scope.editData.city !== ''){
                         if($scope.editData.recentPosition !== ''){
@@ -497,8 +528,10 @@ app.controller("personController",function($scope,personService,usersService){
                                     personService.save($scope.editData).success(
                                         function(response){
                                             if(response.success){
-                                                window.location.reload();
+                                                layer.msg("保存成功")
+                                                window.location.href = "../../pages/简历-详情.html"
                                             }else{
+                                                layer.msg("保存失败")
                                                 console.log(response.message);
                                             }
                                         },
@@ -555,7 +588,8 @@ app.controller("personController",function($scope,personService,usersService){
 						$scope.initData.params = res.obj;
 					}
 				}
-			)
+            )
+            
 			$(".resume-content .edit-exhibition").hide();
 			$(".resume-content .edit").show();
 			$(".bj").trigger("click");
@@ -675,7 +709,9 @@ app.controller("personController",function($scope,personService,usersService){
 		var reader = new FileReader();
 		reader.readAsDataURL(imgFile ); // 将图片转成dataUri
 		reader.onload = function(e) {
-			//更新图片链接
+            //更新图片链接
+            console.log('图片资源',$scope.editData)
+            $scope.editData.headportrait[0] = {}
 			$scope.editData.headportrait[0].photoPath =  e.target.result;
 			$scope.$apply();
 		}

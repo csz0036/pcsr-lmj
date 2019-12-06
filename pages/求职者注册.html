@@ -28,6 +28,17 @@
             <div class="inputBox">
                 <dl>
                     <dt>
+                        <i>*</i>姓名
+                    </dt>
+                    <dd>
+                        <label for="">
+                            <input ng-model="entity.userName" class="phone" type="text" placeholder="请输入姓名" maxlength="11">
+                            <span ng-bind="entity.errorMsg.userName" class="error"></span>
+                        </label>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
                         <i>*</i>手机号码
                     </dt>
                     <dd>
@@ -46,7 +57,7 @@
                             <input ng-model="entity.vCodeBox" class="vCode" type="text" placeholder="请输入图片验证码" maxlength="6">
                             <span ng-bind="entity.errorMsg.vCodeBox" class="error"></span>
                         </label>
-                        <canvas id="canvas"></canvas>
+                        <canvas id="userSignCanvas"></canvas>
                         
                     </dd>
                 </dl>

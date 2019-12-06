@@ -55,25 +55,7 @@
                         <div class="jopPage">
                             <div class="addSr">
                                 <div class="table">
-                                    <table id="table1" lay-filter="table1"> </table>
-                                    <table cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <th>职位名称</th>
-                                            <th>职位类型</th>
-                                            <th>工作地点</th>
-                                            <th>发布时间</th>
-                                            <th>&nbsp;</th>
-                                            <th>&nbsp;</th>
-                                        </tr>
-                                        <tr>
-                                            <td>测试</td>
-                                            <td>技术类</td>
-                                            <td>北京</td>
-                                            <td>2019-07-12</td>
-                                            <td>已投递</td>
-                                            <td><i class="iconfont">&#xe6c8;</i></td>
-                                        </tr>
-                                    </table>
+                                    <table lay-filter="table1" class="layui-hide" id="table1"></table>
                                 </div>
                                 <div class="addContent hide">
                                     <h1>岗位职责</h1>
@@ -224,95 +206,41 @@
     <!-- 当前页面 -->
     <script src="../lib/swiper/dist/js/swiper.min.js"></script>
     <script>
-        // $(function(){
-        //     var swiper = new Swiper('.swiper-container1', {
-        //         loop : true,
-        //         effect : 'fade',
-        //         autoplay: {
-        //             delay: 5000,
-        //             stopOnLastSlide: false,
-        //             disableOnInteraction: true,
-        //         },
-        //     });
-        //     layui.use(['table','form'], function(){
-        //         var table = layui.table,
-        //             form = layui.form;
-        //         var table1 = table.render({
-        //             elem: '#table1',
-        //             id : "table_e1"
-        //             ,url: "/api/joinsoiroc/search"
-        //             ,method : 'get'
-        //             ,contentType : 'application/json;charset=UTF-8'
-        //             ,parseData : function(res){
-        //                 return {
-        //                     "code": res.code, //解析接口状态
-        //                     "msg": res.message, //解析提示文本
-        //                     "data": res.obj.rows, //解析数据列表
-        //                     "count": res.obj.total,
-        //                 };
-        //             },
-        //             request: {
-        //                 pageName: "page" //页码的参数名称，默认：page
-        //                 ,limitName: "rows" //每页数据量的参数名，默认：limit
-        //             },
-        //             page: {
-        //                 layout: [ 'prev', 'page', 'next', 'skip'], //自定义分页布局
-        //                 prev : "上一页",
-        //                 next : "下一页",
-        //             }, //开启分页
-        //             cols: [
-        //                 [ //表头
-        //                     {field: 'jobTitle', title: '职位名称', width:153,align:'center' }
-        //                     ,{field: 'jobType', title: '职位类型', width:150,align:'center'}
-        //                     ,{field: 'workingPlace', title: '工作地点', width:161,align:'center'}
-        //                     ,{field: 'updateTime', title: '发布时间', width:178,align:'center'}
-        //                     ,{field: '', title: '&nbsp;', width:113,align:'center'} 
-        //                     ,{field: '', title: '&nbsp;', width: 65,align:'center',templet:function(){
-        //                         return '<div><i class="iconfont">&#xe6c8;</i></div>'
-        //                     }}
-        //                     ,{field: '', title: '&nbsp;', width: 0,align:'center',hide:true,templet: function(d){
-        //                         return '<div class="duty">'+d.duty+'</div>'
-        //                     }}
-        //                     ,{field: '', title: '&nbsp;', width: 0,align:'center',hide:true,templet: function(d){
-        //                         return '<div class="qualification">'+d.qualification+'</div>'
-        //                     }}
-        //                 ]
-        //             ],
-        //             done:function(){
-                        
-        //             }
-        //         });
-        //         table.on('row(table1)', function(obj){
-        //             var duty = obj.data.duty;
-        //             var qualification = obj.data.qualification;
-        //             var _html = "<div class='addContent'> " + 
-        //                             " <h1>岗位职责</h1>" + 
-        //                             "<p>"+obj.data.duty+"</p>" +
-        //                             "<h1>任职资格</h1>" + 
-        //                             "<p>"+obj.data.qualification+"</p>" +
-        //                             "<p><strong>求职邮件：gmo@soiroc.com</strong></p>"+
-        //                             "<a href='javascript:;'>应聘职位</a>" +
-        //                         "</div>";
-        //             // $(".addContent").remove();
-        //             if(obj.tr.hasClass("addHtml")){
-        //                 $(".addContent").remove();
-        //                 obj.tr.removeClass("addHtml");
-        //             }else{
-        //                 obj.tr.addClass("addHtml");
-        //                 obj.tr.after(_html);
-        //             }
-                    
-                   
-        //         });
-        //         $(".table").on("click",".addContent a",function(){
-        //             $(this).addClass("on");
-        //             $(".table").hide();
-        //             $(".addFrom").show();
-        //         });
-                
-               
-        //     });
-        // });
+        $(function(){
+            var swiper = new Swiper('.swiper-container1', {
+                loop : true,
+                effect : 'fade',
+                autoplay: {
+                    delay: 5000,
+                    stopOnLastSlide: false,
+                    disableOnInteraction: true,
+                },
+            });
+            
+        });
+
+    //     layui.use('table', function(){
+    //     var table = layui.table;
+
+    //     table.render({
+    //         elem: '#test',
+    //         data:[{
+    //             "name":"测试",
+    //              "type":"技术类",
+    //              "city": "北京",
+    //              "time": "2019-07-12",
+    //              "statu": "已投递"
+    //          }],
+    //         cols: [[
+    //             {field:'name',align:'center', width:'20%', title: '职位名称'}
+    //             ,{field:'type',align:'center', width:'20%', title: '职位类型'}
+    //             ,{field:'city',align:'center', width:'20%', title: '工作地点'}
+    //             ,{field:'time',align:'center', width:'20%', title: '发布时间'}
+    //             ,{field:'statu',align:'center', title: '  ', width: '10%'} 
+    //             ,{field:'sign',align:'center', title: '  ', width: '10%'}
+    //         ]]
+    //     });
+    // });
     </script>
 </body>
 </html>

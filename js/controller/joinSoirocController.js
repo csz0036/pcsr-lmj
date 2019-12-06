@@ -5,10 +5,95 @@ app.controller("joinSoirocController",function($scope,joinSoirocService){
     }
     var entity = $scope.entity={};
     $scope.oinSoiroc = function (rows,page) {
-		joinSoirocService.search(rows,page).success(function (response) {
+        let newRows = rows || 4
+        let newPage = page || 1
+		joinSoirocService.search(newRows,newPage).success(function (response) {
 			if (response.success) {
                 console.log(response.obj.rows)
-				$scope.initData.oinSoiroc.push(response.obj.rows)
+                $scope.initData.oinSoiroc.push(response.obj.rows)
+            layui.use(['table','form'], function(){
+                var table = layui.table,
+                    form = layui.form;
+                var table1 = table.render({
+                    elem: '#table1',
+                    id : "table_e1",
+                    url: "/api/joinsoiroc/search",
+                    method: "get",
+                    // contentType : 'application/json;charset=UTF-8',
+                    parseData : function(res){
+                        return {
+                            "code": res.code, //解析接口状态
+                            "msg": res.message, //解析提示文本
+                            "data": res.obj.rows, //解析数据列表
+                            "count": res.obj.total,
+                        };
+                    },
+                    // data: $scope.initData.oinSoiroc[0],
+                    request: {
+                        pageName: "page" //页码的参数名称，默认：page
+                        ,limitName: "rows" //每页数据量的参数名，默认：limit
+                    },
+                    page: {
+                        layout: [ 'prev', 'page', 'next', 'skip'], //自定义分页布局
+                        prev : "上一页",
+                        next : "下一页",
+                    }, //开启分页
+                    page: true,
+                    cols: [
+                        [ //表头
+                            {field: 'jobTitle', title: '职位名称', width:153,align:'center' }
+                            ,{field: 'jobType', title: '职位类型', width:150,align:'center'}
+                            ,{field: 'workingPlace', title: '工作地点',align:'center'}
+                            ,{field: 'updateTime', title: '发布时间', width:178,align:'center'}
+                            ,{field: 'status', title: '&nbsp;', width:60,align:'center',templet:function(d){
+                                return  d.status?'<div style="color:red">已投递</div>':'<div>未投递</div>'
+                            }} 
+                            ,{field: '', title: '&nbsp;', width:60,align:'center',templet:function(){
+                                return '<div><i class="iconfont">&#xe6c8;</i></div>'
+                            }}
+                            ,{field: '', title: '&nbsp;', width: 0,align:'center',hide:true,templet: function(d){
+                                return '<div class="duty">'+d.duty+'</div>'
+                            }}
+                            ,{field: '', title: '&nbsp;', width: 0,align:'center',hide:true,templet: function(d){
+                                return '<div class="qualification">'+d.qualification+'</div>'
+                            }}
+                        ]
+                    ],
+                    done:function(){
+                        
+                    }
+                });
+                table.on('row(table1)', function(obj){
+                    var duty = obj.data.duty;
+                    var qualification = obj.data.qualification;
+                    var _html = "<div class='addContent'> " + 
+                                    " <h1>岗位职责</h1>" + 
+                                    "<p>"+obj.data.duty+"</p>" +
+                                    "<h1>任职资格</h1>" + 
+                                    "<p>"+obj.data.qualification+"</p>" +
+                                    "<p><strong>求职邮件：gmo@soiroc.com</strong></p>"+
+                                    "<a href='javascript:;'>应聘职位</a>" +
+                                "</div>";
+                    $(".addContent").remove();
+                    if(obj.tr.hasClass("addHtml")){
+                        $(".addContent").remove();
+                        obj.tr.removeClass("addHtml");
+                    }else{
+                        obj.tr.addClass("addHtml");
+                        obj.tr.after(_html);
+                    }
+                    
+                
+                });
+                $(".table").on("click",".addContent a",function(){
+                    $(this).addClass("on");
+                    $(".table").hide();
+                    $(".addFrom").show();
+                });
+                
+            
+            });
+
 			}
 		})
     }
@@ -18,7 +103,9 @@ app.controller("joinSoirocController",function($scope,joinSoirocService){
             
     //     }
     // }
-   
+    
+    
+
     // 新增或者更新
     $scope.save=function(){
         var _radio = $('input:radio[name="gender"]:checked').val();

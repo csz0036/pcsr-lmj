@@ -1,10 +1,37 @@
+
 app.controller("yingpinController", function ($scope, yingpinService, collectionStationService, usersService,recommendService, personService) {
 	//截取url name的值
+	
 	function getUrlParam(name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
 		var r = window.location.search.substr(1).match(reg);  //匹配目标参数
 		if (r != null) return unescape(r[2]); return null; //返回参数值
 	}
+	function changeTime(d){
+		  var year=d.getFullYear();
+		  var month=change(d.getMonth()+1);
+		  var day=change(d.getDate());
+		  var hour=change(d.getHours());
+		  var minute=change(d.getMinutes());
+		  var second=change(d.getSeconds());
+		  function change(t){
+		    if(t<10){
+		     return "0"+t;
+		    }else{
+		     return t;
+		    }
+		  }
+		  var time=year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second;
+		  return time
+	}
+	var nowDate = new Date()
+	var weekDate = new Date((new Date()).getTime() - 7*24*60*60*1000)
+	var monthDate = new Date((new Date()).getTime() - 30*24*60*60*1000)
+
+	$scope.todayTime = changeTime(nowDate)
+	$scope.weekTime = changeTime(weekDate)
+	$scope.monthTime = changeTime(monthDate)
+
 	$scope.initData = {
 		jobDetailslist: [],
 		// 城市
@@ -48345,8 +48372,33 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 	}
 	// 更多失去
 	$scope.moreBlur = function (obj) {
+		console.log('选择字段',obj)
 		$scope.select[obj] = $scope.initData.more[obj]
 		$scope.search(1, 10)
+	}
+	layui.use('form', function(){
+		var form = layui.form;
+		form.on('select(gender)', function(data){
+			console.log('选择字段',data.value);
+			$scope.select.gender = data.value
+			$scope.search(1, 10)
+		});
+		form.on('select(publishDate)', function(data){
+			console.log('选择字段',data.value);
+			$scope.select.publishDate = data.value
+			$scope.search(1, 10)
+		});
+		form.on('select(firstDegree)', function(data){
+			console.log('选择字段',data.value);
+			$scope.select.firstDegree = data.value
+			$scope.search(1, 10)
+		});
+		//各种基于事件的操作，下面会有进一步介绍
+	  });
+	
+	// 更多选择
+	$scope.selectChange = function(val){
+		console.log('选择字段',val)
 	}
 	// 删除条件
 	$scope.delItem = function (key) {
@@ -48562,9 +48614,12 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 				$(".Subscribe button").text("取消订阅");
 				$scope.flag=true
 				$('.jobs .allJobs .tops h1 .fasta').addClass("on").siblings('.jobs .allJobs .tops h1 span').removeClass("on");
-				$scope.initData.subscribe.hopeIndustry = $scope.initData.subscribe.hpoeIndustry.trim().split(/\s+/);
+				console.log('期望职位',typeof($scope.initData.subscribe.hopeIndustry))
+				var hopeIndustry = $scope.initData.subscribe.hopeIndustry
+				$scope.initData.subscribe.hopeIndustry = hopeIndustry.trim().split(/\s+/);
 				yingpinService.addcollectionsation($scope.initData.subscribe).success(function(response){
 					console.log(response)
+					layer.msg('订阅成功')
 				})
 			}
 		} else {
@@ -48633,6 +48688,7 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 	$scope.searchEntity = [];
 
 	$scope.search = function (page, rows,proName) {
+
 		if (page && rows) {
 			if($scope.select.proName != ''){
 				$scope.select.proName=proName;
@@ -48640,13 +48696,15 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 			if($scope.select.subwaystation != ''){
 				$scope.select.subwaystation=$scope.initData.lineadrsList.stepName;
 			}
+
 			for(var element in $scope.select){
 				if($scope.select[element]==""){
 					delete $scope.select[element];
 					// $scope.select.splice(element,1)
 				}
 			}
-			yingpinService.search(1,10, $scope.select).success(function (response) {
+			console.log('筛选条件',$scope.select)
+			yingpinService.search(page,rows, $scope.select).success(function (response) {
 				console.log(response.obj)
 				if(response.obj!=null){
 					$scope.list = response.obj.rows;

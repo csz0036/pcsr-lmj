@@ -274,8 +274,8 @@ $(function(){
       $(this).hide().siblings(".Preservation").hide().siblings(".bj").css("display","inline-block");
     });
     $(".resume-content .btn .Preservation").click(function(){
-      $(".resume-content .edit").hide();
-      $(this).hide().siblings(".cancel").hide().siblings(".bj").css("display","inline-block");
+      // $(".resume-content .edit").hide();
+      // $(this).hide().siblings(".cancel").hide().siblings(".bj").css("display","inline-block");
     });
 
     

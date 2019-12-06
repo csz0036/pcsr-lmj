@@ -39,7 +39,7 @@
         <div class="marginAuto">
             <div class="optionBtn">
                 <div class="searchTop">
-                    <input type="test" placeholder="请输入职位名称" ng-model="initData.jobName"><button ng-click="search(1,10,initData.jobName)"><i class="iconfont">&#xe665;</i></button>
+                    <input type="test" placeholder="请输入职位名称" ng-model="initData.jobName"><button style="cursor: pointer;" ng-click="search(1,10,initData.jobName)"><i class="iconfont">&#xe665;</i></button>
                 </div>
                 <ul>
                     <li>
@@ -86,35 +86,35 @@
                             <div class="layui-form">
                                 <div class="layui-form-item">
                                     <div class="layui-input-block">
-                                        <select name="city" lay-verify="required" ng-blur="moreBlur('time')">
-                                            <option value=""></option>
-                                            <option value="不限">不限</option>
-                                            <option value="今天">今天</option>
-                                            <option value="本周">本周</option>
-                                            <option value="本月">本月</option>
+                                        <select lay-filter="publishDate" lay-verify="required">
+                                            <option value="">发布日期</option>
+                                            <option value="">不限</option>
+                                            <option ng-value="todayTime">今天</option>
+                                            <option ng-value="weekTime">本周</option>
+                                            <option ng-value="monthTime">本月</option>
                                         </select>
                                         <!-- <input type="text" class="layui-input" ng-model="initData.more.city" ng-blur="moreBlur('city')"> -->
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <div class="layui-input-block">
-                                        <select name="city" lay-verify="required" ng-blur="moreBlur('city')">
-                                            <option value=""></option>
-                                            <option value="本科-统招">本科-统招</option>
-                                            <option value="本科-非统招">本科-非统招</option>
-                                            <option value="大专-统招">大专-统招</option>
-                                            <option value="大专-非统招">大专-非统招</option>
-                                            <option value="职高">职高</option>
-                                            <option value="高中">高中</option>
-                                            <option value="其他">其他</option>
+                                        <select lay-filter="firstDegree" lay-verify="required">
+                                            <option value="">请选择学历</option>
+                                            <option value="00">本科-统招</option>
+                                            <option value="01">本科-非统招</option>
+                                            <option value="02">大专-统招</option>
+                                            <option value="03">大专-非统招</option>
+                                            <option value="04">职高</option>
+                                            <option value="05">高中</option>
+                                            <option value="06">其他</option>
                                         </select>
                                         <!-- <input type="text" class="layui-input" ng-model="initData.more.city" ng-blur="moreBlur('city')"> -->
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <div class="layui-input-block">
-                                        <select name="city" lay-verify="required" ng-blur="moreBlur('province')">
-                                            <option value=""></option>
+                                        <select lay-filter="gender" lay-verify="required">
+                                            <option value="">请选择性别</option>
                                             <option value="男">男</option>
                                             <option value="女">女</option>
                                             <option value="男女不限">男女不限</option>
