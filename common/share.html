@@ -269,9 +269,13 @@
                 }),  
                 dataType: "json",  
                 success: function(data){  
+                    alert('密码修改成功')
+                    window.location.href= '../pages/首页.html'
                     console.log('修改成功')
                 }, 
                 error:function(e){  
+                    alert('密码修改失败')
+
                     console.log('修改失败')
                 }  
             }) 

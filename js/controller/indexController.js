@@ -47,7 +47,7 @@ app.controller("indexController",function($scope,indexService,newsInformationSer
     $scope.highEndJobs = function(id){
         $scope.searchEntity.position = id;
         $scope.searchEntity.type = "position";
-        $scope.search(1,4);
+        $scope.search(1,5,$scope.searchEntity);
     }
 
 

@@ -5,10 +5,10 @@ app.controller("joinSoirocController",function($scope,joinSoirocService){
     }
     var entity = $scope.entity={};
     $scope.oinSoiroc = function (rows,page) {
-        let newRows = rows || 4
+        let newRows = rows || 999
         let newPage = page || 1
-		joinSoirocService.search(newRows,newPage).success(function (response) {
-			if (response.success) {
+		joinSoirocService.search(newRows,newPage,{}).success(function (response) {
+			if (response.success) { 
                 console.log(response.obj.rows)
                 $scope.initData.oinSoiroc.push(response.obj.rows)
             layui.use(['table','form'], function(){
@@ -17,9 +17,9 @@ app.controller("joinSoirocController",function($scope,joinSoirocService){
                 var table1 = table.render({
                     elem: '#table1',
                     id : "table_e1",
-                    url: "/api/joinsoiroc/search",
-                    method: "get",
-                    // contentType : 'application/json;charset=UTF-8',
+                    // url: `/api/joinsoiroc/search?rows=100&page=1`,
+                    // method: "post",
+                    // contentType : 'application/json',
                     parseData : function(res){
                         return {
                             "code": res.code, //解析接口状态
@@ -28,17 +28,17 @@ app.controller("joinSoirocController",function($scope,joinSoirocService){
                             "count": res.obj.total,
                         };
                     },
-                    // data: $scope.initData.oinSoiroc[0],
-                    request: {
-                        pageName: "page" //页码的参数名称，默认：page
-                        ,limitName: "rows" //每页数据量的参数名，默认：limit
-                    },
-                    page: {
-                        layout: [ 'prev', 'page', 'next', 'skip'], //自定义分页布局
-                        prev : "上一页",
-                        next : "下一页",
-                    }, //开启分页
-                    page: true,
+                    where: {},
+                    data: $scope.initData.oinSoiroc[0],
+                    // request: {
+                    //     pageName: "page" //页码的参数名称，默认：page
+                    //     ,limitName: "rows" //每页数据量的参数名，默认：limit
+                    // },
+                    // page: {
+                    //     layout: [ 'prev', 'page', 'next', 'skip'], //自定义分页布局
+                    //     prev : "上一页",
+                    //     next : "下一页",
+                    // }, //开启分页
                     cols: [
                         [ //表头
                             {field: 'jobTitle', title: '职位名称', width:153,align:'center' }
