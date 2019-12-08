@@ -15,6 +15,18 @@ app.controller("personController",function($scope,personService,usersService){
         '小米雷布斯',
         '一加爱黑莓'
     ]
+    $scope.incumbencyList = [
+        "CEO",
+		'COO',
+		'CFO',
+		'CTO',
+		'CIO',
+		'CHO',
+		'总裁',
+		'副总裁',
+		'总经理',
+        '其他'
+    ]
     //选择简历信息 初始化数
     $scope.selectPersons = function(){
 
@@ -260,7 +272,7 @@ app.controller("personController",function($scope,personService,usersService){
 				'ddf4afda-9f15-41fd-ae1d-38bfcc50fc44':'',
 				'efdd270f-fac2-46be-9a96-6990b919f78e':'',
 				'fb894fdb-8ae6-4f72-807c-c8476c7543cb':'',
-				'815374f3-5cb7-48dd-8783-52308a7c8217':''
+                '815374f3-5cb7-48dd-8783-52308a7c8217':''
 			},
 			mainDuty:'',
 			workBussdesc:'',
@@ -270,15 +282,25 @@ app.controller("personController",function($scope,personService,usersService){
             var laydate = layui.laydate,
                 form = layui.form,
                 upload = layui.upload;
-                laydate.render({
-                    elem: '.timePicker' //指定元素
-                    ,theme: '#D23637'
+                function timeAdd(){
+                    lay('.timePicker').each(function() {
+                        laydate.render({
+                            elem : this,
+                            trigger : 'click'
+                        });
+                    });
+                }
+                timeAdd()
+                // laydate.render({
+                //     elem: '.timePicker' //指定元素
+                //     ,theme: '#D23637',
+                //     trigger: 'click',
                     // ,change:function(value,date,enddata){
                     //     console.log(value);
                     //     console.log(date);
                     //     console.log(endDate);
                     // }
-                });
+                // });
 		});
 		$(".resume-content .edit").css("display","inline-block");
 
@@ -313,10 +335,20 @@ app.controller("personController",function($scope,personService,usersService){
             var laydate = layui.laydate,
                 form = layui.form,
                 upload = layui.upload;
-                laydate.render({
-                    elem: '.timePicker' //指定元素
-                    ,theme: '#D23637'
-                });
+                function timeAdd(){
+                    lay('.timePicker').each(function() {
+                        laydate.render({
+                            elem : this,
+                            trigger : 'click'
+                        });
+                    });
+                }
+                timeAdd()
+                // laydate.render({
+                //     elem: '.timePicker' //指定元素
+                //     ,theme: '#D23637',
+                //     trigger: 'click',
+                // });
 		});
 		$(".resume-content .edit").show();
 	}
@@ -345,10 +377,20 @@ app.controller("personController",function($scope,personService,usersService){
             var laydate = layui.laydate,
                 form = layui.form,
                 upload = layui.upload;
-                laydate.render({
-                    elem: '.timePicker' //指定元素
-                    ,theme: '#D23637'
-                });
+                // laydate.render({
+                //     elem: '.timePicker' //指定元素
+                //     ,theme: '#D23637',
+                //     trigger: 'click',
+                // });
+                function timeAdd(){
+                    lay('.timePicker').each(function() {
+                        laydate.render({
+                            elem : this,
+                            trigger : 'click'
+                        });
+                    });
+                }
+                timeAdd()
 		});
 		$(".resume-content .edit").show();
 	}
@@ -366,10 +408,20 @@ app.controller("personController",function($scope,personService,usersService){
             var laydate = layui.laydate,
                 form = layui.form,
                 upload = layui.upload;
-                laydate.render({
-                    elem: '.timePicker' //指定元素
-                    ,theme: '#D23637'
-                });
+                // laydate.render({
+                //     elem: '.timePicker' //指定元素
+                //     ,theme: '#D23637',
+                //     trigger: 'click',
+                // });
+                function timeAdd(){
+                    lay('.timePicker').each(function() {
+                        laydate.render({
+                            elem : this,
+                            trigger : 'click'
+                        });
+                    });
+                }
+                timeAdd()
 		});
 		$(".resume-content .edit").show();
 	}
@@ -398,10 +450,20 @@ app.controller("personController",function($scope,personService,usersService){
             var laydate = layui.laydate,
                 form = layui.form,
                 upload = layui.upload;
-                laydate.render({
-                    elem: '.timePicker' //指定元素
-                    ,theme: '#D23637'
-                });
+                // laydate.render({
+                //     elem: '.timePicker' //指定元素
+                //     ,theme: '#D23637',
+                //     trigger: 'click',
+                // });
+                function timeAdd(){
+                    lay('.timePicker').each(function() {
+                        laydate.render({
+                            elem : this,
+                            trigger : 'click'
+                        });
+                    });
+                }
+                timeAdd()
 		});
 		$(".resume-content .edit").show();
 	}
@@ -607,10 +669,20 @@ app.controller("personController",function($scope,personService,usersService){
             var laydate = layui.laydate,
 			form = layui.form,
 			upload = layui.upload;
-			laydate.render({
-				elem: '.timePicker' //指定元素
-				,theme: '#D23637'
-			});
+			// laydate.render({
+			// 	elem: '.timePicker' //指定元素
+            //     ,theme: '#D23637',
+            //     trigger: 'click',
+            // });
+            function timeAdd(){
+                lay('.timePicker').each(function() {
+                    laydate.render({
+                        elem : this,
+                        trigger : 'click'
+                    });
+                });
+            }
+            timeAdd()
 			$scope.form = form;
 			form.on('checkbox(it)', function(data){
 				if(data.elem.checked == true){

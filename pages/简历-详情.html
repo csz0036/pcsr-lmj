@@ -277,8 +277,11 @@
                                             <div class="layui-form-item layui-edge-item">
                                                 <label class="layui-form-label"><i>*</i>现属职能</label>
                                                 <div class="layui-input-block">
-                                                        <input type="text" name="title" required ng-model="editData.incumbency"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
-                                                        <i class="layui-edge"></i>
+                                                        <select name="city" lay-verify="required" ng-model="editData.incumbency">
+                                                            <option value="{{item}}" ng-repeat="item in incumbencyList">{{item}}</option>
+                                                        </select>
+                                                        <!-- <input type="text" name="title" required ng-model="editData.incumbency"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input"> -->
+                                                        <!-- <i class="layui-edge"></i> -->
                                                 </div>
                                             </div>   
                                         </li>
@@ -795,7 +798,7 @@
                                         </li>
                                         <li>
                                             <div class="layui-form-item">
-                                                <label class="layui-form-label">所属智能</label>
+                                                <label class="layui-form-label">所属职能</label>
                                                 <div class="layui-input-block">
                                                     <input type="text" name="title" required ng-model="item.workExpValue['fb894fdb-8ae6-4f72-807c-c8476c7543cb']" lay-verify="required" placeholder="填写直接上级的职位名，多个职位用逗号" autocomplete="off" class="layui-input">
                                                 </div>
@@ -807,6 +810,12 @@
                                                 <div class="layui-input-block">
                                                     <select name="city" lay-verify="required" ng-model="item.workExpValue['815374f3-5cb7-48dd-8783-52308a7c8217']">
                                                         <option value="{{index}}" ng-repeat="(index,item) in initData.params.industry">{{item}}</option>
+                                                    </select>
+                                                    <!-- <select name="city" lay-verify="required" ng-model="item.workExpValue['815374f3-5cb7-48dd-8783-52308a7c8217']">
+                                                        <option value="123123">123123</option>
+                                                        <option value="123123">addlanguageExpRow</option>
+                                                        <option value="123123">sss</option> -->
+
                                                     </select>
                                                 </div>
                                             </div>
@@ -1043,9 +1052,9 @@
                                             <div class="layui-form-item time-item">
                                                 <label class="layui-form-label">时间</label>
                                                 <div class="layui-input-block">
-                                                    <input type="text" class="layui-input" id="test3" ng-model="item.eduStartTime">
+                                                    <input type="text" class="layui-input timePicker" id="test3" ng-model="item.eduStartTime">
                                                     <span>至</span> 
-                                                    <input type="text" class="layui-input" id="test4" ng-model="item.eduEndTime">
+                                                    <input type="text" class="layui-input timePicker" id="test4" ng-model="item.eduEndTime">
                                                 </div>
                                             </div>
                                         </li>
@@ -1068,11 +1077,10 @@
                                                 <div class="layui-form-mid layui-word-aux">
                                                     <select name="city" lay-verify="required" ng-model="item.eduValue['572266df-2bd8-4a46-be10-fd5f595bc4c4']">
                                                         <option value=""></option>
-                                                        <option value="0">北京</option>
-                                                        <option value="1">上海</option>
-                                                        <option value="2">广州</option>
-                                                        <option value="3">深圳</option>
-                                                        <option value="4">杭州</option>
+                                                        <option value="985">985</option>
+                                                        <option value="211">211</option>
+                                                        <option value="985/211">985/211</option>
+                                                        <option value="其他">其他</option>
                                                     </select>
                                                 </div>
                                             </div>
