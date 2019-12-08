@@ -32,12 +32,12 @@
                     </div>
                     <div class="resumeText layui-form">
                         <h1>
-                            <input type="text" value="" placeholder="简历名称" disabled ng-model="pName" ng-change="updatePersonName(pName)" >
+                            <input type="text" value="" placeholder="简历名称" disabled ng-model="pName" ng-blur="updatePersonName(pName)" >
                             <i class="iconfont">&#xe661;</i>
                         </h1>
                         <div class="page">
 
-                            <select ng-options="c.personId as c.chineseName for c in persons" ng-model="editData.personId" ng-change="selectPersons()"></select>
+                            <select ng-options="c.personId as c.personName for c in persons" ng-model="editData.personId" ng-change="selectPersons()"></select>
 
                             <span class="length">{{persons.length}}</span>
                         </div>
@@ -1341,7 +1341,7 @@
                             </div>
                             <div class="list">
                                 <ul>
-                                    <li ng-repeat="x in shieldCompanyList">{{ x }}</li>
+                                    <li ng-repeat="x in shieldCompanyList">{{ x.proName }}</li>
                                 </ul>
                             </div>
                         </div>

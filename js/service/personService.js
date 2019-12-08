@@ -42,5 +42,9 @@ app.service('personService',function($http){
 		return $http.get("/api/shieldcompany/findAll?type=pro");
 	}
 
+	this.changePersonName=function(param){
+		return $http.post("/api/person/updatePersonName",param);
+	}
+
 	// http://www.soiroc.com:9002/api/selectPersonByMy?pageNo=1&pageSize=10
 })

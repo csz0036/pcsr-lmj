@@ -2,7 +2,28 @@ app.controller("personController",function($scope,personService,usersService){
 
     //修改简历名称
     $scope.updatePersonName = function(pName){
+        if(!pName){
+            layer.msg('简历名称不能为空')
+            return
+        }
         $scope.editData.personName=pName;
+        if(!getUrlParam("preson")){
+            var param = {
+                personName: pName,
+                personId: $scope.editData.personId
+            }
+            personService.changePersonName(param).success(
+                function(){
+                    layer.msg('修改简历名称成功')
+                    var personArr = $scope.persons;
+                    for (var i= 0;i < personArr.length;i++){
+                        if(personArr[i].personId == $scope.editData.personId){
+                            personArr[i].personName = pName
+                        }
+                    }
+                }
+            )
+        }
     }
     $scope.persons =[];
     $scope.flaglast =false;
@@ -10,10 +31,6 @@ app.controller("personController",function($scope,personService,usersService){
     $scope.editData = {};
     $scope.saveProName = '';
     $scope.shieldCompanyList = [
-        '华为荣耀',
-        '华为法务部',
-        '小米雷布斯',
-        '一加爱黑莓'
     ]
     $scope.incumbencyList = [
         "CEO",
@@ -32,13 +49,15 @@ app.controller("personController",function($scope,personService,usersService){
 
         var personId = $scope.editData.personId;
         var personArr = $scope.persons;
+
         for (var i= 0;i < personArr.length;i++){
             if(personArr[i].personId == personId){
                 initData($scope.initData,personArr[i]);
-                console.log($scope.editData);
+                console.log($scope.initData);
+                $scope.pName = $scope.initData.personName
+
             }
         }
-        
     }
 
     $scope.getShieldCompany = function(){
@@ -65,6 +84,7 @@ app.controller("personController",function($scope,personService,usersService){
                 }
                 $scope.persons = res.obj;
                 initData($scope.initData,res.obj[0]);
+               
                 if(getUrlParam("preson") == "null"){
                     $scope.flaglast=false
                     usersService.getCurrentUser().success(function(res){
@@ -81,7 +101,11 @@ app.controller("personController",function($scope,personService,usersService){
            
         )
 
-        personService.getShieldCompany().success()
+        personService.getShieldCompany().success(
+            function(res){
+                $scope.shieldCompanyList = res.obj
+            }
+        )
     }
 
 
@@ -89,6 +113,7 @@ app.controller("personController",function($scope,personService,usersService){
         entitydata.personId = resultdata.personId;
         entitydata.chineseName = resultdata.chineseName;
         entitydata.personName = resultdata.personName;
+        $scope.pName = entitydata.personName || resultdata.chineseName
         if(resultdata.phone == null){
             entitydata.phone = [];
         }else{
@@ -154,8 +179,8 @@ app.controller("personController",function($scope,personService,usersService){
 
         if(resultdata.eduBackground == null){
             entitydata.eduBackground = [{
-                eduStartTime:'2006-08-23',
-                eduEndTime:'2008-08-23',
+                eduStartTime:'',
+                eduEndTime:'',
                 soFar:'',
                 eduType:'',
                 eduSchoolName:'北京大学',
@@ -264,6 +289,7 @@ app.controller("personController",function($scope,personService,usersService){
 	// }
 	// 添加工作经历
 	$scope.addWorkExpRow = function(){
+        console.log('新增')
 		$scope.editData.workExp.push({
 			workStartTime:'',
 			workEndTime:'',
@@ -301,7 +327,43 @@ app.controller("personController",function($scope,personService,usersService){
                     //     console.log(endDate);
                     // }
                 // });
-		});
+        });
+        setTimeout( () => {
+            $scope.form.render()
+            layui.use(['laydate','form','upload'], function(){
+                var laydate = layui.laydate,
+                    form = layui.form,
+                    upload = layui.upload;
+                    function timeAdd(){
+                        lay('.timePicker').each(function() {
+                            laydate.render({
+                                elem : this,
+                                trigger : 'click'
+                            });
+                        });
+                    }
+                    timeAdd()
+            });
+            ;},0);
+
+            setTimeout( () => {
+                $scope.form.render()
+                layui.use(['laydate','form','upload'], function(){
+                    var laydate = layui.laydate,
+                        form = layui.form,
+                        upload = layui.upload;
+                        function timeAdd(){
+                            lay('.timePicker').each(function() {
+                                laydate.render({
+                                    elem : this,
+                                    trigger : 'click'
+                                });
+                            });
+                        }
+                        timeAdd()
+                });
+                ;},0);
+        
 		$(".resume-content .edit").css("display","inline-block");
 
 	}
@@ -349,7 +411,25 @@ app.controller("personController",function($scope,personService,usersService){
                 //     ,theme: '#D23637',
                 //     trigger: 'click',
                 // });
-		});
+        });
+        
+        setTimeout( () => {
+            $scope.form.render()
+            layui.use(['laydate','form','upload'], function(){
+                var laydate = layui.laydate,
+                    form = layui.form,
+                    upload = layui.upload;
+                    function timeAdd(){
+                        lay('.timePicker').each(function() {
+                            laydate.render({
+                                elem : this,
+                                trigger : 'click'
+                            });
+                        });
+                    }
+                    timeAdd()
+            });
+            ;},0);
 		$(".resume-content .edit").show();
 	}
 	// 删除项目经历
@@ -391,7 +471,24 @@ app.controller("personController",function($scope,personService,usersService){
                     });
                 }
                 timeAdd()
-		});
+        });
+        setTimeout( () => {
+            $scope.form.render()
+            layui.use(['laydate','form','upload'], function(){
+                var laydate = layui.laydate,
+                    form = layui.form,
+                    upload = layui.upload;
+                    function timeAdd(){
+                        lay('.timePicker').each(function() {
+                            laydate.render({
+                                elem : this,
+                                trigger : 'click'
+                            });
+                        });
+                    }
+                    timeAdd()
+            });
+            ;},0);
 		$(".resume-content .edit").show();
 	}
 	// 删除教育背景
@@ -422,7 +519,24 @@ app.controller("personController",function($scope,personService,usersService){
                     });
                 }
                 timeAdd()
-		});
+        });
+        setTimeout( () => {
+            $scope.form.render()
+            layui.use(['laydate','form','upload'], function(){
+                var laydate = layui.laydate,
+                    form = layui.form,
+                    upload = layui.upload;
+                    function timeAdd(){
+                        lay('.timePicker').each(function() {
+                            laydate.render({
+                                elem : this,
+                                trigger : 'click'
+                            });
+                        });
+                    }
+                    timeAdd()
+            });
+            ;},0);
 		$(".resume-content .edit").show();
 	}
 	// 删除教育背景
@@ -464,7 +578,24 @@ app.controller("personController",function($scope,personService,usersService){
                     });
                 }
                 timeAdd()
-		});
+        });
+        setTimeout( () => {
+            $scope.form.render()
+            layui.use(['laydate','form','upload'], function(){
+                var laydate = layui.laydate,
+                    form = layui.form,
+                    upload = layui.upload;
+                    function timeAdd(){
+                        lay('.timePicker').each(function() {
+                            laydate.render({
+                                elem : this,
+                                trigger : 'click'
+                            });
+                        });
+                    }
+                    timeAdd()
+            });
+            ;},0);
 		$(".resume-content .edit").show();
 	}
 	// 删除教育背景
@@ -683,6 +814,23 @@ app.controller("personController",function($scope,personService,usersService){
                 });
             }
             timeAdd()
+            setTimeout( () => {
+                $scope.form.render()
+                layui.use(['laydate','form','upload'], function(){
+                    var laydate = layui.laydate,
+                        form = layui.form,
+                        upload = layui.upload;
+                        function timeAdd(){
+                            lay('.timePicker').each(function() {
+                                laydate.render({
+                                    elem : this,
+                                    trigger : 'click'
+                                });
+                            });
+                        }
+                        timeAdd()
+                });
+                ;},0);
 			$scope.form = form;
 			form.on('checkbox(it)', function(data){
 				if(data.elem.checked == true){
