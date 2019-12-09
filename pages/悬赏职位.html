@@ -100,13 +100,7 @@
                                     <div class="layui-input-block">
                                         <select lay-filter="firstDegree" lay-verify="required">
                                             <option value="">请选择学历</option>
-                                            <option value="00">本科-统招</option>
-                                            <option value="01">本科-非统招</option>
-                                            <option value="02">大专-统招</option>
-                                            <option value="03">大专-非统招</option>
-                                            <option value="04">职高</option>
-                                            <option value="05">高中</option>
-                                            <option value="06">其他</option>
+                                            <option ng-repeat=" item in initData.degreeList " value="{{item.name}}">{{ item.name }}</option>
                                         </select>
                                         <!-- <input type="text" class="layui-input" ng-model="initData.more.city" ng-blur="moreBlur('city')"> -->
                                     </div>
@@ -292,7 +286,7 @@
                 <div class="layui-form-item function-input-item">
                     <label class="layui-form-label"><i>*</i>人选现属职能</label>
                     <div class="layui-input-block">
-                        <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input functions" ng-model="recommend.currentFunctions">
+                        <input type="text" ng-change="getData1" name="" placeholder="请输入" autocomplete="off" class="layui-input functions" ng-model="recommend.currentFunctions">
                         <div class="errorBox">输入错误</div>
                     </div>
                 </div>
@@ -303,30 +297,44 @@
                         <div class="errorBox">输入错误</div>
                     </div>
                 </div>
+                <div class="strong">注:须经本人同意，您才可以推荐人选~</div>
+                <div class="btn">
+                    <a href="javascript:;"  lay-submit lay-filter="formRecommend" ng-click="saveRecommend()">确认推荐</a>
+                </div>
             </form>
-            <div class="strong">注:须经本人同意，您才可以推荐人选~</div>
-            <div class="btn">
-                <a href="javascript:;" ng-click="saveRecommend()">确认推荐</a>
-            </div>
         </div>
         <div class="content tj hide">
-            <div class="list layui-form">
-                <ul>
-                    <li ng-repeat="iterm in recommends">
-                        <div class="layui-form-item">
-                            <div class="layui-input-block">
-                                <input type="radio" name="sex" value="0">
+            
+            <div ng-if="recommends.length > 0">
+                <div class="list layui-form">
+                    <form action="">
+                        <ul>
+                            <div class="layui-form-item">
+                                <li ng-repeat="iterm in recommends">
+                                    <div class="layui-form-item">
+                                        <div class="layui-input-block">
+                                            <input type="radio" value="{{iterm}}" name="recommendsMan" >
+                                        </div>
+                                    </div>
+                                    <h1>人选姓名：{{iterm.username}}</h1><h1>人员手机号:{{iterm.phone}}</h1><a href="http://127.0.0.1:8082/pages/%E6%8E%A8%E8%8D%90%E8%81%8C%E4%BD%8D.html">详情</a>
+                                </li>
                             </div>
+                        </ul>
+                        <div class="strong">注:须经本人同意，您才可以推荐人选~</div>
+                        <div class="btn">
+                            <a href="javascript:;" lay-submit lay-filter="recommendsManForm" ng-click="saveRecommendadd()">确认推荐</a>
                         </div>
-                        <h1>人选姓名：{{iterm.obj.username}}</h1><h1>人员手机号:{{iterm.obj.phone}}</h1><a href="http://127.0.0.1:8082/pages/%E6%8E%A8%E8%8D%90%E8%81%8C%E4%BD%8D.html">详情</a>
-                    </li>
-                </ul>
+                    </form>
+                    
+            
+                </div>
+                
             </div>
-            <div class="strong">注:须经本人同意，您才可以推荐人选~</div>
-            <div class="btn">
-                <a href="javascript:;" ng-click="saveRecommendadd()">确认推荐</a>
+            <div style="margin-top: 30px;font-size:24px;text-align: center;" ng-if="recommends.length <= 0">
+                未登录或暂无可推荐人
             </div>
         </div>
+        
     </div>
 
 
@@ -566,7 +574,6 @@
                         });
 
                         $(".jobsNewAlert .new .layui-form input.functions").val(obj.data.title);
-                        console.log(obj.data); //得到当前点击的节点数据
 
                     }
                 });

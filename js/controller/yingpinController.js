@@ -34,6 +34,31 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 
 	$scope.initData = {
 		jobDetailslist: [],
+		// 学历名称
+		degreeName: '',
+		// 学历列表
+		degreeList:[{
+			name: '本科-统招',
+			value: '00'
+		},{
+			name: '本科-非统招',
+			value: '01'
+		},{
+			name: '大专-统招',
+			value: '02'
+		},{
+			name: '大专-非统招',
+			value: '03'
+		},{
+			name: '职高',
+			value: '04'
+		},{
+			name: '高中',
+			value: '05'
+		},{
+			name: '其他',
+			value: '06'
+		}],
 		// 城市
 		cityList: [{
 				code: "010000",
@@ -48371,6 +48396,7 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 		$scope.search(1, 10)
 	}
 	// 更多失去
+	var firstDegreeName = ''
 	$scope.moreBlur = function (obj) {
 		console.log('选择字段',obj)
 		$scope.select[obj] = $scope.initData.more[obj]
@@ -48389,8 +48415,9 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 			$scope.search(1, 10)
 		});
 		form.on('select(firstDegree)', function(data){
-			console.log('选择字段',data.value);
+			console.log('选择字段',data);
 			$scope.select.firstDegree = data.value
+			$scope.initData.degreeName = data.value
 			$scope.search(1, 10)
 		});
 		//各种基于事件的操作，下面会有进一步介绍
@@ -48498,6 +48525,7 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 		let industryInputItem = document.querySelector('.industry-input-item .now-industry');
 		console.log($event);
 		industryInputItem.value = $event.target.innerHTML;
+		$scope.recommend.currentIndustry = industryInputItem.value
 	}
 	// 选择城市
 	$scope.selectCity = function(item,index) {
@@ -48684,6 +48712,16 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 			}
 		);
 	}
+	// 对象浅拷贝
+	function shallowCopy(src) {
+		var dst = {};
+		for (var prop in src) {
+			if (src.hasOwnProperty(prop)) {
+				dst[prop] = src[prop];
+			}
+		}
+		return dst;
+	}
 	// 搜索
 	$scope.searchEntity = [];
 
@@ -48704,7 +48742,22 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 				}
 			}
 			console.log('筛选条件',$scope.select)
-			yingpinService.search(page,rows, $scope.select).success(function (response) {
+
+			var param = shallowCopy($scope.select)
+
+			var list = $scope.initData.degreeList
+			for(var i = 0 ; i < list.length ; i++){
+				if(list[i].name == $scope.initData.degreeName){
+					param.firstDegree = list[i].value
+					
+
+				}
+			}
+
+			console.log('前数组',$scope.select)
+			console.log('后数组',param)
+
+			yingpinService.search(page,rows, param).success(function (response) {
 				console.log(response.obj)
 				if(response.obj!=null){
 					$scope.list = response.obj.rows;
@@ -48715,7 +48768,18 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 				// $scope.addhref='职位-职位详情页.html?id='+response.obj.id+'+&projectVistiNum='+response.obj.projectVistiNum
 			})
 		} else {
-			yingpinService.search(1, 10, $scope.select).success(function (response) {
+			var param = shallowCopy($scope.select)
+
+			var list = $scope.initData.degreeList
+			for(var i = 0 ; i < list.length ; i++){
+				if(list[i].name == $scope.initData.degreeName){
+					param.firstDegree = list[i].value
+				}
+			}
+
+			console.log('前数组',$scope.select)
+			console.log('后数组',param)
+			yingpinService.search(1, 10, param).success(function (response) {
 				$scope.list = response.obj.rows;
 				// console.log(response,"response")
 				$scope.totalRows = response.obj.total;
@@ -48780,20 +48844,53 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 	//保存简历信息
 	// $scope.newCandidates={}
 	$scope.saveRecommend = function () {
-		// $scope.recommend.sex=$scope.initDate.recommend.gender;
-		console.log($scope.recommend,"111")
-		recommendService.save($scope.recommend).success(function (response) {
-			if (response.success) {
-				$scope.recommends.push(JSON.parse(response.obj));
-				console.log($scope.recommends);
-				// window.location.reload();
-			}
-		})
+		layui.use('form', function(){
+			var form = layui.form;
+			//监听提交
+			form.on('submit(formRecommend)', function(data){
+				$scope.recommend.sex = data.field.sex
+				$scope.recommend.currentFunctions = $(".jobsNewAlert .new .layui-form input.functions").val()
+				recommendService.save($scope.recommend).success(function (response) {
+					if (response.success == true) {
+						$scope.recommends.push(response.obj);
+						console.log($scope.recommends);
+						// window.location.reload();
+						layer.msg(response.message)
+						window.location.reload();
+					} else {
+						layer.msg(response.message)
+					}
+				})
+			});
+		});
+		
 	}
+
 	//确认推荐saveRecommendadd
 	$scope.saveRecommendadd = function () {
+		layui.use('form', function(){
+			var form = layui.form;
+			//监听提交
+			form.on('submit(recommendsManForm)', function(data){
+				console.log('推荐人',data.field)
+				var param =  data.field.recommendsMan
+				recommendService.update(param).success(function (response) {
+					if (response.success == true) {
+						$scope.recommends.push(response.obj);
+						console.log($scope.recommends);
+						// window.location.reload();
+						layer.msg(response.message)
+						window.location.reload();
+					} else {
+						layer.msg(response.message)
+					}
+				})
+			});
+		});
+
+		
 		// $scope.recommend.sex=$scope.initDate.recommend.gender;
-		// console.log($scope.recommend,"111")
+		console.log($scope.recommend,"111")
 		recommendService.selectPersonProject(1,10,$scope.recommend).success(function (response) {
 			console.log(response)
 			// if (response.success) {
@@ -48821,8 +48918,8 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 
 	$scope.findRecommends = function () {
 		recommendService.findAll().success(function (response) {
-			if (response.success) {
-				$scope.recommends.push(response.obj);
+			if (response.success == true && response.obj.length>0) {
+				$scope.recommends = response.obj;
 			}
 		})
 	}
