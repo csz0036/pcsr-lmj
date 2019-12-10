@@ -59,6 +59,7 @@ app.filter('filterRow',function(){
 })
 app.filter('filterSubString',function CarouselContentFilter() {
     return function (str) {
+		// console.log('str::::',str,str.length )
         if(str){
             var carContent = '';
             if(str.length >= 50){
@@ -82,7 +83,9 @@ app.filter('to_trusted', ["$sce", function ($sce) {
 app.filter('content_trusted', ["$sce", function ($sce) {
 	return function (html) {
 		var delImg = html.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi,'')
-		return $sce.trustAsHtml(delImg);  
+		var reg= delImg.replace(/<\/?.+?\/?>/g,'');
+		var lastHTML = '<p>'+reg.substring(0,50) + '...'+'</p>'
+		return $sce.trustAsHtml(lastHTML);  
 	}
 }])
 app.filter('ftpChangeImg', function () {
@@ -90,7 +93,6 @@ app.filter('ftpChangeImg', function () {
 		if(typeof ftp == 'string'){
 			var strSplit = ftp.split('/')
 			var lastImg = strSplit[strSplit.length - 1]
-			console.log('ftp----', lastImg)
 			$.ajax({
 				type : "GET",
 				url : '/api/upload/getFtpImage?sfzh='+lastImg,
@@ -100,7 +102,6 @@ app.filter('ftpChangeImg', function () {
 				},
 			});
 		}
-		
 		// return 'http://res.itkeyword.com/images/itkeyword/logo.gif'
 		
 	}

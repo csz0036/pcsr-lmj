@@ -50,7 +50,7 @@
                             </div>
                             <div class="test">
                                 <h1>{{entity.newsHeadlines}}</h1>
-                                <p class="contnetBox" ng-bind-html="entity.text | content_trusted | filterSubString"></p>
+                                <p class="contnetBox" ng-bind-html="entity.text | content_trusted"></p>
                                 <span>详情</span>
                                 <div class="timeLength">
                                     <span>{{entity.releaseDate}}  丨  浏览：{{entity.readingVolume}}</span>

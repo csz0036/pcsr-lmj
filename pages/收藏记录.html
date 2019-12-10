@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="import" href="../common/common.html"/>
+    <script src="../js/service/personService.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/service/collectionStationService.js"></script>
     <script src="../js/controller/collectionStationController.js"></script>
     <!-- <script src="../js/controller/yingpinService.js"></script> -->
@@ -51,15 +53,17 @@
                 <ul>
                     <li ng-repeat = "entity in list">
                         <div class="tit">
-                            <h1>{{entity.dept}}</h1>
-                            <h2>{{entity.yearSalary}}   {{entity.company}}</h2>
-                            <h3>{{entity.address}}丨 {{entity.workYear}}丨{{entity.edu}}丨{{entity.gender}}</h3>
+                            <h1>{{entity.proName}}</h1>
+                            <!-- <h2>{{entity.yearSalary}}   {{entity.company}}</h2> -->
+                            <!-- <h3>{{entity.address}}丨 {{entity.workYear}}丨{{entity.edu}}丨{{entity.gender}}</h3> -->
+                            <h2>年薪{{entity.minSalary}}  - {{entity.maxSalary}}万 {{entity.communicationDepartName}}</h2>
+                            <h3>{{areaData[entity.city]}}丨 {{entity.minLimit}}-{{entity.maxLimit}}丨{{eduCation[entity.firstDegree]}}丨{{sexDate[entity.gender]}}</h3>
                         </div>
                         <div class="center">
-                            <h1><span>悬赏金￥{{entity.price}}</span><a href="javascript:;">赚</a></h1>
+                            <h1><span>悬赏金￥{{entity.estimateHeadhuntingFee}}</span><a href="javascript:;">赚</a></h1>
                         </div>
                         <div class="right">
-                            <div class="length"><i class="iconfont">&#xe9ff;</i>2550</div>
+                            <div class="length"><i class="iconfont">&#xe9ff;</i>{{entity.visitNumber}}</div>
                             <div class="btn">
                                 <a href="javascript:;">推荐人选</a><a href="javascript:;">应聘职位</a>
                             </div>

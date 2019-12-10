@@ -48495,7 +48495,7 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 		if($scope.selectCvAll.length > 1){
 			$scope.tdscarch.personId = $scope.selectCvAll[0].personId;
 
-			var param = "proId="+id+"&userId="+window.localStorage.getItem('userId')+"&perIds="+perIdsJoin
+			var param = "proId="+id+"&perIds="+perIdsJoin
 			personService.addPersonPush(param).success(
 			function (response) {
 				console.log('应聘点击操作')
@@ -48955,7 +48955,7 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 	}
 	// 收藏职位
 	$scope.addperfavpro = function (proid, $event) {
-		console.log('$scope.loginInfos',$scope.loginInfos)
+		console.log('$scope.loginInfos',proid, $scope.loginInfos)
 		if($scope.loginInfos == true){
 			if(!$($event.target).hasClass("on")){
 				$($event.target).addClass("on");
@@ -48974,7 +48974,7 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 					//sexDate
 					"gender":proid.release.gender,
 					"estimateHeadhuntingFee":proid.release.estimateHeadhuntingFee,
-					"visitNumber":proid.projectVistiNum
+					"visitNumber":proid.projectVistiNum,
 				}
 				yingpinService.addcollectionsation(param).success(function(response){
 				

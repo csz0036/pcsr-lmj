@@ -55,12 +55,16 @@ app.controller("applicationRecordController", function($scope, applicationRecord
 	// 搜索
 	$scope.searchEntity = {
 		perIds: [],
-		userId: localStorage.getItem('userId')
+		userId: localStorage.getItem('userId'),
+		state:'',  //01-被查看 02-约面 03-发OF 04-入职 05-不合适
 	};
 
 	$scope.search = function(page, rows) {
 		console.log($scope.searchEntity);
-		applicationRecordService.search(page, rows, $scope.searchEntity).success(function(response) {
+		$scope.searchEntity.pageNo = page;
+		$scope.searchEntity.pageSize = rows;
+
+		applicationRecordService.search($scope.searchEntity).success(function(response) {
 			$scope.list = response.obj;
 		})
 

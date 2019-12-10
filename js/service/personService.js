@@ -53,7 +53,7 @@ app.service('personService',function($http){
 	}
 
 	this.addPersonPush=function(param){
-		return $http.get("/api/addPerson?"+param);
+		return $http.get("/api/api/addPerson?"+param);
 	}
 
 	// http://www.soiroc.com:9002/api/selectPersonByMy?pageNo=1&pageSize=10

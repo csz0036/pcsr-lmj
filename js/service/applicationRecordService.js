@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 14:09:11
- * @LastEditTime: 2019-12-09 17:50:41
- * @LastEditors: your name
+ * @LastEditTime: 2019-12-10 21:41:53
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /pcsr-lmj/js/service/applicationRecordService.js
  */
@@ -27,8 +27,8 @@ app.service('applicationRecordService',function($http){
     //     return $http.get("http://www.soiroc.com:9002/applicationRecord/delete?proid="+prodId);
     // }
 
-    this.search=function(page,rows,param){
-        return $http.post("/api/api/selectPersonProject?pageNo="+page+"&pageSize="+rows,param);
+    this.search=function(param){
+        return $http.post("/api/api/selectPersonProject",param);
     }
 
 })
