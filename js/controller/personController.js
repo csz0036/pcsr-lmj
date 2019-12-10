@@ -15,12 +15,13 @@ app.controller("personController",function($scope,personService,usersService){
             personService.changePersonName(param).success(
                 function(){
                     layer.msg('修改简历名称成功')
-                    var personArr = $scope.persons;
-                    for (var i= 0;i < personArr.length;i++){
-                        if(personArr[i].personId == $scope.editData.personId){
-                            personArr[i].personName = pName
-                        }
-                    }
+                    // var personArr = $scope.persons;
+                    // for (var i= 0;i < personArr.length;i++){
+                    //     if(personArr[i].personId == $scope.editData.personId){
+                    //         personArr[i].personName = pName
+                    //     }
+                    // }
+                    window.location.reload()
                 }
             )
         }
@@ -34,14 +35,15 @@ app.controller("personController",function($scope,personService,usersService){
     ]
     $scope.incumbencyList = [
         "CEO",
-		'COO',
-		'CFO',
-		'CTO',
-		'CIO',
-		'CHO',
-		'总裁',
-		'副总裁',
-		'总经理',
+		'地产',
+		'互联网',
+		'汽车',
+		'金融',
+		'文旅',
+		'酒店',
+		'教育',
+		'商业',
+        '物业',
         '其他'
     ]
     //选择简历信息 初始化数
@@ -74,6 +76,9 @@ app.controller("personController",function($scope,personService,usersService){
         )
     }
 
+    $scope.userName=''
+    $scope.watchTimes=''
+
     /**获取当前用户的所有简历信息*/
     $scope.personList = function(){
         personService.personList().success(
@@ -84,6 +89,11 @@ app.controller("personController",function($scope,personService,usersService){
                 }
                 $scope.persons = res.obj;
                 initData($scope.initData,res.obj[0]);
+
+                usersService.getCurrentUser().success(function(res){
+                    $scope.userName = res.obj.username
+                    $scope.watchTimes = Math.floor(Math.random() * 100)
+                });
                
                 if(getUrlParam("preson") == "null"){
                     $scope.flaglast=false
@@ -183,7 +193,7 @@ app.controller("personController",function($scope,personService,usersService){
                 eduEndTime:'',
                 soFar:'',
                 eduType:'',
-                eduSchoolName:'北京大学',
+                eduSchoolName:'',
                 eduValue:{
                         // 专业名称
                         '572266df-2bd8-4a46-be10-fd5f595bc4c4':'',
@@ -309,12 +319,26 @@ app.controller("personController",function($scope,personService,usersService){
                 form = layui.form,
                 upload = layui.upload;
                 function timeAdd(){
-                    lay('.timePicker').each(function() {
+                    lay('.timePicker1').each(function() {
                         laydate.render({
                             elem : this,
-                            trigger : 'click'
+                            trigger : 'click',
+                            done:function(value,date,endDate){
+                                console.log(value);
+                            }
                         });
                     });
+                    lay('.timePicker2').each(function() {
+                        laydate.render({
+                            elem : this,
+                            trigger : 'click',
+                            done:function(value,date,endDate){
+                                console.log(value);
+                            }
+                        });
+                    });
+                        
+
                 }
                 timeAdd()
                 // laydate.render({
@@ -335,34 +359,28 @@ app.controller("personController",function($scope,personService,usersService){
                     form = layui.form,
                     upload = layui.upload;
                     function timeAdd(){
-                        lay('.timePicker').each(function() {
+                        lay('.timePicker1').each(function() {
                             laydate.render({
                                 elem : this,
-                                trigger : 'click'
+                                trigger : 'click',
+                                done:function(value,date,endDate){
+                                    console.log(value);
+                                }
+                            });
+                        });
+                        lay('.timePicker2').each(function() {
+                            laydate.render({
+                                elem : this,
+                                trigger : 'click',
+                                done:function(value,date,endDate){
+                                    console.log(value);
+                                }
                             });
                         });
                     }
                     timeAdd()
             });
             ;},0);
-
-            setTimeout( () => {
-                $scope.form.render()
-                layui.use(['laydate','form','upload'], function(){
-                    var laydate = layui.laydate,
-                        form = layui.form,
-                        upload = layui.upload;
-                        function timeAdd(){
-                            lay('.timePicker').each(function() {
-                                laydate.render({
-                                    elem : this,
-                                    trigger : 'click'
-                                });
-                            });
-                        }
-                        timeAdd()
-                });
-                ;},0);
         
 		$(".resume-content .edit").css("display","inline-block");
 
@@ -466,7 +484,8 @@ app.controller("personController",function($scope,personService,usersService){
                     lay('.timePicker').each(function() {
                         laydate.render({
                             elem : this,
-                            trigger : 'click'
+                            trigger : 'click',
+                            done
                         });
                     });
                 }
@@ -647,73 +666,26 @@ app.controller("personController",function($scope,personService,usersService){
         if(location_[1]){
             window.location.href = "../../pages/简历-详情.html"
         }
-	}
+    }
+    
+    // console.log(222);
+    layui.use('form', function(){
+        var form = layui.form;
+        form.on('radio(genderRadio)', function (data) {
+            $scope.editData.gender = data.value
+            console.log('性别',$scope.editData.gender)
+        })
+    });
+
 	// 新增或者更新
 	$scope.save=function(){
-        // console.log(222);
-        console.log('立即提交了',$scope.flaglast);
 		if(getUrlParam("preson") == "null"){
 			funcUrlDel('preson');
 			return;
         }
         if($scope.editData.chineseName !== '') {
             if($scope.editData.phone.length != 0 && (/^1[3456789]\d{9}$/.test($scope.editData.phone))) {
-                // if($scope.editData.gender == ''){
-                    if($scope.editData.city !== ''){
-                        if($scope.editData.recentPosition !== ''){
-                            if($scope.editData.incumbency !== ''){
-                                if($scope.editData.industry !== ''){
-                                    personService.save($scope.editData).success(
-                                        function(response){
-                                            if(response.success){
-                                                layer.msg("保存成功")
-                                                window.location.href = "../../pages/简历-详情.html"
-                                            }else{
-                                                layer.msg("保存失败")
-                                                console.log(response.message);
-                                            }
-                                        },
-                                         $scope.initData = $scope.editData
-                                     ).fail(
-                                         function(){
-                                            
-                                                layer.msg("保存失败")
-                                             
-                                     })
-                                }else{
-                                    layer.msg("现在行业不能为空")
-                                }
-                            }else{
-                                layer.msg("现属职能不能为空")
-                            }
-                            
-                        }else{
-                            layer.msg("最近职位不能为空")
-                        }
-                       
-                    }else{
-                        layer.msg("城市不能为空")
-                    }
-                // }else{
-                //     alert('性别不能为空')
-                // }  
-            }else {
-                layer.msg("电话号码输入有误")
-            }
-        }else{
-            layer.msg("姓名不能为空")
-        }
-		
-		// $scope.editData = {}
-
-
-	}
-	// 立即提交
-	$scope.submit=function(){
-		console.log($scope.editData)
-        if($scope.editData.chineseName !== '') {
-            if($scope.editData.phone.length != 0 && (/^1[3456789]\d{9}$/.test($scope.editData.phone))) {
-                // if($scope.editData.gender == ''){
+                if($scope.editData.gender !== ''){
                     if($scope.editData.city !== ''){
                         if($scope.editData.recentPosition !== ''){
                             if($scope.editData.incumbency !== ''){
@@ -744,9 +716,59 @@ app.controller("personController",function($scope,personService,usersService){
                     }else{
                         layer.msg("城市不能为空")
                     }
-                // }else{
-                //     alert('性别不能为空')
-                // }  
+                }else{
+                    alert('性别不能为空')
+                }  
+            }else {
+                layer.msg("电话号码输入有误")
+            }
+        }else{
+            layer.msg("姓名不能为空")
+        }
+		
+		// $scope.editData = {}
+
+
+	}
+	// 立即提交
+	$scope.submit=function(){
+		console.log($scope.editData)
+        if($scope.editData.chineseName !== '') {
+            if($scope.editData.phone.length != 0 && (/^1[3456789]\d{9}$/.test($scope.editData.phone))) {
+                if($scope.editData.gender !== ''){
+                    if($scope.editData.city !== ''){
+                        if($scope.editData.recentPosition !== ''){
+                            if($scope.editData.incumbency !== ''){
+                                if($scope.editData.industry !== ''){
+                                    personService.save($scope.editData).success(
+                                        function(response){
+                                            if(response.success){
+                                                layer.msg("保存成功")
+                                                window.location.href = "../../pages/简历-详情.html"
+                                            }else{
+                                                layer.msg("保存失败")
+                                                console.log(response.message);
+                                            }
+                                        },
+                                         $scope.initData = $scope.editData
+                                     )
+                                }else{
+                                    layer.msg("现在行业不能为空")
+                                }
+                            }else{
+                                layer.msg("现属职能不能为空")
+                            }
+                            
+                        }else{
+                            layer.msg("最近职位不能为空")
+                        }
+                       
+                    }else{
+                        layer.msg("城市不能为空")
+                    }
+                }else{
+                    alert('性别不能为空')
+                }  
             }else {
                 layer.msg("电话号码输入有误")
             }
@@ -841,7 +863,8 @@ app.controller("personController",function($scope,personService,usersService){
 			});
 			form.on('select', function(data) {
 				$(data.elem).change(); // 创建自定义change事件 => 触发NG数据更新
-			});
+            });
+            
 			form.on('radio(xzltgw)', function(data){
 				console.log(data.elem); //得到radio原始DOM对象
 				console.log(data.value); //被点击的radio的value值
@@ -964,7 +987,7 @@ app.controller("personController",function($scope,personService,usersService){
 		}
 	}
     $scope.initDataAdd = function(entitydata){
-        entitydata.personId = Math.ceil(Math.random()*10000);
+        // entitydata.personId = Math.ceil(Math.random()*10000);
         entitydata.chineseName = "";
         console.log(entitydata.chineseName);
         entitydata.personName = "";
@@ -1005,11 +1028,11 @@ app.controller("personController",function($scope,personService,usersService){
             languageLevel:''
         }];
             entitydata.eduBackground = [{
-                eduStartTime:'2006-08-23',
-                eduEndTime:'2008-08-23',
+                eduStartTime:'',
+                eduEndTime:'',
                 soFar:'',
                 eduType:'',
-                eduSchoolName:'北京大学',
+                eduSchoolName:'',
                 eduValue:{
                     // 专业名称
                     '572266df-2bd8-4a46-be10-fd5f595bc4c4':'',

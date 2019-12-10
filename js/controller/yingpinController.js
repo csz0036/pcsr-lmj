@@ -48945,6 +48945,7 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 	}
 	// 收藏职位
 	$scope.addperfavpro = function (proid, $event) {
+		console.log('$scope.loginInfos',$scope.loginInfos)
 		if($scope.loginInfos == true){
 			if(!$($event.target).hasClass("on")){
 				$($event.target).addClass("on");
@@ -49018,6 +49019,17 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 		}
 	}
 
+	$scope.hasHopeList = false
+
+	$scope.getHopeList = function(page, rows){
+		yingpinService.searchHopeList(page, rows).success(function(res){
+			if(res.obj.length>0){
+				$scope.hasHopeList = true
+
+			}
+		})
+	}
+
 	/**
 	 * 是否登录
 	 */
@@ -49026,7 +49038,7 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 		usersService.getIsLogin().success(function (response) {
 			if (response.success) {
 				$scope.loginInfos = response.obj
-				if (response.obj) {
+				if ($scope.loginInfos) {
 					$(".hots-list").hide();
 					$(".collectionJobs-list").show();
 				} else {

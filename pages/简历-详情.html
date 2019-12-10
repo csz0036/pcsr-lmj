@@ -62,11 +62,11 @@
                             </div>
                             <div class="edit-exhibition ">
                                 <div class="tx">
-                                    <img ng-src="{{initData.headportrait[0].photoPath}}" alt="" >
+                                        <img ng-src="{{initData.headportrait[0].photoPath || '../images/two.png'}}" alt="" >
                                 </div>
                                 <div class="edit-list">
                                     <ul>
-                                        <li>
+                                        <li ng-if="initData.chineseName">
                                             <dl>
                                                 <dt>
                                                     <i>*</i>姓名:
@@ -76,7 +76,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.phone[0]">
                                             <dl>
                                                 <dt>
                                                     <i>*</i>电话:
@@ -87,7 +87,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.gender">
                                             <dl>
                                                 <dt>
                                                     <i>*</i>性别:
@@ -97,7 +97,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                         <li>
+                                         <li ng-if="initData.params.b_city[initData.city]">
                                             <dl>
                                                 <dt>
                                                     <i>*</i>所在城市:
@@ -107,7 +107,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.birthday">
                                             <dl>
                                                 <dt>
                                                     出生日期:
@@ -117,7 +117,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.recentUnit">
                                             <dl>
                                                 <dt>
                                                     最近公司:
@@ -127,7 +127,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.params.qualifications[initData.qualification]">
                                             <dl>
                                                 <dt>
                                                         第一学历:
@@ -137,7 +137,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.params.position[initData.recentPosition]">
                                             <dl>
                                                 <dt>
                                                         <i>*</i>最近职位:
@@ -147,7 +147,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.params.personState[initData.personState]">
                                             <dl>
                                                 <dt>
                                                         <i>*</i>人才状态:
@@ -157,7 +157,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.incumbency">
                                             <dl>
                                                 <dt>
                                                         <i>*</i>现属职能:
@@ -167,7 +167,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                         <li>
+                                         <li ng-if="initData.params.industry[initData.industry]">
                                             <dl>
                                                 <dt>
                                                         <i>*</i>现在行业:
@@ -182,6 +182,7 @@
                             </div>
                             <div class="edit hide">
                                 <div class="input-list layui-form">
+                                    <form>
                                     <div class="tx">
                                             <img ng-src="{{editData.headportrait[0].photoPath}}" alt=""><a href="javascript:;" ng-click="uImg()">上传头像</a>
                                             <input type="file" style="display: none;" id="userimg" accept="image/jpg,image/jpeg,image/png,image/PNG" onchange="angular.element(this).scope().onFileSelect(this)">
@@ -207,8 +208,8 @@
                                             <div class="layui-form-item">
                                                 <label class="layui-form-label"><i>*</i>性别</label>
                                                 <div class="layui-input-block">
-                                                    <input type="radio" name="gender" value="男" ng-model="editData.gender" ng-checked="editData.gender == '男'" title="男">
-                                                    <input type="radio" name="gender" value="女" ng-model="editData.gender" ng-checked="editData.gender == '女'" title="女">
+                                                    <input type="radio"  lay-filter="genderRadio" name="gender" value="男" ng-model="editData.gender" ng-checked="editData.gender == '男'" title="男">
+                                                    <input type="radio"  lay-filter="genderRadio" name="gender" value="女" ng-model="editData.gender" ng-checked="editData.gender == '女'" title="女">
                                                 </div>
                                             </div>
                                         </li>
@@ -229,8 +230,8 @@
                                                     <input type="text" name="title" required ng-model="editData.birthday"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                                                     <select class="rl-item" name="timetype" lay-verify="required" ng-model="editData.timetype">
                                                         <option value=""></option>
-                                                        <option value="0">公历</option>
-                                                        <option value="1">农历</option>
+                                                        <option value="公历">公历</option>
+                                                        <option value="农历">农历</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -296,6 +297,7 @@
                                             </div>
                                         </li>
                                     </ul>
+                                </form>
                                 </div>
                             </div>
                         </li>
@@ -306,7 +308,7 @@
                             <div class="edit-exhibition">
                                 <div class="edit-list">
                                     <ul>
-                                        <li>
+                                        <li ng-if="initData.expyearsal">
                                             <dl>
                                                 <dt>
                                                     期望年薪:
@@ -316,7 +318,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                         <li>
+                                         <li ng-if="initData.params.industry[initData.hopeIndustry]">
                                             <dl>
                                                 <dt>
                                                         期望行业:
@@ -326,7 +328,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.params.b_city[initData.household]">
                                             <dl>
                                                 <dt>
                                                         期望城市:
@@ -336,7 +338,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.houseProject">
                                             <dl>
                                                 <dt>
                                                         期望职位:
@@ -399,17 +401,17 @@
                             <div class="edit-exhibition ">
                                 <div class="edit-list">
                                     <ul>
-                                        <li>
+                                        <li ng-if="initData.email[0]">
                                             <dl>
                                                 <dt>
                                                     邮箱:
                                                 </dt>
                                                 <dd>
-                                                    <span>{{initData.email}}</span>
+                                                    <span>{{initData.email[0]}}</span>
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.height">
                                             <dl>
                                                 <dt>
                                                     身高:
@@ -419,7 +421,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.params.country[initData.country]">
                                             <dl>
                                                 <dt>
                                                         国籍:
@@ -429,7 +431,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                         <li>
+                                         <li ng-if="initData.params.jobLeavl[initData.jobLeavl]">
                                             <dl>
                                                 <dt>
                                                         职位级别:
@@ -439,7 +441,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.params.b_city[initData.origin]">
                                             <dl>
                                                 <dt>
                                                         籍贯:
@@ -449,7 +451,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.curyearsal">
                                             <dl>
                                                 <dt>
                                                         目前年薪:
@@ -459,7 +461,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.params.politics[initData.politics]">
                                             <dl>
                                                 <dt>
                                                         政治面貌:
@@ -469,7 +471,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.params.isdegree[initData.highlyEducated]">
                                             <dl>
                                                 <dt>
                                                         最高学历:
@@ -479,7 +481,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.params.marriage[initData.maritalStatus]">
                                             <dl>
                                                 <dt>
                                                         婚姻状况:
@@ -489,7 +491,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.params.certtype[initData.certtype]">
                                             <dl>
                                                 <dt>
                                                         证件类型:
@@ -500,7 +502,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                         <li>
+                                         <li ng-if="initData.params.overseasExperience[initData.overseasExperience]">
                                             <dl>
                                                 <dt>
                                                         海外经历:
@@ -511,7 +513,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.certcode">
                                             <dl>
                                                 <dt>
                                                         证件编码:
@@ -673,7 +675,7 @@
                             <div class="edit-exhibition">
                                 <div class="edit-list" ng-repeat=" item in initData.workExp">
                                     <ul>
-                                        <li>
+                                        <li ng-if="item.workStartTime">
                                             <dl>
                                                 <dt>
                                                         时间:
@@ -684,17 +686,17 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                         <li>
+                                         <li ng-if="item.workExpValue['ddf4afda-9f15-41fd-ae1d-38bfcc50fc44']">
                                             <dl>
                                                 <dt>
                                                         职位名称:
                                                 </dt>
                                                 <dd>
-                                                    {{item.workComname}}
+                                                    {{item.workExpValue['ddf4afda-9f15-41fd-ae1d-38bfcc50fc44']}}
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="item.workComname">
                                             <dl>
                                                 <dt>
                                                         公司名称:
@@ -704,7 +706,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="item.workExpValue['fb894fdb-8ae6-4f72-807c-c8476c7543cb']">
                                             <dl>
                                                 <dt>
                                                         所属职能:
@@ -714,7 +716,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.params.industry[item.workExpValue['815374f3-5cb7-48dd-8783-52308a7c8217']]">
                                             <dl>
                                                 <dt>
                                                         所属行业:
@@ -724,7 +726,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="item.workExpValue['efdd270f-fac2-46be-9a96-6990b919f78e']">
                                             <dl>
                                                 <dt>
                                                         直接上级:
@@ -734,7 +736,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li class="zz">
+                                        <li ng-if="item.mainDuty" class="zz">
                                             <dl>
                                                 <dt>
                                                         主要职责:
@@ -744,7 +746,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li class="yj">
+                                        <li ng-if="item.workBussdesc" class="yj">
                                             <dl>
                                                 <dt>
                                                         关键业绩:
@@ -754,7 +756,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="item.exitText">
                                             <dl>
                                                 <dt>
                                                         离职说明:
@@ -774,9 +776,9 @@
                                             <div class="layui-form-item time-item">
                                                 <label class="layui-form-label">时间</label>
                                                 <div class="layui-input-block">
-                                                    <input type="text" class="layui-input timePicker" ng-model="item.workStartTime">
+                                                    <input type="text" class="layui-input timePicker1" ng-model="item.workStartTime">
                                                     <span>至</span> 
-                                                    <input type="text" class="layui-input timePicker" ng-model="item.workEndTime">
+                                                    <input type="text" class="layui-input timePicker2" ng-model="item.workEndTime">
                                                 </div>
                                             </div>
                                         </li>
@@ -872,7 +874,7 @@
                             <div class="edit-exhibition">
                                 <div class="edit-list" ng-repeat="item in initData.projectExp track by $index">
                                     <ul>
-                                        <li>
+                                        <li ng-if="item.proIntoTime">
                                             <dl>
                                                 <dt>
                                                         时间:
@@ -883,7 +885,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                         <li>
+                                         <li ng-if="item.proName">
                                             <dl>
                                                 <dt>
                                                         项目名称:
@@ -893,7 +895,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="item.projectExpValue['77a7441a-23b4-4b7c-aa2c-269185db1c33']">
                                             <dl>
                                                 <dt>
                                                         项目角色:
@@ -903,7 +905,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li class="zz">
+                                        <li ng-if="item.proDescription" class="zz">
                                             <dl>
                                                 <dt>
                                                         主要职责:
@@ -1000,7 +1002,7 @@
                             <div class="edit-exhibition">
                                 <div class="edit-list" ng-repeat="item in initData.eduBackground  track by $index">
                                     <ul>
-                                        <li>
+                                        <li ng-if="item.eduStartTime">
                                             <dl>
                                                 <dt>
                                                         时间:
@@ -1011,7 +1013,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                         <li>
+                                         <li ng-if="initData.params.major[item.eduValue['572266df-2bd8-4a46-be10-fd5f595bc4c4']]">
                                             <dl>
                                                 <dt>
                                                         专业名称:
@@ -1021,7 +1023,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="item.eduSchoolName">
                                             <dl>
                                                 <dt>
                                                         学校名称:
@@ -1031,7 +1033,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="initData.params.qualifications[item.eduValue['0b8b0f62-7d06-4b2f-8ef7-6ad703d9d67b']]">
                                             <dl>
                                                 <dt>
                                                         学历/学位:
@@ -1112,7 +1114,7 @@
                             <div class="edit-exhibition">
                                 <div class="edit-list" ng-repeat="item in initData.languageExp  track by $index">
                                     <ul>
-                                        <li>
+                                        <li ng-if="initData.params.name[item.languageType]">
                                             <dl>
                                                 <dt>
                                                     语言种类:
@@ -1123,7 +1125,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                         <li>
+                                         <li ng-if="initData.languageLevel">
                                             <dl>
                                                 <dt>
                                                     语言水平:
@@ -1139,17 +1141,20 @@
                             <div class="edit hide">
                                 <div class="input-list layui-form" ng-repeat="item in editData.languageExp  track by $index">
                                     <ul>
-                                       <li>
-                                            <div class="layui-form-item">
-                                                <label class="layui-form-label">语言种类</label>
-                                                <div class="layui-input-block">
-                                                    <select lay-verify="required" ng-model="item.languageType">
-                                                        <option value="{{index}}" ng-repeat="(index,item) in initData.params.name">{{item}}</option>
-                                                    </select>
+                                        <div class="language-type">
+                                            <li>
+                                                <div class="layui-form-item">
+                                                    <label class="layui-form-label">语言种类</label>
+                                                    <div class="layui-input-block">
+                                                        <select lay-verify="required" ng-model="item.languageType">
+                                                            <option value="{{index}}" ng-repeat="(index,item) in initData.params.name">{{item}}</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                       </li>
-                                       <li>
+                                            </li>
+                                        </div>
+                                       
+                                       <li class="language-score">
                                             <div class="layui-form-item">
                                                 <label class="layui-form-label">语言水平</label>
                                                 <div class="layui-input-block">
@@ -1174,7 +1179,7 @@
                             <div class="edit-exhibition">
                                 <div class="edit-list" ng-repeat="item in initData.majorQualify  track by $index">
                                     <ul>
-                                        <li>
+                                        <li ng-if="item.papersName">
                                             <dl>
                                                 <dt>
                                                         证件名称:
@@ -1184,7 +1189,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                         <li>
+                                         <li ng-if="item.getTime">
                                             <dl>
                                                 <dt>
                                                         获得时间:
@@ -1194,7 +1199,7 @@
                                                 </dd>
                                             </dl>
                                         </li>
-                                        <li>
+                                        <li ng-if="item.issuingAgency">
                                             <dl>
                                                 <dt>
                                                         颁发机构:
@@ -1249,13 +1254,13 @@
             <div class="slideStrong">
                 <div class="tops">
                     <div class="tx">
-                        <img src="../images/one.jpg" alt="">
+                        <img src="../images/two.png" alt="">
                     </div>
                     <div class="tit">
-                        <h1>谢奔庭</h1>
+                        <h1>{{ userName }}</h1>
                         <p>
-                            hi,谢奔庭<br />
-                            您的简历被浏览<font>100次</font>
+                            hi,{{userName}}<br />
+                            您的简历被浏览<font>{{ initData.viewNum || 0 }}次</font>
                         </p>
                     </div>
                 </div>

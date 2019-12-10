@@ -40,7 +40,12 @@ app.controller("indexController",function($scope,indexService,newsInformationSer
 
         indexService.search(page,rows,id,$scope.searchEntity).success(function(response){
             console.log(response.obj)
-            $scope.list = response.obj.rows;
+            if(response.obj.rows.length<=4){
+                $scope.list = response.obj.rows;
+            } else {
+                $scope.list = response.obj.rows.slice(0,4);
+
+            }
         })
     }
 

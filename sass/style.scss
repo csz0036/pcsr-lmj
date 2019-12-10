@@ -7318,6 +7318,12 @@ body.h{
                                 display: flex;
                                 flex-wrap: wrap;
                                 justify-content: space-between;
+                                .language-type{
+                                    width: 100% !important;
+                                }
+                                .language-score{
+                                    width: 100% !important;
+                                }
                                 li{
                                     width: 45%;
                                     &.xxmc-item{
