@@ -1,7 +1,7 @@
 app.controller("collectionStationController",function($scope,collectionStationService){
 			// 查询分页
 			$scope.findPage=function(page,rows){
-			collectionStationService.findPage(page,rows).success(
+			collectionStationService.search(page,rows).success(
 					function(response){
 						console.log(response,"resss")
 						$scope.list=response.rows;	

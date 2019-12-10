@@ -1,5 +1,14 @@
+/*
+ * @Author: your name
+ * @Date: 2019-12-02 14:09:11
+ * @LastEditTime: 2019-12-09 21:34:52
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /pcsr-lmj/js/controller/usersController.js
+ */
 //判断是否登录
 var successfn = function(res){
+
 	if(res.obj.username !='anonymousUser'){
 		$("#welcomeName").text("欢迎你："+res.obj.username);
 		layer.closeAll();
@@ -14,6 +23,10 @@ var successfn = function(res){
 			window.location.href = "../pages/顶级职位.html";
 		});
 		$(".JobDetails .recommend").show();
+
+		if(res.obj.id){
+			window.localStorage.setItem('userId',res.obj.id)
+		}
 	}else{
 		$(".loggedIn").hide();
 		$(".JobDetails .recommend").hide();
@@ -55,7 +68,7 @@ var getUserName = function(){
 	return user;
 }
 var showUserOrHide = function(){
-	getUserInfo(successfn);
+	getUserInfo(successfn)
 };
 
 var upUsrPw = function(){

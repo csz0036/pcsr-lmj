@@ -1,6 +1,4 @@
 app.controller("indexController",function($scope,indexService,newsInformationService){
-
-
     $scope.topPosts = [{"487181981":"CEO"},{"472378393":"COO"},{"960493450":"CFO"},{"711249516":"CTO"},{"806634754":"CIO"},{"388036864":"CHO"},{"820680760":"总裁"},{"341789050":"副总裁"},{"937140505":"总经理"},{"00":"其他"}];
 
     $scope.highEndJobs = [{"106":"地产"},{"102":"互联网"},{"130":"汽车"},{"100019":"金融"},{"122":"文旅"},{"2275058":"酒店"},{"70065790":"儿童"},{"318023868":"商业"},{"188876":"物业"},{"330372959":"人力"},{"349421233":"财审"},{"000000":"其他"}];
@@ -37,9 +35,8 @@ app.controller("indexController",function($scope,indexService,newsInformationSer
     $scope.searchEntity={};
 
     $scope.search = function(page,rows,id){
-
         indexService.search(page,rows,id,$scope.searchEntity).success(function(response){
-            console.log(response.obj)
+            // console.log('高端职位：：：',response.obj)
             $scope.list = response.obj.rows;
         })
     }
@@ -47,7 +44,7 @@ app.controller("indexController",function($scope,indexService,newsInformationSer
     $scope.highEndJobs = function(id){
         $scope.searchEntity.position = id;
         $scope.searchEntity.type = "position";
-        $scope.search(1,5,$scope.searchEntity);
+        $scope.search(1,4,$scope.searchEntity);
     }
 
 

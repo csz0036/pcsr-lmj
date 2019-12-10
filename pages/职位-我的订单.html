@@ -7,6 +7,13 @@
     <link rel="import" href="../common/common.html"/>
     <script src="../js/service/orderManagerService.js"></script>
 	<script src="../js/controller/orderManagerController.js"></script>
+    <style>
+        .nothing{
+            position: relative;
+        }
+        .my-order .table .nothing .nothingTest img{ position: absolute; width: 198px; height: auto; top: 20%;left: 50%; display: block; transform: translateX(-50%);}
+        .my-order .table .nothing .nothingTest p{  position: absolute;  font-size: 18px; color: #666666;top: 20%; text-align: center; width: 100%; top: 35%;}
+    </style>
 </head>
 <body class="h" ng-app="soiroc"  ng-controller="orderManagerController">
     <header class="header headerB marginBottom">
@@ -36,7 +43,7 @@
                 <div class="nothing" style="display: {{nothing}}">
                     <div class="nothingTest">
                         <img src="../images/logo2.png" alt="">
-                        <h1>暂无订单</h1>
+                        <p>暂无订单</p>
                     </div>
                 </div>
                 <table border="0" ng-if="nothing=='none'">
@@ -75,7 +82,7 @@
                 <div class="nothing"  style="display: {{nothing}}">
                     <div class="nothingTest">
                         <img src="../images/logo2.png" alt="">
-                        <h1>暂无订单</h1>
+                        <p>暂无订单</p>
                     </div>
                 </div>
                 <table border="0" ng-if="nothing=='none'">

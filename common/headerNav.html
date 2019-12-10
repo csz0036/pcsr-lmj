@@ -90,12 +90,14 @@
  </div>
   <script>
       $('.sign .loggedIn .title .loginOut a').click(function(){
+        window.localStorage.clear() 
         $.ajax({
             type: "GET",  
-             url: "/api/logout?return=/",
+             url: "/api/logout",
              dataType: "json",  
              success: function(data){  
-               window.location.href="http://127.0.0.1:8082/pages/%E9%A6%96%E9%A1%B5.html"  
+               
+               window.location.href="http://127.0.0.1:8082/pages/%E9%A6%96%E9%A1%B5.html" ;
             }, 
              error:function(e){  
                  alert('退出失败')

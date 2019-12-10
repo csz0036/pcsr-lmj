@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-12-02 14:09:12
+ * @LastEditTime: 2019-12-10 00:12:21
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /pcsr-lmj/pages/职位-我邀请的人.html
+ -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +13,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="import" href="../common/common.html"/>
+    <script src="../js/service/inviteManagerService.js"></script>
+	<script src="../js/controller/inviteManagerController.js"></script>
+    <style>
+        #invite{ padding-left: 5px;}
+        .inviters .list .tit span:nth-child(1), .inviters .list ul li span:nth-child(1){width: auto;}
+    </style>
 </head>
-<body class="h">
+<body class="h" ng-controller="inviteManagerController" ng-app="soiroc">
     <header class="header headerB marginBottom">
         <nav class="nav">
             
@@ -25,7 +39,7 @@
                 <h1>我的邀请链接</h1>
                 <h2>复制链接发给朋友，邀请其注册，众多职位等TA来投</h2>
                 <div class="input-item">
-                    <input type="text"><button data-clipboard-text="">复制</button>
+                    <input type="text" value="" id="invite"><button data-clipboard-text="">复制</button>
                 </div>
                 <div class="rule">
                     <h3>规则：</h3>
@@ -45,37 +59,16 @@
                     <span>&nbsp;</span>
                 </div>
                 <ul>
-                    <li>
+                    <li ng-repeat="item in list">
                         <span><img src="../images/tx.jpg" alt=""></span>
-                        <span>易躬侗</span>
+                        <span>{{item.username}}</span>
                         <span>15781391117</span>
                         <span>2019-09-08</span>
                         <span><a href="javascript:;">立即沟通</a></span>
                     </li>
-                    <li>
-                        <span><img src="../images/tx.jpg" alt=""></span>
-                        <span>易躬侗</span>
-                        <span>15781391117</span>
-                        <span>2019-09-08</span>
-                        <span><a href="javascript:;">立即沟通</a></span>
-                    </li>
-                    <li>
-                        <span><img src="../images/tx.jpg" alt=""></span>
-                        <span>易躬侗</span>
-                        <span>15781391117</span>
-                        <span>2019-09-08</span>
-                        <span><a href="javascript:;">立即沟通</a></span>
-                    </li>
-                    <li>
-                        <span><img src="../images/tx.jpg" alt=""></span>
-                        <span>易躬侗</span>
-                        <span>15781391117</span>
-                        <span>2019-09-08</span>
-                        <span><a href="javascript:;">立即沟通</a></span>
-                    </li>
+                  
                 </ul>
-                <div id="page">
-                </div>
+                 <tm-pagination conf="paginationConf"></tm-pagination>
             </div>
         </div>
     </div>
@@ -83,25 +76,14 @@
     <footer class="footer">
         
     </footer>
-    <script src="js/clipboard.min.js"></script>
+    <script src="../js/clipboard.min.js"></script>
     <script>
         $(function(){
-            layui.use(['laypage'], function(){
-            var laypage = layui.laypage;
-            
-                laypage.render({
-                        elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
-                        ,count: 50 //数据总数，从服务端得到
-                        ,layout: [ 'prev', 'page', 'next', 'skip']
-                        ,jump: function(obj){    //分页回调
-                            console.log(obj)
-                        }
-                });
-            });
             $(".tops .input-item button").click(function(){
                 $(this).attr("data-clipboard-text", $(".tops .input-item input").val());
                 var clipboard = new Clipboard('.tops button');
             });
+            $("#invite").val('http://39.96.49.139/index/register.jsp?invite='+localStorage.getItem('userId'))
         }) 
     </script>
 </body>
