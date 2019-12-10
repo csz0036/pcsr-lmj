@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2019-12-02 14:09:11
+ * @LastEditTime: 2019-12-09 17:50:41
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /pcsr-lmj/js/service/applicationRecordService.js
+ */
 /**
  * 应聘简历
  */
@@ -20,7 +28,7 @@ app.service('applicationRecordService',function($http){
     // }
 
     this.search=function(page,rows,param){
-        return $http.post("/api/selectPersonProject?pageNo="+page+"&pageSize="+rows,param);
+        return $http.post("/api/api/selectPersonProject?pageNo="+page+"&pageSize="+rows,param);
     }
 
 })

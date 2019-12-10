@@ -1,4 +1,7 @@
 $(function () {
+
+
+
   $(".loginAlert h1 a").click(function () {
     $(this).addClass("active").siblings("a").removeClass("active");
     var index = $(this).index();
@@ -137,4 +140,6 @@ function check(form) {
       showUserOrHide();
     }, 1000)
   }
+
+  // window.location.href = 'http://127.0.0.1:8082/pages/%E9%A1%B6%E7%BA%A7%E8%81%8C%E4%BD%8D.html'
 }

@@ -8,8 +8,9 @@ app.controller("applicationRecordController", function($scope, applicationRecord
 	$scope.findPage = function(page, rows) {
 		applicationRecordService.findPage(page, rows).success(
 			function(response) {
-				$scope.list = response.rows;
-				$scope.paginationConf.totalItems = response.total; // 更新总记录数
+				var strVobj = JSON.parse(response.obj)
+				$scope.list = strVobj.dataJson;
+				$scope.paginationConf.totalItems = strVobj.totalPages; // 更新总记录数
 			}
 		)
 	}
@@ -52,7 +53,8 @@ app.controller("applicationRecordController", function($scope, applicationRecord
 	}
 	// 搜索
 	$scope.searchEntity = {
-		perIds: []
+		perIds: [],
+		userId: localStorage.getItem('userId')
 	};
 
 	$scope.search = function(page, rows) {
@@ -71,8 +73,7 @@ app.controller("applicationRecordController", function($scope, applicationRecord
 
 	$scope.reloadList = function() {
 		//切换页码
-		$scope.search($scope.paginationConf.currentPage,
-			$scope.paginationConf.itemsPerPage);
+		$scope.search($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
 	}
 	//分页控件配置
 	$scope.paginationConf = {

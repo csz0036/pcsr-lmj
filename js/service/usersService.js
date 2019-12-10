@@ -50,5 +50,5 @@ var getCurrentUser = function(){
 	return $.getNoData(model+"getUserInfo");
 }
 var loginOut = function(){
-	return $http.get("/api/logout?return=/")
+	return $http.get("/api/logout")
 }
