@@ -1,9 +1,13 @@
 app.controller("newsInformationController",function($location,$scope,newsInformationService){
 	//截取url name的值
 	function getUrlParam(name) {
-		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-		var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-		if (r != null) return unescape(r[2]); return null; //返回参数值
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		var r = window.location.search.substr(1).match(reg);
+		if ( r != null ){
+		return decodeURI(r[2]);
+		}else{
+		return null;
+		} 
 	}
 
 
@@ -16,7 +20,7 @@ app.controller("newsInformationController",function($location,$scope,newsInforma
 		nextTitle : getUrlParam("nextTitle")
 	};
 
-	console.log($scope.nextPrev)
+	console.log('nextPrev:::::',$scope.nextPrev)
 
 	// 查询单个
 	$scope.findOne=function($event){
@@ -29,7 +33,9 @@ app.controller("newsInformationController",function($location,$scope,newsInforma
 
 	
 	// 搜索
-	$scope.searchEntity={}
+	$scope.searchEntity={
+		fileType:'商壤新闻'
+	}
 	
 	$scope.search = function(page,rows){
 		newsInformationService.search(page,rows,$scope.searchEntity).success(function(response){
@@ -66,5 +72,14 @@ app.controller("newsInformationController",function($location,$scope,newsInforma
 			$scope.selectIds.splice(idx, 1);//删除 
 		}
 	}
+
+
+	$scope.index = 0
+    //获取新闻列表
+    $scope.iNews = function(title,index){
+        $scope.searchEntity.fileType = title;
+		$scope.index = index
+        $scope.search(1,10);
+    }
 			
 })

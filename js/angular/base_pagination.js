@@ -1,3 +1,4 @@
+
 var app=angular.module('soiroc',['pagination']);
 //定义http拦截器httpInterceptor，这个factory返回的对象可以拥有responseError，response，request，requestError这些属性，分别对应拦截的处理。
 app.factory('httpInterceptor', ['$q',function($q) { 
@@ -70,6 +71,39 @@ app.filter('filterSubString',function CarouselContentFilter() {
             return carContent
         }
     }
+})
+//设置过滤器,新闻正文内容转HTML
+app.filter('to_trusted', ["$sce", function ($sce) {
+	return function (html) {
+		return $sce.trustAsHtml(html);  
+	}
+}])
+//过滤新闻列表中内容，把图片删除
+app.filter('content_trusted', ["$sce", function ($sce) {
+	return function (html) {
+		var delImg = html.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi,'')
+		return $sce.trustAsHtml(delImg);  
+	}
+}])
+app.filter('ftpChangeImg', function () {
+	return function (ftp) {
+		if(typeof ftp == 'string'){
+			var strSplit = ftp.split('/')
+			var lastImg = strSplit[strSplit.length - 1]
+			console.log('ftp----', lastImg)
+			$.ajax({
+				type : "GET",
+				url : '/api/upload/getFtpImage?sfzh='+lastImg,
+				dataType : "json",
+				success : function(res){
+					return "data:image/png;base64,"+res.obj
+				},
+			});
+		}
+		
+		// return 'http://res.itkeyword.com/images/itkeyword/logo.gif'
+		
+	}
 })
 
 app.config(['$locationProvider', function($locationProvider) {

@@ -1,3 +1,4 @@
+
 app.service('personService',function($http){
 	this.findAll=function(page,rows){
 		return $http.get("/api/person/findAll");
@@ -31,7 +32,12 @@ app.service('personService',function($http){
 		return $http.get("/api/api/interestedProject?proid="+proid);
 	}
 	this.proVisitorNum=function(proId,perIds,params){
-		return $http.get("/api/api/proVisitorNum?proId="+proId + "&perIds=" + perIds + '&' + params);
+		if(params){
+			return $http.get("/api/api/proVisitorNum?proId="+proId + "&perIds=" + perIds + '&' + params);
+		}else{
+			return $http.get("/api/api/proVisitorNum?proId="+proId + "&perIds=" + perIds);
+		}
+		
 	}
 
 	this.saveShieldCompany=function(param){
@@ -44,6 +50,10 @@ app.service('personService',function($http){
 
 	this.changePersonName=function(param){
 		return $http.post("/api/person/updatePersonName",param);
+	}
+
+	this.addPersonPush=function(param){
+		return $http.get("/api/addPerson?"+param);
 	}
 
 	// http://www.soiroc.com:9002/api/selectPersonByMy?pageNo=1&pageSize=10

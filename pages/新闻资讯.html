@@ -37,24 +37,23 @@
     <div class="newsInformation">
         <div class="marginAuto">
             <div class="btn">
-                <a class="on" href="javascript:;">商壤新闻</a>
-                <a href="javascript:;">猎场分享</a>
-                <a href="javascript:;">职场管理</a>
+                <a href="javascript:;" ng-click="iNews('商壤新闻',0)" ng-class="{'on': index == 0}">商壤新闻</a>
+                <a href="javascript:;" ng-click="iNews('猎场分享',1)" ng-class="{'on': index == 1}">猎场分享</a>
+                <a href="javascript:;" ng-click="iNews('职场管理',2)" ng-class="{'on': index == 2}">职场管理</a>
             </div>
             <div class="list">
                 <ul>
                     <li ng-repeat="(index,entity) in list">
-                        <a ng-href="商壤新闻-正文.html?id={{entity.id}}&prevId={{list[index - 1].id}}&prevTitle={{list[index - 1].articleTitle}}&nextId={{list[index + 1].id}}&nextTitle={{list[index + 1].articleTitle}}">
+                        <a ng-href="商壤新闻-正文.html?id={{entity.id}}&prevId={{list[index - 1].id}}&prevTitle={{list[index - 1].newsHeadlines}}&nextId={{list[index + 1].id}}&nextTitle={{list[index + 1].newsHeadlines}}">
                             <div class="img">
-                                <img ng-src="{{entity.imgPath}}" alt="">
+                                <img ng-src="{{entity.imgPath | ftpChangeImg}}" alt="">
                             </div>
                             <div class="test">
-                                <h1>{{entity.articleTitle}}</h1>
-                                <p>
-									{{entity.text | filterSubString}}<span>详情</span>
-                                </p>
+                                <h1>{{entity.newsHeadlines}}</h1>
+                                <p class="contnetBox" ng-bind-html="entity.text | content_trusted | filterSubString"></p>
+                                <span>详情</span>
                                 <div class="timeLength">
-                                    <span>{{entity.release}}  丨  浏览：{{entity.readingVolume}}</span>
+                                    <span>{{entity.releaseDate}}  丨  浏览：{{entity.readingVolume}}</span>
                                 </div>
                             </div>
                         </a>

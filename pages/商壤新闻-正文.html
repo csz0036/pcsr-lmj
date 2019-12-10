@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-12-02 14:09:12
+ * @LastEditTime: 2019-12-10 15:57:03
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /pcsr-lmj/pages/商壤新闻-正文.html
+ -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,11 +57,7 @@
                     <span><i class="iconfont">&#xe9ff;</i>{{entity.readingVolume}}</span>
                 </div>
             </div>
-            <div class="content">
-                {{entity.text}}
-                <hr>
-                
-                <img alt="" ng-src="{{entity.imgPath}}">
+            <div class="content"  ng-bind-html="entity.text | to_trusted">
             </div>
             <div class="newsPrevNext">
                 <a ng-href="商壤新闻-正文.html?id={{nextPrev.prevId}}">{{nextPrev.prevTitle}}</a>

@@ -9,6 +9,7 @@ app.controller("applicationRecordController", function($scope, applicationRecord
 		applicationRecordService.findPage(page, rows).success(
 			function(response) {
 				var strVobj = JSON.parse(response.obj)
+				console.log('strVobj:::',strVobj)
 				$scope.list = strVobj.dataJson;
 				$scope.paginationConf.totalItems = strVobj.totalPages; // 更新总记录数
 			}
@@ -101,79 +102,78 @@ app.controller("applicationRecordController", function($scope, applicationRecord
 
 });
 // 全选事件
-
-	layui.use('form', function() {
-		var form = layui.form;
-		var listArr = ['01', '02', '03', '04', '05'];
-		scopes.selectIds = listArr.slice(0);
-		// 监听复选框事件
-		form.on('checkbox(allCheck)', function(data) {
-			if (data.value == '0') {
-				if (data.elem.checked) {
-					scopes.selectIds = listArr;
-					$('#checkContent  input').each(function() {
-						$(this).prop("checked", true);
-						form.render();
-					});
-				} else {
-					scopes.selectIds = [];
-					$('#checkContent  input').each(function() {
-						$(this).prop("checked", false);
-						form.render();
-					});
-				}
+layui.use('form', function() {
+	var form = layui.form;
+	var listArr = ['01', '02', '03', '04', '05'];
+	scopes.selectIds = listArr.slice(0);
+	// 监听复选框事件
+	form.on('checkbox(allCheck)', function(data) {
+		if (data.value == '0') {
+			if (data.elem.checked) {
+				scopes.selectIds = listArr;
+				$('#checkContent  input').each(function() {
+					$(this).prop("checked", true);
+					form.render();
+				});
 			} else {
-				if (data.elem.checked) {
-					scopes.selectIds.push(data.value);
-				} else {
-					var idx = scopes.selectIds.indexOf(data.value);
-					scopes.selectIds.splice(idx, 1); //删除
-				}
-				if (scopes.selectIds && scopes.selectIds.length == listArr.length) {
-					$('#checkContent  input').eq(0).prop("checked", true);
+				scopes.selectIds = [];
+				$('#checkContent  input').each(function() {
+					$(this).prop("checked", false);
 					form.render();
-				} else {
-					$('#checkContent input').eq(0).prop("checked", false);
-					form.render();
-				}
+				});
 			}
-			if (scopes.selectIds && scopes.selectIds.length > 0) {
-				var params = {
-					state: scopes.selectIds.join(','),
-					userId: '1',
-					proName: '产品',
-					perIds: '1'
-				};
-				_applicationRecordService.search(1, 10, params).success(function(response) {
-					scopes.list = response.obj;
-					if (scopes.list && scopes.list.length > 0) {
-						var str = '';
-						$('.nothingTest').addClass('hide');
-						for (var i = 0; i < scopes.list.length; i++) {
-							str += '<li>' +
-								'<div class="tit">' +
-								'<h1>酒店事业部经理</h1>' +
-								'<h2>年薪100-150万   某地产公司</h2>' +
-								'<h3>北京丨 10-12年丨大专统招丨男</h3>' +
-								'</div>' +
-								'<div class="step">' +
-								'<span class="on"><i>被查看</i></span>' +
-								'<span class="on"><i>约面试</i></span>' +
-								'<span class="on"><i>发offer</i></span>' +
-								'<span class="on"><i>已入职</i></span>' +
-								'</div>' +
-								'<div class="right">' +
-								'<h1>猎头顾问:赖畅畅<a href="javascript:;">立即沟通</a></h1>' +
-								'<h2>投递简历:李磊-简历1</h2>' +
-								'</div>' +
-								'</li>';
-						}
-						$('#pojoList').html(str); //渲染到页面上
-					} else {
-						$('.nothingTest').removeClass('hide');
+		} else {
+			if (data.elem.checked) {
+				scopes.selectIds.push(data.value);
+			} else {
+				var idx = scopes.selectIds.indexOf(data.value);
+				scopes.selectIds.splice(idx, 1); //删除
+			}
+			if (scopes.selectIds && scopes.selectIds.length == listArr.length) {
+				$('#checkContent  input').eq(0).prop("checked", true);
+				form.render();
+			} else {
+				$('#checkContent input').eq(0).prop("checked", false);
+				form.render();
+			}
+		}
+		if (scopes.selectIds && scopes.selectIds.length > 0) {
+			var params = {
+				state: scopes.selectIds.join(','),
+				userId: '1',
+				proName: '产品',
+				perIds: '1'
+			};
+			_applicationRecordService.search(1, 10, params).success(function(response) {
+				scopes.list = response.obj;
+				if (scopes.list && scopes.list.length > 0) {
+					var str = '';
+					$('.nothingTest').addClass('hide');
+					for (var i = 0; i < scopes.list.length; i++) {
+						str += '<li>' +
+							'<div class="tit">' +
+							'<h1>酒店事业部经理</h1>' +
+							'<h2>年薪100-150万   某地产公司</h2>' +
+							'<h3>北京丨 10-12年丨大专统招丨男</h3>' +
+							'</div>' +
+							'<div class="step">' +
+							'<span class="on"><i>被查看</i></span>' +
+							'<span class="on"><i>约面试</i></span>' +
+							'<span class="on"><i>发offer</i></span>' +
+							'<span class="on"><i>已入职</i></span>' +
+							'</div>' +
+							'<div class="right">' +
+							'<h1>猎头顾问:赖畅畅<a href="javascript:;">立即沟通</a></h1>' +
+							'<h2>投递简历:李磊-简历1</h2>' +
+							'</div>' +
+							'</li>';
 					}
-				})
-			}
-		});
+					$('#pojoList').html(str); //渲染到页面上
+				} else {
+					$('.nothingTest').removeClass('hide');
+				}
+			})
+		}
 	});
+});
 // })

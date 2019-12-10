@@ -4676,8 +4676,13 @@ body.h {
   color: #666666;
 }
 
-.newsInformation .list ul li .test p span {
+.newsInformation .list ul li .test .contnetBox {
+  display: inline-block;
+}
+
+.newsInformation .list ul li .test span {
   color: #D23637;
+  font-size: 16px;
 }
 
 .newsInformation .list ul li .timeLength {
@@ -4789,6 +4794,10 @@ body.h {
 
 .newsContent .content p span {
   color: #BBBABA;
+}
+
+.newsContent .content img {
+  max-width: 1100px;
 }
 
 .newsContent .content h1 {

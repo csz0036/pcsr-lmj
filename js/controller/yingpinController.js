@@ -48482,13 +48482,23 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 	}; 
 
 
-	$scope.ypAdd=function(id){
-		
-		$scope.tdscarch._id = id;
+	$scope.ypAdd=function(id, pid){
+		$scope.tdscarch.proId = id;
+		$scope.tdscarch.userId = window.localStorage.getItem('userId');
+
+		console.log(id, pid)
+		var perIdAry = [],perIdsJoin = '';
+		for(var k in pid){
+			perIdAry.push(pid[k].perId)
+		}
+		perIdsJoin = perIdAry.join()
 		if($scope.selectCvAll.length > 1){
 			$scope.tdscarch.personId = $scope.selectCvAll[0].personId;
-			personService.proVisitorNum($scope.tdscarch._id,$scope.tdscarch.personId).success(
+
+			var param = "proId="+id+"&userId="+window.localStorage.getItem('userId')+"&perIds="+perIdsJoin
+			personService.addPersonPush(param).success(
 			function (response) {
+				console.log('应聘点击操作')
 				layer.msg("投递成功");
 			}
 		)
@@ -48901,7 +48911,7 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 		})
 	}
 	//获取所有的简历
-	$scope.selectCvAll = function(){
+	$scope.selectCvAllFn = function(){
 		personService.findAll().success(function (response) {
 			if (response.success) {
 				$scope.selectCvAll = response.obj;

@@ -4215,9 +4215,14 @@ body.h{
                     p{
                         font-size: 16px;
                         color: #666666;
-                        span{
-                            color: #D23637;
-                        }
+                        
+                    }
+                    .contnetBox{
+                        display: inline-block;
+                    }
+                    span{
+                        color: #D23637;
+                        font-size: 16px;
                     }
                 }
                 .timeLength{
@@ -4312,6 +4317,9 @@ body.h{
             span{
                 color: #BBBABA;
             }
+        }
+        img{
+            max-width: 1100px;
         }
         h1{
             font-size: 16px;

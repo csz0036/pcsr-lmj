@@ -22,7 +22,7 @@
 
 </head>
 <!-- <body class="h" ng-app="soiroc"  ng-controller="yingpinController"> -->
-    <body class="h" ng-app="soiroc" ng-cloak  ng-controller="yingpinController" ng-init="collectionStationProjectFindAll();collectionStationFindAll();findRecommends();findHotStationList();selectCvAll();loginInfo()">
+    <body class="h" ng-app="soiroc" ng-cloak  ng-controller="yingpinController" ng-init="collectionStationProjectFindAll();collectionStationFindAll();findRecommends();findHotStationList();selectCvAllFn();loginInfo()">
     <header class="header headerB marginBottom">
         <nav class="nav">
             
@@ -178,7 +178,7 @@
                                     </div>
                                 </a>
                                 <div class="btn">
-                                    <span class="tj" ng-click="tjAdd(this)">推荐人选</span><span class="yp"  ng-click="ypAdd(entity._id)">应聘职位</span>
+                                    <span class="tj" ng-click="tjAdd(this)">推荐人选</span><span class="yp"  ng-click="ypAdd(entity._id,entity.projectPersons)">应聘职位</span>
                                 </div>
                                 <div class="sc">
                                     <span ng-click="addperfavpro(entity,$event)"></span>
