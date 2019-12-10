@@ -8199,6 +8199,14 @@ body.h {
   justify-content: space-between;
 }
 
+.resume-content .slideList .list-item > ul > li .edit .input-list ul .language-type {
+  width: 100% !important;
+}
+
+.resume-content .slideList .list-item > ul > li .edit .input-list ul .language-score {
+  width: 100% !important;
+}
+
 .resume-content .slideList .list-item > ul > li .edit .input-list ul li {
   width: 45%;
 }

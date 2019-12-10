@@ -36,6 +36,15 @@ app.service('yingpinService',function($http){
 		this.collectionsation=function(proId){  //取消收藏职位
 			return $http.get("/api/collectionstation/delete?id="+proId);
 		}
+
+		this.searchHopeList=function(page,rows,param){  //获取订阅职位
+			return $http.post("/api/hope/search?page="+page+"&rows="+rows,param);
+		}
+
+		this.findAllHopeList=function(param){  //获取全部订阅职位
+			return $http.get("/api/hope/findAll?id="+param.id+"&hProName="+param.hProName+"&hMinSalary="+param.hMinSalary+"&hMaxSalary="+param.hMaxSalary+"&hIndustry="+param.hIndustry+"&userId="+param.userId);
+		}
+		
 		
 		
 })

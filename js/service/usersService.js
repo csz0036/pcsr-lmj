@@ -4,7 +4,10 @@ app.service('usersService',function($http){
 	}
     this.getIsLogin=function(){
         return $http.get("/api/users/islogin");
-    }
+	}
+	this.getUserInfo = function(successfn){
+		return $http.get(model+"getUserInfo",null,successfn);
+	}
 });
 
 var model = "/api/" +"users"+"/";

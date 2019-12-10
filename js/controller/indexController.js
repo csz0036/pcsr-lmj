@@ -36,8 +36,13 @@ app.controller("indexController",function($scope,indexService,newsInformationSer
 
     $scope.search = function(page,rows,id){
         indexService.search(page,rows,id,$scope.searchEntity).success(function(response){
-            // console.log('高端职位：：：',response.obj)
-            $scope.list = response.obj.rows;
+            console.log(response.obj)
+            if(response.obj.rows.length<=4){
+                $scope.list = response.obj.rows;
+            } else {
+                $scope.list = response.obj.rows.slice(0,4);
+
+            }
         })
     }
 

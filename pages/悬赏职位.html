@@ -144,7 +144,7 @@
                         <h1>
                             <span ng-show="!flag"  ng-click='allJob()' class="on faskk">全部职位</span>
                             &nbsp;&nbsp;&nbsp;
-                            <span class="fasta" ng-click='subscriptionPosition()'>订阅职位&nbsp;&nbsp;&nbsp;</span>
+                            <span class="fasta" ng-if="hasHopeList" ng-click='getHopeList(1,10)'>订阅职位&nbsp;&nbsp;&nbsp;</span>
                             <span ng-click='allJob()'  ng-show="flag">全部职位</span>
                             </h1>
                         <span>共{{totalRows}}个职位</span>
