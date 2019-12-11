@@ -48457,8 +48457,28 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 
 		$scope.search(1, 10)
 	}
+	// 当前选择推荐的职位id
+	$scope.chooseId=""
+	$scope.personalDetail={
+		chineseName:'哈',
+		gender: '',
+		phone: '',
+		curyearsal: '',
+		phone: '',
+		recentPosition: '',
+		incumbency: '',
+		industry: '',
+	}
 
-	$scope.tjAdd=function(e){
+	$scope.showDetail=function(id){
+
+		layer.open({
+			title: '人选详情',
+			content: $(".personalDetailAlert"),
+		});
+	}
+
+	$scope.tjAdd=function(e,id){
 		layer.open({
 			type: 1,
 			title: false,
@@ -48472,6 +48492,8 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 			content: $(".jobsNewAlert"),
 		});
 		console.log(e);
+		console.log('职位id',id)
+		$scope.chooseId = id
 		e.stopPropagation();
 		e.preventDefault();
 	}
@@ -48486,11 +48508,14 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 		$scope.tdscarch.proId = id;
 		$scope.tdscarch.userId = window.localStorage.getItem('userId');
 
-		console.log(id, pid)
+		console.log('数组',$scope.selectCvAll);
+
+		console.log('两个id',id, pid)
 		var perIdAry = [],perIdsJoin = '';
 		for(var k in pid){
 			perIdAry.push(pid[k].perId)
 		}
+		$scope.tdscarch._id = id
 		perIdsJoin = perIdAry.join()
 		if($scope.selectCvAll.length > 1){
 			$scope.tdscarch.personId = $scope.selectCvAll[0].personId;
@@ -48522,7 +48547,7 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 		
 	}
 	$scope.selectCvSave = function(){
-		
+		$scope.tdscarch._id,$scope.tdscarch.personId
 		personService.proVisitorNum($scope.tdscarch._id,$scope.tdscarch.personId).success(
 			function (response) {
 				layer.msg("投递成功");
@@ -48858,9 +48883,9 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 			var form = layui.form;
 			//监听提交
 			form.on('submit(formRecommend)', function(data){
-				$scope.recommend.sex = data.field.sex
-				$scope.recommend.currentFunctions = $(".jobsNewAlert .new .layui-form input.functions").val()
-				recommendService.save($scope.recommend).success(function (response) {
+				$scope.recommend.gender = data.field.gender
+				$scope.recommend.incumbency = $(".jobsNewAlert .new .layui-form input.functions").val()
+				recommendService.saveRecommend($scope.recommend).success(function (response) {
 					if (response.success == true) {
 						$scope.recommends.push(response.obj);
 						console.log($scope.recommends);
@@ -48883,8 +48908,11 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 			//监听提交
 			form.on('submit(recommendsManForm)', function(data){
 				console.log('推荐人',data.field)
-				var param =  data.field.recommendsMan
-				recommendService.update(param).success(function (response) {
+				var param =  {
+					perIds: data.field.recommendsMan,
+					proId:$scope.chooseId
+				}
+				recommendService.recommendPush(param).success(function (response) {
 					if (response.success == true) {
 						$scope.recommends.push(response.obj);
 						console.log($scope.recommends);
@@ -48899,22 +48927,23 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 		});
 
 		
-		// $scope.recommend.sex=$scope.initDate.recommend.gender;
-		console.log($scope.recommend,"111")
-		recommendService.selectPersonProject(1,10,$scope.recommend).success(function (response) {
-			console.log(response)
-			// if (response.success) {
-			// 	$scope.recommends.push(JSON.parse(response.obj));
-			// 	console.log($scope.recommends);
-			// 	// window.location.reload();
-			// }
-		})
+		// // $scope.recommend.sex=$scope.initDate.recommend.gender;
+		// console.log($scope.recommend,"111")
+		// recommendService.selectPersonProject(1,10,$scope.recommend).success(function (response) {
+		// 	console.log(response)
+		// 	// if (response.success) {
+		// 	// 	$scope.recommends.push(JSON.parse(response.obj));
+		// 	// 	console.log($scope.recommends);
+		// 	// 	// window.location.reload();
+		// 	// }
+		// })
 	}
 	//获取所有的简历
 	$scope.selectCvAllFn = function(){
-		personService.findAll().success(function (response) {
+		recommendService.getRecommendList().success(function (response) {
 			if (response.success) {
 				$scope.selectCvAll = response.obj;
+				$scope.recommends = response.obj;
 				//console.log($scope.selectCvAll);
 				layui.use(['form'], function(){
 						var form = layui.form;
@@ -48926,16 +48955,10 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 		})
 	}
 
-	$scope.findRecommends = function () {
-		recommendService.findAll().success(function (response) {
-			if (response.success == true && response.obj.length>0) {
-				$scope.recommends = response.obj;
-			}
-		})
-	}
-
 	// 赚
-	$scope.zhuan = function(){
+	$scope.zhuan = function($event){
+		$event.stopPropagation();//阻止冒泡
+      	$event.preventDefault();// 阻止默认行为 
 		if($scope.loginInfos == true){
 			window.location.href = "http://39.96.49.139/outside/index/frontPage.jsp";
 		}else{

@@ -105,6 +105,9 @@ app.controller("personController",function($scope,personService,usersService){
                 }else{
                     $scope.flaglast=true
                     initData($scope.editData,res.obj[0]);
+
+
+
                 }
                 setTimeout( () => {$scope.form.render();},0);
             }
@@ -277,7 +280,7 @@ app.controller("personController",function($scope,personService,usersService){
         if(resultdata.headportrait == null){
             entitydata.headportrait = [];
         }else{
-            entitydata.headportrait = resultdata.headportrait;
+            entitydata.headportrait = resultdata.headportrait; 
         }
     }
 
@@ -324,7 +327,7 @@ app.controller("personController",function($scope,personService,usersService){
                             elem : this,
                             trigger : 'click',
                             done:function(value,date,endDate){
-                                console.log(value);
+                                $scope.editData.workExp[$scope.editData.workExp.length-1].workStartTime = value
                             }
                         });
                     });
@@ -333,7 +336,7 @@ app.controller("personController",function($scope,personService,usersService){
                             elem : this,
                             trigger : 'click',
                             done:function(value,date,endDate){
-                                console.log(value);
+                                $scope.editData.workExp[$scope.editData.workExp.length-1].workEndTime = value
                             }
                         });
                     });
@@ -364,7 +367,7 @@ app.controller("personController",function($scope,personService,usersService){
                                 elem : this,
                                 trigger : 'click',
                                 done:function(value,date,endDate){
-                                    console.log(value);
+                                    $scope.editData.workExp[$scope.editData.workExp.length-1].workStartTime = value
                                 }
                             });
                         });
@@ -373,7 +376,7 @@ app.controller("personController",function($scope,personService,usersService){
                                 elem : this,
                                 trigger : 'click',
                                 done:function(value,date,endDate){
-                                    console.log(value);
+                                    $scope.editData.workExp[$scope.editData.workExp.length-1].workEndTime = value
                                 }
                             });
                         });
@@ -416,10 +419,22 @@ app.controller("personController",function($scope,personService,usersService){
                 form = layui.form,
                 upload = layui.upload;
                 function timeAdd(){
-                    lay('.timePicker').each(function() {
+                    lay('.timePicker3').each(function() {
                         laydate.render({
                             elem : this,
-                            trigger : 'click'
+                            trigger : 'click',
+                            done:function(value,date,endDate){
+                                $scope.editData.projectExp[$scope.editData.projectExp.length-1].proIntoTime = value
+                            }
+                        });
+                    });
+                    lay('.timePicker4').each(function() {
+                        laydate.render({
+                            elem : this,
+                            trigger : 'click',
+                            done:function(value,date,endDate){
+                                $scope.editData.projectExp[$scope.editData.projectExp.length-1].proOutTime = value
+                            }
                         });
                     });
                 }
@@ -438,10 +453,22 @@ app.controller("personController",function($scope,personService,usersService){
                     form = layui.form,
                     upload = layui.upload;
                     function timeAdd(){
-                        lay('.timePicker').each(function() {
+                        lay('.timePicker3').each(function() {
                             laydate.render({
                                 elem : this,
-                                trigger : 'click'
+                                trigger : 'click',
+                                done:function(value,date,endDate){
+                                    $scope.editData.projectExp[$scope.editData.projectExp.length-1].proIntoTime = value
+                                }
+                            });
+                        });
+                        lay('.timePicker4').each(function() {
+                            laydate.render({
+                                elem : this,
+                                trigger : 'click',
+                                done:function(value,date,endDate){
+                                    $scope.editData.projectExp[$scope.editData.projectExp.length-1].proOutTime = value
+                                }
                             });
                         });
                     }
@@ -481,11 +508,22 @@ app.controller("personController",function($scope,personService,usersService){
                 //     trigger: 'click',
                 // });
                 function timeAdd(){
-                    lay('.timePicker').each(function() {
+                    lay('.timePicker5').each(function() {
                         laydate.render({
                             elem : this,
                             trigger : 'click',
-                            done
+                            done:function(value,date,endDate){
+                                $scope.editData.eduBackground[$scope.editData.eduBackground.length-1].eduStartTime = value
+                            }
+                        });
+                    });
+                    lay('.timePicker6').each(function() {
+                        laydate.render({
+                            elem : this,
+                            trigger : 'click',
+                            done:function(value,date,endDate){
+                                $scope.editData.eduBackground[$scope.editData.eduBackground.length-1].eduEndTime = value
+                            }
                         });
                     });
                 }
@@ -498,10 +536,22 @@ app.controller("personController",function($scope,personService,usersService){
                     form = layui.form,
                     upload = layui.upload;
                     function timeAdd(){
-                        lay('.timePicker').each(function() {
+                        lay('.timePicker5').each(function() {
                             laydate.render({
                                 elem : this,
-                                trigger : 'click'
+                                trigger : 'click',
+                                done:function(value,date,endDate){
+                                    $scope.editData.eduBackground[$scope.editData.eduBackground.length-1].eduStartTime = value
+                                }
+                            });
+                        });
+                        lay('.timePicker6').each(function() {
+                            laydate.render({
+                                elem : this,
+                                trigger : 'click',
+                                done:function(value,date,endDate){
+                                    $scope.editData.eduBackground[$scope.editData.eduBackground.length-1].eduEndTime = value
+                                }
                             });
                         });
                     }
@@ -690,11 +740,12 @@ app.controller("personController",function($scope,personService,usersService){
                         if($scope.editData.recentPosition !== ''){
                             if($scope.editData.incumbency !== ''){
                                 if($scope.editData.industry !== ''){
+                                    $scope.editData.headportrait[0].photoPath =  $scope.personHeadImg
                                     personService.save($scope.editData).success(
                                         function(response){
                                             if(response.success){
                                                 layer.msg("保存成功")
-                                                window.location.href = "../../pages/简历-详情.html"
+                                                // window.location.href = "../../pages/简历-详情.html"
                                             }else{
                                                 layer.msg("保存失败")
                                                 console.log(response.message);
@@ -740,11 +791,14 @@ app.controller("personController",function($scope,personService,usersService){
                         if($scope.editData.recentPosition !== ''){
                             if($scope.editData.incumbency !== ''){
                                 if($scope.editData.industry !== ''){
+
+                                    $scope.editData.headportrait[0].photoPath =  $scope.personHeadImg
+
                                     personService.save($scope.editData).success(
                                         function(response){
                                             if(response.success){
                                                 layer.msg("保存成功")
-                                                window.location.href = "../../pages/简历-详情.html"
+                                                // window.location.href = "../../pages/简历-详情.html"
                                             }else{
                                                 layer.msg("保存失败")
                                                 console.log(response.message);
@@ -828,10 +882,58 @@ app.controller("personController",function($scope,personService,usersService){
             //     trigger: 'click',
             // });
             function timeAdd(){
-                lay('.timePicker').each(function() {
+                lay('.timePicker1').each(function() {
                     laydate.render({
                         elem : this,
-                        trigger : 'click'
+                        trigger : 'click',
+                        done:function(value,date,endDate){
+                            $scope.editData.workExp[$scope.editData.workExp.length-1].workStartTime = value
+                        }
+                    });
+                });
+                lay('.timePicker2').each(function() {
+                    laydate.render({
+                        elem : this,
+                        trigger : 'click',
+                        done:function(value,date,endDate){
+                            $scope.editData.workExp[$scope.editData.workExp.length-1].workEndTime = value
+                        }
+                    });
+                });
+                lay('.timePicker3').each(function() {
+                    laydate.render({
+                        elem : this,
+                        trigger : 'click',
+                        done:function(value,date,endDate){
+                            $scope.editData.projectExp[$scope.editData.projectExp.length-1].proIntoTime = value
+                        }
+                    });
+                });
+                lay('.timePicker4').each(function() {
+                    laydate.render({
+                        elem : this,
+                        trigger : 'click',
+                        done:function(value,date,endDate){
+                            $scope.editData.projectExp[$scope.editData.projectExp.length-1].proOutTime = value
+                        }
+                    });
+                });
+                lay('.timePicker5').each(function() {
+                    laydate.render({
+                        elem : this,
+                        trigger : 'click',
+                        done:function(value,date,endDate){
+                            $scope.editData.eduBackground[$scope.editData.eduBackground.length-1].eduStartTime = value
+                        }
+                    });
+                });
+                lay('.timePicker6').each(function() {
+                    laydate.render({
+                        elem : this,
+                        trigger : 'click',
+                        done:function(value,date,endDate){
+                            $scope.editData.eduBackground[$scope.editData.eduBackground.length-1].eduEndTime = value
+                        }
                     });
                 });
             }
@@ -843,10 +945,58 @@ app.controller("personController",function($scope,personService,usersService){
                         form = layui.form,
                         upload = layui.upload;
                         function timeAdd(){
-                            lay('.timePicker').each(function() {
+                            lay('.timePicker1').each(function() {
                                 laydate.render({
                                     elem : this,
-                                    trigger : 'click'
+                                    trigger : 'click',
+                                    done:function(value,date,endDate){
+                                        $scope.editData.workExp[$scope.editData.workExp.length-1].workStartTime = value
+                                    }
+                                });
+                            });
+                            lay('.timePicker2').each(function() {
+                                laydate.render({
+                                    elem : this,
+                                    trigger : 'click',
+                                    done:function(value,date,endDate){
+                                        $scope.editData.workExp[$scope.editData.workExp.length-1].workEndTime = value
+                                    }
+                                });
+                            });
+                            lay('.timePicker3').each(function() {
+                                laydate.render({
+                                    elem : this,
+                                    trigger : 'click',
+                                    done:function(value,date,endDate){
+                                        $scope.editData.projectExp[$scope.editData.projectExp.length-1].proIntoTime = value
+                                    }
+                                });
+                            });
+                            lay('.timePicker4').each(function() {
+                                laydate.render({
+                                    elem : this,
+                                    trigger : 'click',
+                                    done:function(value,date,endDate){
+                                        $scope.editData.projectExp[$scope.editData.projectExp.length-1].proOutTime = value
+                                    }
+                                });
+                            });
+                            lay('.timePicker5').each(function() {
+                                laydate.render({
+                                    elem : this,
+                                    trigger : 'click',
+                                    done:function(value,date,endDate){
+                                        $scope.editData.eduBackground[$scope.editData.eduBackground.length-1].eduStartTime = value
+                                    }
+                                });
+                            });
+                            lay('.timePicker6').each(function() {
+                                laydate.render({
+                                    elem : this,
+                                    trigger : 'click',
+                                    done:function(value,date,endDate){
+                                        $scope.editData.eduBackground[$scope.editData.eduBackground.length-1].eduEndTime = value
+                                    }
                                 });
                             });
                         }
@@ -946,19 +1096,42 @@ app.controller("personController",function($scope,personService,usersService){
 	// 上传头像
 	$scope.uImg = function(){
 		$('#userimg').click()
-	}
+    }
+    
+    // 头像字段
+    $scope.personHeadImg = ''
+
 	$scope.onFileSelect = function(file){
-		imgFile = file.files[0]
-		var reader = new FileReader();
+        imgFile = file.files[0]
+        var reader = new FileReader();
 		reader.readAsDataURL(imgFile ); // 将图片转成dataUri
 		reader.onload = function(e) {
-            //更新图片链接
-            console.log('图片资源',$scope.editData)
-            $scope.editData.headportrait[0] = {}
-			$scope.editData.headportrait[0].photoPath =  e.target.result;
-			$scope.$apply();
-		}
-	}
+        //更新图片链接
+        console.log('图片资源',$scope.editData)
+        $scope.editData.headportrait[0] = {}
+        $scope.editData.headportrait[0].photoPath =  e.target.result;
+
+        var pic1 = imgFile;
+        var formData = new FormData();
+        // 服务端要求参数是 pic1 
+        formData.append('file',pic1);
+        $.ajax({
+            url:'/api/upload/uploadFile',
+            type:'post',
+            data:formData,
+            cache: false, //上传文件不需要缓存
+            processData: false, // 告诉jQuery不要去处理发送的数据
+            contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+            success:function(data){
+                var url = JSON.parse(data.obj).url
+                // 设置图片预览功能
+                $scope.personHeadImg = 'http://122.14.213.237:8022/' + url
+            }
+        })
+
+        $scope.$apply();
+    }
+}
 
 	$scope.reloadList = function() {
 		//切换页码
@@ -985,7 +1158,8 @@ app.controller("personController",function($scope,personService,usersService){
 			var idx = $scope.selectIds.indexOf(id);
 			$scope.selectIds.splice(idx, 1);//删除
 		}
-	}
+    }
+
     $scope.initDataAdd = function(entitydata){
         // entitydata.personId = Math.ceil(Math.random()*10000);
         entitydata.chineseName = "";

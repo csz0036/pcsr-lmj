@@ -184,7 +184,8 @@
                                 <div class="input-list layui-form">
                                     <form>
                                     <div class="tx">
-                                            <img ng-src="{{editData.headportrait[0].photoPath}}" alt=""><a href="javascript:;" ng-click="uImg()">上传头像</a>
+                                            <img ng-src="{{editData.headportrait[0].photoPath}}" alt="">
+                                            <a href="javascript:;" ng-click="uImg()">上传头像</a>
                                             <input type="file" style="display: none;" id="userimg" accept="image/jpg,image/jpeg,image/png,image/PNG" onchange="angular.element(this).scope().onFileSelect(this)">
                                     </div>
                                     <ul>
@@ -925,9 +926,9 @@
                                             <div class="layui-form-item time-item">
                                                 <label class="layui-form-label">时间</label>
                                                 <div class="layui-input-block">
-                                                    <input type="text" class="layui-input timePicker" ng-model="item.proIntoTime">
+                                                    <input type="text" class="layui-input timePicker3" ng-model="item.proIntoTime">
                                                     <span>至</span> 
-                                                    <input type="text" class="layui-input timePicker" ng-model="item.proOutTime">
+                                                    <input type="text" class="layui-input timePicker4" ng-model="item.proOutTime">
                                                 </div>
                                             </div>
                                         </li>
@@ -1054,9 +1055,9 @@
                                             <div class="layui-form-item time-item">
                                                 <label class="layui-form-label">时间</label>
                                                 <div class="layui-input-block">
-                                                    <input type="text" class="layui-input timePicker" id="test3" ng-model="item.eduStartTime">
+                                                    <input type="text" class="layui-input timePicker5" id="test3" ng-model="item.eduStartTime">
                                                     <span>至</span> 
-                                                    <input type="text" class="layui-input timePicker" id="test4" ng-model="item.eduEndTime">
+                                                    <input type="text" class="layui-input timePicker6" id="test4" ng-model="item.eduEndTime">
                                                 </div>
                                             </div>
                                         </li>
