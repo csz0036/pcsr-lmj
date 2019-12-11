@@ -22,7 +22,7 @@
 
 </head>
 <!-- <body class="h" ng-app="soiroc"  ng-controller="yingpinController"> -->
-    <body class="h" ng-app="soiroc" ng-cloak  ng-controller="yingpinController" ng-init="collectionStationProjectFindAll();collectionStationFindAll();findHotStationList();selectCvAllFn();loginInfo()">
+    <body class="h" ng-app="soiroc" ng-cloak  ng-controller="yingpinController" ng-init="collectionStationProjectFindAll();collectionStationFindAll();findHotStationList();selectCvAllFn();loginInfo();getHopeList()">
     <header class="header headerB marginBottom">
         <nav class="nav">
             
@@ -144,7 +144,7 @@
                         <h1>
                             <span ng-show="!flag"  ng-click='allJob()' class="on faskk">全部职位</span>
                             &nbsp;&nbsp;&nbsp;
-                            <span class="fasta" ng-if="hasHopeList" ng-click='getHopeList(1,10)'>订阅职位&nbsp;&nbsp;&nbsp;</span>
+                            <span class="fasta" ng-click='changeHopeList()' ng-if="hasHopeList">订阅职位&nbsp;&nbsp;&nbsp;</span>
                             <span ng-click='allJob()'  ng-show="flag">全部职位</span>
                             </h1>
                         <span>共{{totalRows}}个职位</span>

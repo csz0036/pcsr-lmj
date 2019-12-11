@@ -48759,6 +48759,8 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 	}
 	// 搜索
 	$scope.searchEntity = [];
+	$scope.jobList = [];
+
 
 	$scope.search = function (page, rows,proName) {
 
@@ -48791,11 +48793,14 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 
 			console.log('前数组',$scope.select)
 			console.log('后数组',param)
+			$scope.list = []
+
 
 			yingpinService.search(page,rows, param).success(function (response) {
 				console.log(response.obj)
 				if(response.obj!=null){
 					$scope.list = response.obj.rows;
+					$scope.jobList = response.obj.rows;
 					$scope.totalRows = response.obj.total;
 					$scope.paginationConf.totalItems = response.obj.total; // 更新总记录数
 				}
@@ -49053,15 +49058,35 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 	}
 
 	$scope.hasHopeList = false
+	$scope.hopeList = []
 
 	$scope.getHopeList = function(page, rows){
-		yingpinService.searchHopeList(page, rows).success(function(res){
+		var pageNum = page || 1
+		var pageSize = rows || 10
+		yingpinService.searchHopeList(pageNum, pageSize).success(function(res){
 			if(res.obj.length>0){
 				$scope.hasHopeList = true
 
+				yingpinService.findAllHopeList(res.obj).success(function(res){
+					$scope.hopeList = res.obj
+				})
 			}
 		})
 	}
+
+	// 切换为订阅列表
+	$scope.changeHopeList = function(){
+		$scope.list = []
+		$scope.list = $scope.hopeList
+
+	}
+
+	// 切换全部职业列表
+	$scope.allJob = function(){
+		$scope.list = []
+		$scope.list = $scope.jobList
+	}
+
 
 	/**
 	 * 是否登录

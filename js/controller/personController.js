@@ -740,7 +740,7 @@ app.controller("personController",function($scope,personService,usersService){
                         if($scope.editData.recentPosition !== ''){
                             if($scope.editData.incumbency !== ''){
                                 if($scope.editData.industry !== ''){
-                                    $scope.editData.headportrait[0].photoPath =  $scope.personHeadImg
+                                    $scope.editData.headportrait[0] =  $scope.personHeadImg
                                     personService.save($scope.editData).success(
                                         function(response){
                                             if(response.success){
@@ -792,7 +792,7 @@ app.controller("personController",function($scope,personService,usersService){
                             if($scope.editData.incumbency !== ''){
                                 if($scope.editData.industry !== ''){
 
-                                    $scope.editData.headportrait[0].photoPath =  $scope.personHeadImg
+                                    $scope.editData.headportrait[0] =  $scope.personHeadImg
 
                                     personService.save($scope.editData).success(
                                         function(response){
@@ -1109,7 +1109,7 @@ app.controller("personController",function($scope,personService,usersService){
         //更新图片链接
         console.log('图片资源',$scope.editData)
         $scope.editData.headportrait[0] = {}
-        $scope.editData.headportrait[0].photoPath =  e.target.result;
+        $scope.editData.headportrait[0] =  e.target.result;
 
         var pic1 = imgFile;
         var formData = new FormData();

@@ -62,7 +62,7 @@
                             </div>
                             <div class="edit-exhibition ">
                                 <div class="tx">
-                                        <img ng-src="{{initData.headportrait[0].photoPath || '../images/two.png'}}" alt="" >
+                                        <img ng-src="{{initData.headportrait[0] || '../images/two.png'}}" alt="" >
                                 </div>
                                 <div class="edit-list">
                                     <ul>
@@ -184,7 +184,7 @@
                                 <div class="input-list layui-form">
                                     <form>
                                     <div class="tx">
-                                            <img ng-src="{{editData.headportrait[0].photoPath}}" alt="">
+                                            <img ng-src="{{editData.headportrait[0]}}" alt="">
                                             <a href="javascript:;" ng-click="uImg()">上传头像</a>
                                             <input type="file" style="display: none;" id="userimg" accept="image/jpg,image/jpeg,image/png,image/PNG" onchange="angular.element(this).scope().onFileSelect(this)">
                                     </div>
