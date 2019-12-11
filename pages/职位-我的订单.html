@@ -123,5 +123,16 @@
     <footer class="footer">
         
     </footer>
+
+    <script>
+        $.ajax({
+            url:'/api/ordermanager/add',
+            type:"post",
+            success:function(result){
+                console.log('result',result)
+            }
+
+        })
+    </script>
 </body>
 </html>
