@@ -6,6 +6,18 @@ app.service('recommendService',function($http){
     this.save=function(data){
         return $http.post("/api/recommend/add",data);
     }
+    // 推荐人保存
+    this.saveRecommend=function(data){
+        return $http.post("/api/person/add",data);
+    }
+    // 推荐人列表
+    this.getRecommendList=function(){
+		return $http.get("/api/person/personList");
+    }
+    // 人才简历加入职位
+    this.recommendPush=function(param){
+		return $http.get("/api/api/addPerson?"+param.proId+"&"+param.perIds);
+	}
     this.findAll=function(){
         return $http.get("/api/recommend/findAll");
     }
