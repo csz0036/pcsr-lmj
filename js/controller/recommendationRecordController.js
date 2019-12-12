@@ -63,7 +63,7 @@ app.controller("recommendationRecordController", function($scope, recommendation
 	// 搜索
 	$scope.searchEntity = {
 		"state":"01",
-		"proName":"职位名称1",
+		"proName":"",
 		userId:"",
 		perIds: ["1","2"]
 	};

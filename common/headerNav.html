@@ -71,7 +71,7 @@
                         <li><a href="../pages/职位-我的订单.html">我的订单</a></li>
                         <li><a href="../pages/职位-我的邀请顾问.html">我邀请的人</a></li>
                         <li><a href="../pages/职位-我邀请的人.html">我的邀请链接</a></li>
-                        <li class="loginOut"><a href="">退出</a></li>
+                        <li class="loginOut"><a href="javascript:;">退出</a></li>
                     </ul>
                 </h1>
             </div>
@@ -96,11 +96,10 @@
              url: "/api/logout",
              dataType: "json",  
              success: function(data){  
-               
-               window.location.href="http://127.0.0.1:8082/pages/%E9%A6%96%E9%A1%B5.html" ;
+               window.location.href="../pages/首页.html" ;
             }, 
              error:function(e){  
-                 alert('退出失败')
+                 console.log('loginOut---退出失败')
             }  
         })
       })
