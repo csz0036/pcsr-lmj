@@ -56,7 +56,7 @@ app.controller("personController",function($scope,personService,usersService){
             if(personArr[i].personId == personId){
                 initData($scope.initData,personArr[i]);
                 console.log($scope.initData);
-                $scope.pName = $scope.initData.personName
+                $scope.pName = $scope.initData.personName || $scope.initData.chineseName
 
             }
         }
@@ -87,6 +87,11 @@ app.controller("personController",function($scope,personService,usersService){
                     alert("请添加简历");
                     return;
                 }
+                res.obj.forEach(item=>{
+                    if(item.personName == ''){
+                        item.personName = item.chineseName
+                    }
+                })
                 $scope.persons = res.obj;
                 initData($scope.initData,res.obj[0]);
 
@@ -125,14 +130,14 @@ app.controller("personController",function($scope,personService,usersService){
     var initData = function(entitydata ,resultdata){
         entitydata.personId = resultdata.personId;
         entitydata.chineseName = resultdata.chineseName;
-        entitydata.personName = resultdata.personName;
+        entitydata.personName = resultdata.personName || resultdata.chineseName;
         $scope.pName = entitydata.personName || resultdata.chineseName
         if(resultdata.phone == null){
             entitydata.phone = [];
         }else{
             entitydata.phone = resultdata.phone;
         }
-        entitydata.headportrait = resultdata.headportrait;
+        entitydata.headPortrait = resultdata.headPortrait;
         entitydata.gender = resultdata.gender;
         entitydata.city = resultdata.city;
         entitydata.birthday = resultdata.birthday;
@@ -277,11 +282,12 @@ app.controller("personController",function($scope,personService,usersService){
             entitydata.note = resultdata.note;
         }
 
-        if(resultdata.headportrait == null){
-            entitydata.headportrait = [];
+        if(resultdata.headPortrait == null){
+            entitydata.headPortrait = [];
         }else{
-            entitydata.headportrait = resultdata.headportrait; 
+            entitydata.headPortrait = resultdata.headPortrait; 
         }
+        console.log('头像11111',$scope.initData.headPortrait[0])
     }
 
 	// $scope.editData = {}
@@ -298,7 +304,7 @@ app.controller("personController",function($scope,personService,usersService){
 	// 	majorqualify:[],//证件
 	// 	personalfile:[],//附件
 	// 	note:[],//
-	// 	headportrait:[]//头像
+	// 	headPortrait:[]//头像
 	// }
 	// 添加工作经历
 	$scope.addWorkExpRow = function(){
@@ -740,12 +746,12 @@ app.controller("personController",function($scope,personService,usersService){
                         if($scope.editData.recentPosition !== ''){
                             if($scope.editData.incumbency !== ''){
                                 if($scope.editData.industry !== ''){
-                                    $scope.editData.headportrait[0] =  $scope.personHeadImg
-                                    personService.save($scope.editData).success(
+                                    $scope.editData.headPortrait[0] =  $scope.personHeadImg
+                                    personService.save($scope.editData).succes(
                                         function(response){
                                             if(response.success){
                                                 layer.msg("保存成功")
-                                                // window.location.href = "../../pages/简历-详情.html"
+                                                window.location.href = "../../pages/简历-详情.html"
                                             }else{
                                                 layer.msg("保存失败")
                                                 console.log(response.message);
@@ -792,13 +798,13 @@ app.controller("personController",function($scope,personService,usersService){
                             if($scope.editData.incumbency !== ''){
                                 if($scope.editData.industry !== ''){
 
-                                    $scope.editData.headportrait[0] =  $scope.personHeadImg
+                                    $scope.editData.headPortrait[0] =  $scope.personHeadImg
 
                                     personService.save($scope.editData).success(
                                         function(response){
                                             if(response.success){
                                                 layer.msg("保存成功")
-                                                // window.location.href = "../../pages/简历-详情.html"
+                                                window.location.href = "../../pages/简历-详情.html"
                                             }else{
                                                 layer.msg("保存失败")
                                                 console.log(response.message);
@@ -1108,8 +1114,8 @@ app.controller("personController",function($scope,personService,usersService){
 		reader.onload = function(e) {
         //更新图片链接
         console.log('图片资源',$scope.editData)
-        $scope.editData.headportrait[0] = {}
-        $scope.editData.headportrait[0] =  e.target.result;
+        $scope.editData.headPortrait[0] = {}
+        $scope.editData.headPortrait[0] =  e.target.result;
 
         var pic1 = imgFile;
         var formData = new FormData();
@@ -1167,7 +1173,7 @@ app.controller("personController",function($scope,personService,usersService){
         entitydata.personName = "";
         console.log(entitydata.personName);
         entitydata.phone = [];
-        entitydata.headportrait = "";
+        entitydata.headPortrait = "";
         entitydata.gender = "";
         entitydata.city = "";
         entitydata.birthday = "";
@@ -1259,6 +1265,6 @@ app.controller("personController",function($scope,personService,usersService){
             }];
         entitydata.personalfile = [];
         entitydata.note = [];
-        entitydata.headportrait = [];
+        entitydata.headPortrait = [];
     }
 })
