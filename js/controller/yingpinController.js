@@ -48671,32 +48671,48 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
     }
 	// 订阅
 	$scope.subscribe = function () {
-		if ($(".Subscribe button").text() == "订阅") {
-			if ($scope.initData.subscribe.hopeIndustry != '') {
-				$(".Subscribe button").text("取消订阅");
-				$scope.flag=true
-				$('.jobs .allJobs .tops h1 .fasta').addClass("on").siblings('.jobs .allJobs .tops h1 span').removeClass("on");
-				console.log('期望职位',typeof($scope.initData.subscribe.hopeIndustry))
-				var hopeIndustry = $scope.initData.subscribe.hopeIndustry
-				$scope.initData.subscribe.hopeIndustry = hopeIndustry.trim().split(/\s+/);
-				yingpinService.addcollectionsation($scope.initData.subscribe).success(function(response){
-					console.log(response)
-					layer.msg('订阅成功')
-				})
+		console.log('1111122222',$scope.loginInfos)
+		if($scope.loginInfos == true){
+			if ($(".Subscribe button").text() == "订阅") {
+				if ($scope.initData.subscribe.hopeIndustry != '') {
+					$(".Subscribe button").text("取消订阅");
+					$scope.flag=true
+					$('.jobs .allJobs .tops h1 .fasta').addClass("on").siblings('.jobs .allJobs .tops h1 span').removeClass("on");
+					console.log('期望职位',typeof($scope.initData.subscribe.hopeIndustry))
+					var hopeIndustry = $scope.initData.subscribe.hopeIndustry
+					$scope.initData.subscribe.hopeIndustry = hopeIndustry.trim().split(/\s+/);
+					yingpinService.addcollectionsation($scope.initData.subscribe).success(function(response){
+						console.log(response)
+						layer.msg('订阅成功')
+					})
+				}
+			} else {
+				$('.jobs .allJobs .tops h1 .faskk').addClass("on").siblings('.jobs .allJobs .tops h1 span').removeClass("on");
+				$scope.flag=false
+				$(".Subscribe input").val("");
+				$scope.initData.subscribe = {};
+				$scope.initData.subscribe.hopeIndustry = [];
+				$scope.list=[]
+				$(".Subscribe button").text("订阅");
+				$($event.target).addClass("on");
+				// yingpinService.collectionsation($scope.initData.subscribe).success(function(response){
+				// 	console.log(response)
+				// })
+	
 			}
-		} else {
-			$('.jobs .allJobs .tops h1 .faskk').addClass("on").siblings('.jobs .allJobs .tops h1 span').removeClass("on");
-			$scope.flag=false
-			$(".Subscribe input").val("");
-			$scope.initData.subscribe = {};
-			$scope.initData.subscribe.hopeIndustry = [];
-			$scope.list=[]
-			$(".Subscribe button").text("订阅");
-			$($event.target).addClass("on");
-			// yingpinService.collectionsation($scope.initData.subscribe).success(function(response){
-			// 	console.log(response)
-			// })
-
+		}else{
+			layer.open({     
+				type: 1,
+				title: false,
+				closeBtn: 0,
+				shadeClose: true,
+				skin: '',
+				area: 'auto',
+				maxWidth :"auto",
+				maxHeight : "auto",
+				resize : false,
+				content: $(".lay-sign"),
+			});
 		}
 	}
 	// 查询分页
@@ -49058,16 +49074,11 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 	$scope.hasHopeList = false
 	$scope.hopeList = []
 
-	$scope.getHopeList = function(page, rows){
-		var pageNum = page || 1
-		var pageSize = rows || 10
-		yingpinService.searchHopeList(pageNum, pageSize).success(function(res){
+	$scope.getHopeList = function(){
+		yingpinService.findAllHopeList().success(function(res){
 			if(res.obj.length>0){
-				$scope.hasHopeList = true
-
-				yingpinService.findAllHopeList(res.obj).success(function(res){
-					$scope.hopeList = res.obj
-				})
+			$scope.hasHopeList = true
+			$scope.hopeList = res.obj
 			}
 		})
 	}

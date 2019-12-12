@@ -6,12 +6,10 @@ app.controller("joinSoirocController",function($scope,joinSoirocService){
     }
     var entity = $scope.entity={};
     $scope.oinSoiroc = function (rows,page) {
-        let newRows = rows || 999
-        let newPage = page || 1
-		joinSoirocService.search(newRows,newPage,{}).success(function (response) {
+		joinSoirocService.findAll().success(function (response) {
 			if (response.success) { 
-                console.log(response.obj.rows)
-                $scope.initData.oinSoiroc.push(response.obj.rows)
+                console.log(response.obj)
+                $scope.initData.oinSoiroc.push(response.obj)
             layui.use(['table','form'], function(){
                 var table = layui.table,
                     form = layui.form;
@@ -25,8 +23,8 @@ app.controller("joinSoirocController",function($scope,joinSoirocService){
                         return {
                             "code": res.code, //解析接口状态
                             "msg": res.message, //解析提示文本
-                            "data": res.obj.rows, //解析数据列表
-                            "count": res.obj.total,
+                            "data": res.obj, //解析数据列表
+                            "count": res.obj.length,
                         };
                     },
                     where: {},
@@ -47,7 +45,7 @@ app.controller("joinSoirocController",function($scope,joinSoirocService){
                             ,{field: 'workingPlace', title: '工作地点',align:'center'}
                             ,{field: 'updateTime', title: '发布时间', width:178,align:'center'}
                             ,{field: 'status', title: '&nbsp;', width:60,align:'center',templet:function(d){
-                                return  d.status?'<div style="color:red">已投递</div>':'<div>未投递</div>'
+                                return  d.status == 1?'<div style="color:red">已投递</div>':'<div>未投递</div>'
                             }} 
                             ,{field: '', title: '&nbsp;', width:60,align:'center',templet:function(){
                                 return '<div><i class="iconfont">&#xe6c8;</i></div>'

@@ -41,8 +41,8 @@ app.service('yingpinService',function($http){
 			return $http.post("/api/hope/search?page="+page+"&rows="+rows,param);
 		}
 
-		this.findAllHopeList=function(param){  //获取全部订阅职位
-			return $http.get("/api/hope/findAll?id="+param.id+"&hProName="+param.hProName+"&hMinSalary="+param.hMinSalary+"&hMaxSalary="+param.hMaxSalary+"&hIndustry="+param.hIndustry+"&userId="+param.userId);
+		this.findAllHopeList=function(){  //获取全部订阅职位
+			return $http.get("/api/hope/findAll");
 		}
 		
 		
