@@ -741,11 +741,11 @@ app.controller("personController",function($scope,personService,usersService){
                             if($scope.editData.incumbency !== ''){
                                 if($scope.editData.industry !== ''){
                                     $scope.editData.headportrait[0] =  $scope.personHeadImg
-                                    personService.save($scope.editData).success(
+                                    personService.save($scope.editData).succes(
                                         function(response){
                                             if(response.success){
                                                 layer.msg("保存成功")
-                                                // window.location.href = "../../pages/简历-详情.html"
+                                                window.location.href = "../../pages/简历-详情.html"
                                             }else{
                                                 layer.msg("保存失败")
                                                 console.log(response.message);
@@ -798,7 +798,7 @@ app.controller("personController",function($scope,personService,usersService){
                                         function(response){
                                             if(response.success){
                                                 layer.msg("保存成功")
-                                                // window.location.href = "../../pages/简历-详情.html"
+                                                window.location.href = "../../pages/简历-详情.html"
                                             }else{
                                                 layer.msg("保存失败")
                                                 console.log(response.message);
