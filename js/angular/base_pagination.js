@@ -90,20 +90,8 @@ app.filter('content_trusted', ["$sce", function ($sce) {
 }])
 app.filter('ftpChangeImg', function () {
 	return function (ftp) {
-		if(typeof ftp == 'string'){
-			var strSplit = ftp.split('/')
-			var lastImg = strSplit[strSplit.length - 1]
-			$.ajax({
-				type : "GET",
-				url : '/api/upload/getFtpImage?sfzh='+lastImg,
-				dataType : "json",
-				success : function(res){
-					return "data:image/png;base64,"+res.obj
-				},
-			});
-		}
-		// return 'http://res.itkeyword.com/images/itkeyword/logo.gif'
-		
+		var strSplit = JSON.parse(ftp) 
+		return 'http://122.14.213.237:8022/'+strSplit.url
 	}
 })
 

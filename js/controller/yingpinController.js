@@ -48519,12 +48519,11 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 		perIdsJoin = perIdAry.join()
 		if($scope.selectCvAll.length > 1){
 			$scope.tdscarch.personId = $scope.selectCvAll[0].personId;
-
 			var param = "proId="+id+"&perIds="+perIdsJoin
 			personService.addPersonPush(param).success(
 			function (response) {
-				console.log('应聘点击操作')
-				layer.msg("投递成功");
+				var resultMsg = JSON.parse(response.obj)
+				layer.msg(resultMsg.content);
 			}
 		)
 		}else{
@@ -48832,7 +48831,6 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 	$scope.collectionStationCount = 0;
 	$scope.collectionStationFindAll = function () {
 		collectionStationService.findAll().success(function (response) {
-			
 			$scope.collectionStationList = response.obj;
 			$scope.collectionStationCount = response.obj;
 			

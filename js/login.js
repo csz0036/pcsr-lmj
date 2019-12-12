@@ -99,7 +99,6 @@ function getCookie(form) { //获取cookie
 }
 
 function check(form) {
-  console.log(form)
   var validate2 = {
     username: false,
     password: false,
@@ -108,11 +107,9 @@ function check(form) {
   var password = $(form).find($("input[name = password]"));
   var aa = $(form).find($("input[type='checkbox']")).is(":checked");
   var iframe = $(form).find($("#form")).text();
-  console.log(iframe)
   if (username.val() == "") {
     username.siblings(".error").text("请输入手机号/帐号");
     validate2.username = false;
-    console.log("");
     return;
   } else {
     username.siblings(".error").text("");
@@ -132,14 +129,15 @@ function check(form) {
     setCookie(username, password, aa); //调用设置Cookie的方法 
     form.submit();
     setTimeout(function () {
+      // window.location.href = 'http://127.0.0.1:8082/pages/%E9%A1%B6%E7%BA%A7%E8%81%8C%E4%BD%8D.html'
       showUserOrHide();
     }, 1000)
   } else {
     form.submit();
     setTimeout(function () {
+      // window.location.href = 'http://127.0.0.1:8082/pages/%E9%A1%B6%E7%BA%A7%E8%81%8C%E4%BD%8D.html'
       showUserOrHide();
     }, 1000)
   }
 
-  // window.location.href = 'http://127.0.0.1:8082/pages/%E9%A1%B6%E7%BA%A7%E8%81%8C%E4%BD%8D.html'
 }

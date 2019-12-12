@@ -22,6 +22,11 @@ var successfn = function(res){
 		$(".highPost").on("click",".highPostContent .list li .btn a",function(){
 			window.location.href = "../pages/顶级职位.html";
 		});
+		
+		$(".topPosts").on("click","a.employBestPosition",function(){
+			window.location.href = "../pages/悬赏职位.html";
+		});
+
 		$(".JobDetails .recommend").show();
 
 		if(res.obj.id){
@@ -32,6 +37,25 @@ var successfn = function(res){
 		$(".JobDetails .recommend").hide();
         $(".header .nav").removeClass("resume-nav");
 		$(".notLogin").css("display","flex");
+		$(".topPosts").on("click","a.employBestPosition",function(){
+			layer.open({     
+				type: 1,
+				title: false,
+				closeBtn: 0,
+				shadeClose: true,
+				skin: '',
+				area: 'auto',
+				maxWidth :"auto",
+				maxHeight : "auto",
+				resize : false,
+				content: $(".lay-sign"),
+				end:function(){
+					window.location.href = '../pages/悬赏职位.html'
+				}
+			});
+		});
+
+
 		$(".highPost").on("click",".highPostContent .list .more a",function(){
 			layer.open({     
 				type: 1,
@@ -44,6 +68,9 @@ var successfn = function(res){
 				maxHeight : "auto",
 				resize : false,
 				content: $(".lay-sign"),
+				end:function(){
+					window.location.href = '../pages/顶级职位.html'
+				}
 			});
 		});
 		$(".highPost").on("click",".highPostContent .list li .btn a",function(){

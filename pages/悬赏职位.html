@@ -222,12 +222,11 @@
                                 <li ng-repeat="pojo in collectionStationList | limitTo: 4">
                                     <a href="javascript:;">
                                         <div class="tit">
-                                            <h1>proid:{{pojo.proId}}</h1>
-                                            <h2>userid:{{pojo.userId}}</h2>
+                                            <h1>{{pojo.proName}}</h1>
+                                            <!-- <h2>userid:{{pojo.userId}}</h2> -->
                                         </div>
                                         <div class="money">
-                                                等待接口
-                                                {{pojo.workYear}}
+                                                年薪{{pojo.minSalary}}  - {{pojo.maxSalary}}万 
                                         </div>
                                     </a>
                                 </li>

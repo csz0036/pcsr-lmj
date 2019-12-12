@@ -5,10 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="import" href="../common/common.html"/>
+    <script src="../js/service/personService.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/service/newsInformationService.js"></script>
     <script src="../js/service/indexService.js"></script>
     <script src="../js/controller/indexController.js"></script>
 </head>
-<body class="h" ng-app="soiroc" ng-controller="indexController" ng-init="topPosts('487181981')">
+<body class="h" ng-app="soiroc" ng-controller="indexController">
     <header class="header headerB">
         <nav class="nav">
 
@@ -21,10 +23,10 @@
             </div>
         </div>
     </header>
-    <div class="topPosts">
+    <div class="topPosts collectionPosition">
         <div class="marginAuto">
             <div class="slideNav">
-                <a href="javascript:;" ng-repeat="p in topPostsObj track by $index" ng-click="topPosts(p.id)" ng-class="{true:'active',false:'close'}[$index==0]">{{p.name}}</a>
+                <a href="javascript:;" ng-repeat="p in topPostsObj track by $index" ng-click="topPosts(p.id,$index)" ng-class="{active:topPostsObjInde === $index, close:!topPostsObjInde === $index}">{{p.name}}</a>
             </div>
             <div class="content">
                 <div class="position">
@@ -33,6 +35,9 @@
                         共1000个中职位
                     </div>
                 </div>
+
+<!-- 
+
                 <div class="list">
                     <ul>
                         <li ng-repeat="pojo in list">
@@ -57,7 +62,36 @@
                         </li>
                     </ul>
                 </div>
-                <tm-pagination conf="paginationConf"></tm-pagination>
+                <tm-pagination conf="paginationConf"></tm-pagination> -->
+
+
+                <div class="list">
+                    <div class="nothingTest">
+                        <img src="../images/logo2.png" alt="">
+                        <h1>暂无收藏</h1>
+                    </div>
+                    <ul>
+                        <li ng-repeat = "entity in positionList">
+                            <div class="tit">
+                                <h1>{{entity.proName}}</h1>
+                                <h2>年薪{{entity.minSalary}}  - {{entity.maxSalary}}万 {{entity.communicationDepartName}}</h2>
+                                <h3>{{areaData[entity.city]}}丨 {{entity.minLimit}}-{{entity.maxLimit}}丨{{eduCation[entity.firstDegree]}}丨{{sexDate[entity.gender]}}</h3>
+                            </div>
+                            <div class="center">
+                                <h1><span>悬赏金￥{{entity.estimateHeadhuntingFee}}</span><a href="javascript:;">赚</a></h1>
+                            </div>
+                            <div class="right">
+                                <div class="length"><i class="iconfont">&#xe9ff;</i>{{entity.visitNumber}}</div>
+                                <div class="btn">
+                                    <a href="javascript:;" class="employBestPosition">推荐人选</a><a href="javascript:;" class="employBestPosition">应聘职位</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <tm-pagination conf="paginationConf"></tm-pagination>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -68,8 +102,5 @@
 
     </div>
 
-
-
-    <!-- alert -->
 </body>
 </html>

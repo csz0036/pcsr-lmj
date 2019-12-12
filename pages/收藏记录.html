@@ -54,8 +54,6 @@
                     <li ng-repeat = "entity in list">
                         <div class="tit">
                             <h1>{{entity.proName}}</h1>
-                            <!-- <h2>{{entity.yearSalary}}   {{entity.company}}</h2> -->
-                            <!-- <h3>{{entity.address}}丨 {{entity.workYear}}丨{{entity.edu}}丨{{entity.gender}}</h3> -->
                             <h2>年薪{{entity.minSalary}}  - {{entity.maxSalary}}万 {{entity.communicationDepartName}}</h2>
                             <h3>{{areaData[entity.city]}}丨 {{entity.minLimit}}-{{entity.maxLimit}}丨{{eduCation[entity.firstDegree]}}丨{{sexDate[entity.gender]}}</h3>
                         </div>
