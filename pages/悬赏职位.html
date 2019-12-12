@@ -22,7 +22,7 @@
 
 </head>
 <!-- <body class="h" ng-app="soiroc"  ng-controller="yingpinController"> -->
-    <body class="h" ng-app="soiroc" ng-cloak  ng-controller="yingpinController" ng-init="collectionStationProjectFindAll();collectionStationFindAll();findHotStationList();selectCvAllFn();loginInfo();getHopeList()">
+    <body class="h" ng-app="soiroc" ng-cloak  ng-controller="yingpinController" ng-init="collectionStationProjectFindAll();collectionStationFindAll();findHotStationList();selectCvAllFn();loginInfo();getHopeList();dealRouesubway()">
     <header class="header headerB marginBottom">
         <nav class="nav">
             
@@ -52,13 +52,13 @@
                             <dt class= "onselect" ng-click="selectCityType(1)">按地铁沿线</dt>
                         </div>
                         <div class="cityMetro city btn1 mertocity">
-                            <dt ng-repeat="(index,item) in initData.provinceList" ng-click="selectProvince(item,$index)" class="{{initData.provinceCurrent == index?'on':''}}">{{item.name}}</dt>
+                            <dt ng-repeat="(index,item) in initData.provinceList track by $index" ng-click="selectProvince(item,$index)" class="{{initData.provinceCurrent == index?'on':''}}">{{item.name}}</dt>
                         </div>
                         <div class="cityMetro metro btn1 hide">
-                            <dt ng-repeat="(index,item) in initData.lineList" ng-click="selectLine(item.lineName,index)" class="{{initData.lineCurrent==$index?'on':''}}">{{item.lineName}}</dt>
+                            <dt ng-repeat="(index,item) in initData.lineList track by $index" ng-click="selectLine(item.lineName,index)" class="{{initData.lineCurrent==$index?'on':''}}">{{item.lineName}}</dt>
                         </div>
                         <div class="metroList hide">
-                            <dt ng-repeat="(index,item) in initData.lineadrsList" ng-click="selectLineAdrs(item.stepName,index)" class="{{initData.lineadrsCurrent==$index?'on':''}}">{{item.stepName}}</dt>
+                            <dt ng-repeat="(index,item) in initData.lineadrsList track by $index" ng-click="selectLineAdrs(item.stepName,index)" class="{{initData.lineadrsCurrent==$index?'on':''}}">{{item.stepName}}</dt>
                         </div>
                     </li>
                     <li>
@@ -313,10 +313,10 @@
                                 <li ng-repeat="iterm in recommends">
                                     <div class="layui-form-item">
                                         <div class="layui-input-block">
-                                            <input type="radio" value="{{iterm.perId}}" name="recommendsMan" >
+                                            <input lay-filter="recommendsMan" type="radio" value="{{iterm.perId}}" name="recommendsMan" >
                                         </div>
                                     </div>
-                                    <h1>人选姓名：{{iterm.chineseName}}</h1><h1>人员手机号:{{iterm.phone}}</h1><a ng-click="showDetail(iterm.perId)">详情</a>
+                                    <h1>人选姓名：{{iterm.chineseName}}</h1><h1>人员手机号:{{iterm.phone[0]}}</h1><a ng-click="showDetail(iterm.perId)">详情</a>
                                 </li>
                             </div>
                         </ul>

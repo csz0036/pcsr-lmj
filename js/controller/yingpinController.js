@@ -48255,44 +48255,51 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 
 
 	$scope.selectCityType = function (type) {
-		$scope.initData.rouesubway.forEach(element => {
-			element.lineName = getCaption(element.lineName, 0)
-		});
+		// $scope.initData.rouesubway.forEach(element => {
+		// 	element.lineName = getCaption(element.lineName, 0)
+		// });
+
 		$scope.initData.cityType = type
+			// console.log($scope.initData.rouesubway,"111111111")
+
 		if (type) {
 			var obj = {}
 			// console.log($scope.initData.rouesubway,"111111111")
+			$scope.initData.lineList = []
+			$scope.initData.rouesubways = []
+
 			$scope.initData.rouesubway.forEach(element => {
 				if (element.cityName == $scope.select.address) {
 					$scope.initData.rouesubways.push(element)
-
-					for (var i = 0; i < $scope.initData.rouesubways.length; i++) {
-						if (!obj[$scope.initData.rouesubways[i].lineName]) {
-							$scope.initData.lineList.push($scope.initData.rouesubways[i]);
-							obj[$scope.initData.rouesubways[i].lineName] = true;
-							console.log($scope.initData.lineList,"asdadad")
-						}
-					}
-
 				}
 			});
-			console.log("sdsdfsfsdfs")
+
+			for (var i = 0; i < $scope.initData.rouesubways.length; i++) {
+				if (!obj[$scope.initData.rouesubways[i].lineName]) {
+					$scope.initData.lineList.push($scope.initData.rouesubways[i]);
+					obj[$scope.initData.rouesubways[i].lineName] = true;
+
+				}
+			}
+
 			$('.mertocity').css('diaplay','none !important')
 			$('.metro').css('display','flex');
 
 			$('.cityPageBtn .onselect').addClass('on');
 			$('.cityPageBtn .onselectw').removeClass('on')
 			$('.city').css('display', 'none')
-			$scope.select.line = ''
+			// $scope.select.line = ''
 			$scope.initData.lineCurrent = null
 		} else {
 			$('.cityPageBtn .onselect').removeClass('on');
 			$('.cityPageBtn .onselectw').addClass('on')
 			$('.metro').css('display','none');
+			$('.metroList').css('display','none');
+
 			$('.city').css('display', 'flex')
 			// $('.mertocity').css('diaplay','flex')
 			// $('.metro').css('display','none')
-			$scope.select.province = ''
+			// $scope.select.province = ''
 			$scope.initData.provinceCurrent = null
 		}
 	}
@@ -48311,9 +48318,7 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 		var province = item.name;
 		// rouesubway
 		console.log("1111")
-		$scope.initData.rouesubway.forEach(element => {
-			element.lineName = getCaption(element.lineName, 0)
-		});
+		
 
 		if ($scope.initData.provinceCurrent == index) {
 			$scope.initData.provinceCurrent = null
@@ -48326,6 +48331,8 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 	}
 	// 选择地铁
 	$scope.selectLine = function (item, index) {
+		$scope.initData.lineadrsList = []
+
 		// selectLine
 		$scope.select.sbwayline=item;
 		// $scope.select.sbwayline=item;
@@ -48472,6 +48479,12 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 
 	$scope.showDetail=function(id){
 
+		$scope.recommends.forEach(item=>{
+			if(item.perId == id){
+				$scope.personalDetail = item
+			}
+		})
+
 		layer.open({
 			title: '人选详情',
 			content: $(".personalDetailAlert"),
@@ -48479,23 +48492,39 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 	}
 
 	$scope.tjAdd=function(e,id){
-		layer.open({
-			type: 1,
-			title: false,
-			closeBtn: 0,
-			shadeClose: true,
-			skin: '',
-			area: 'auto',
-			maxWidth :"auto",
-			maxHeight : "auto",
-			resize : false,
-			content: $(".jobsNewAlert"),
-		});
-		console.log(e);
-		console.log('职位id',id)
-		$scope.chooseId = id
-		e.stopPropagation();
-		e.preventDefault();
+		if($scope.loginInfos){
+			layer.open({
+				type: 1,
+				title: false,
+				closeBtn: 0,
+				shadeClose: true,
+				skin: '',
+				area: 'auto',
+				maxWidth :"auto",
+				maxHeight : "auto",
+				resize : false,
+				content: $(".jobsNewAlert"),
+			});
+			console.log(e);
+			console.log('职位id',id)
+			$scope.chooseId = id
+			e.stopPropagation();
+			e.preventDefault();
+			}
+			else{
+				layer.open({     
+					type: 1,
+					title: false,
+					closeBtn: 0,
+					shadeClose: true,
+					skin: '',
+					area: 'auto',
+					maxWidth :"auto",
+					maxHeight : "auto",
+					resize : false,
+					content: $(".lay-sign"),
+				});
+			}
 	}
 
 
@@ -48517,17 +48546,32 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 		}
 		$scope.tdscarch._id = id
 		perIdsJoin = perIdAry.join()
-		if($scope.selectCvAll.length > 1){
-			$scope.tdscarch.personId = $scope.selectCvAll[0].personId;
-			var param = "proId="+id+"&perIds="+perIdsJoin
-			personService.addPersonPush(param).success(
-			function (response) {
-				var resultMsg = JSON.parse(response.obj)
-				layer.msg(resultMsg.content);
+		if($scope.loginInfos){
+			if($scope.selectCvAll && $scope.selectCvAll.length > 1){
+				$scope.tdscarch.personId = $scope.selectCvAll[0].personId;
+				var param = "proId="+id+"&perIds="+perIdsJoin
+				personService.addPersonPush(param).success(
+				function (response) {
+					var resultMsg = JSON.parse(response.obj)
+					layer.msg(resultMsg.content);
+				}
+			)
+			}else{
+				layer.open({
+					type: 1,
+					title: false,
+					closeBtn: 0,
+					shadeClose: true,
+					skin: '',
+					area: 'auto',
+					maxWidth :"auto",
+					maxHeight : "auto",
+					resize : false,
+					content: $(".selectCv"),
+				});
 			}
-		)
-		}else{
-			layer.open({
+		} else {
+			layer.open({     
 				type: 1,
 				title: false,
 				closeBtn: 0,
@@ -48537,9 +48581,10 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 				maxWidth :"auto",
 				maxHeight : "auto",
 				resize : false,
-				content: $(".selectCv"),
+				content: $(".lay-sign"),
 			});
 		}
+		
 	}
 	$scope.selectCvId = function(id){
 		$scope.tdscarch.personId = id;
@@ -48561,12 +48606,18 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 		industryInputItem.value = $event.target.innerHTML;
 		$scope.recommend.currentIndustry = industryInputItem.value
 	}
+	$scope.dealRouesubway = function(){
+		$scope.initData.rouesubway.forEach(element => {
+			element.lineName = getCaption(element.lineName, 0)
+		});
+	}
 	// 选择城市
 	$scope.selectCity = function(item,index) {
 		// $scope.index = index;
 		// console.log($scope.index)
 		// console.log(item)
-		if(item.children[0].name=="市辖区"){
+		
+		if(item.children && item.children[0].name=="市辖区"){
 			// console.log(1)
 			$scope.initData.provinceList=item.children[0].children;
 			// console.log($scope.initData.provinceList)
@@ -48592,12 +48643,16 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 					console.log("999999")
 					$('.city').css('display', 'flex')
 					$('.metro').css('display', 'none')
+					$('.cityPageBtn .onselect').removeClass('on');
+					$('.cityPageBtn .onselectw').addClass('on')
 				} else {
 					// 地铁线
 					// debugger;
 					console.log("00000")
 					$('.metro').css('display', 'flex')
 					$('.city').css('display', 'none')
+					$('.cityPageBtn .onselectw').removeClass('on');
+					$('.cityPageBtn .onselect').addClass('on')
 				}
 			}
 			if ($scope.initData.cityCurrent == index) {
@@ -48895,6 +48950,106 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 	}
 	$scope.recommendData = []; //选中的ID集合
 
+	$scope.recommend = {
+		// entitydata.personId = Math.ceil(Math.random()*10000);
+        chineseName  : "",
+          personName  : "" ,
+          phone  : [] ,
+          headportrait  : "" ,
+          gender  : "" ,
+          city  : "" ,
+          birthday  : "" ,
+          recentUnit  : "" ,
+          qualification  : "" ,
+          recentPosition  : "" ,
+         personState  : "" ,
+         incumbency  : "" ,
+         industry  : "" ,
+         timetype  : "" ,
+         expyearsal  : "" ,
+         hopeIndustry  : "" ,
+         household  : "" ,
+         houseProject  : "" ,
+         email  : [] ,
+         height  : "" ,
+         country  : "" ,
+         jobLeavl  : "" ,
+         origin  : "" ,
+         curyearsal  : "" ,
+         politics  : "" ,
+         highlyEducated  : "" ,
+         maritalStatus  : "" ,
+         certtype  : "" ,
+         overseasExperience  : "" ,
+         certcode  : "" ,
+         coverletter  : [] ,
+         familymember  : [] ,
+         resume  : [] ,
+         languageExp  : [{
+            languageType:'',
+            languageLevel:''
+        }] ,
+             eduBackground  : [{
+                eduStartTime:'',
+                eduEndTime:'',
+                soFar:'',
+                eduType:'',
+                eduSchoolName:'',
+                eduValue:{
+                    // 专业名称
+                    '572266df-2bd8-4a46-be10-fd5f595bc4c4':'',
+                    // 是否统招
+                    '8ad30b5b-dfaa-43ba-8968-7535eccc28c8':'',
+                    // 学历/学位
+                    '0b8b0f62-7d06-4b2f-8ef7-6ad703d9d67b':''
+                }
+            }] ,
+             projectExp  : [
+                {
+                    proIntoTime:'',
+                    proOutTime:'',
+                    sofar:'',
+                    proName:'',
+                    projectExpValue:{
+                        '77a7441a-23b4-4b7c-aa2c-269185db1c33':'',
+                        '238926b5-bf7f-4b88-b7fb-ce1c9caf234c':'',
+                        'e56dbbc6-a86b-437d-9de5-241929df991a':'',
+                        'dbf1b67f-ac70-495a-be14-aaf08daa8bfd':'',
+                        '7099a588-7dd1-4fa7-aed5-64f096e618dc':''
+                    },
+                    path:'',
+                    yPath:'',
+                    kPath:'',
+                    cos:'',
+                    proDescription:''
+                }
+            ] ,
+             workExp  : [
+                {
+                    workStartTime:'',
+                    workEndTime:'',
+                    workComname:'',
+                    workExpValue:{
+                        'ddf4afda-9f15-41fd-ae1d-38bfcc50fc44':'',
+                        'efdd270f-fac2-46be-9a96-6990b919f78e':'',
+                        'fb894fdb-8ae6-4f72-807c-c8476c7543cb':'',
+                        '815374f3-5cb7-48dd-8783-52308a7c8217':''
+                    },
+                    mainDuty:'',
+                    workBussdesc:'',
+                    exitText:''
+                }
+            ] ,
+             majorQualify  : [{
+                papersName:'',
+                getTime:'',
+                issuingAgency:''
+            }] ,
+         personalfile  : [] ,
+         note  : [] ,
+         headportrait  : [] ,
+	}
+
 	//保存简历信息
 	// $scope.newCandidates={}
 	$scope.saveRecommend = function () {
@@ -48925,11 +49080,15 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 		layui.use('form', function(){
 			var form = layui.form;
 			//监听提交
+			form.on('radio(recommendsMan)', function(data){
+				console.log(data.elem); //得到radio原始DOM对象
+				console.log(data.value); //被点击的radio的value值
+				});  
 			form.on('submit(recommendsManForm)', function(data){
 				console.log('推荐人',data.field)
 				var param =  {
 					perIds: data.field.recommendsMan,
-					proId:$scope.chooseId
+					proId: $scope.chooseId
 				}
 				recommendService.recommendPush(param).success(function (response) {
 					if (response.success == true) {
@@ -49076,9 +49235,11 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 
 	$scope.getHopeList = function(){
 		yingpinService.findAllHopeList().success(function(res){
-			if(res.obj.length>0){
-			$scope.hasHopeList = true
-			$scope.hopeList = res.obj
+			if(res.success == true){
+				if( res.obj.length>0){
+					$scope.hasHopeList = true
+					$scope.hopeList = res.obj
+					}
 			}
 		})
 	}

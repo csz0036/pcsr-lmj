@@ -16,7 +16,7 @@ app.service('recommendService',function($http){
     }
     // 人才简历加入职位
     this.recommendPush=function(param){
-		return $http.get("/api/api/addPerson?"+param.proId+"&"+param.perIds);
+		return $http.get("/api/api/addPerson?param.proId="+param.proId+"&param.perIds="+param.perIds);
 	}
     this.findAll=function(){
         return $http.get("/api/recommend/findAll");

@@ -129,7 +129,7 @@ function check(form) {
     setCookie(username, password, aa); //调用设置Cookie的方法 
     form.submit();
     setTimeout(function () {
-      // window.location.href = 'http://127.0.0.1:8082/pages/%E9%A1%B6%E7%BA%A7%E8%81%8C%E4%BD%8D.html'
+      window.location.reload()
       showUserOrHide();
     }, 1000)
   } else {
