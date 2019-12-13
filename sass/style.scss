@@ -5277,9 +5277,18 @@ body.h{
                             height: 120px;
                             align-items: center;
                             padding: 0 29px 0 20px;
-                            justify-content: space-between;
+                            // justify-content: space-between;
                             box-sizing: border-box;
                             margin-bottom: 20px;
+                            .center{
+                                position: absolute;
+                                right: 300px;
+                            }
+                            .right{
+                                position: absolute;
+                                right: 35px;
+                                top: 15px
+                            }
                         }
                         &:hover{
                             border-left: 2px solid #D23637;

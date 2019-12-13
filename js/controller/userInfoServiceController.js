@@ -184,6 +184,8 @@ app.controller("userInfoServiceController",function($scope,userInfoService){
                         console.log(response);
                         layer.msg('提交成功');
                         localStorage.setItem('userId',response.obj.id)
+                        localStorage.setItem('userInfo',JSON.stringify(response.obj))
+
                         location.href = "../../pages/首页.html"
                     }else{
                         layer.msg(response.message);

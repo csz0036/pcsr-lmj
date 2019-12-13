@@ -48467,7 +48467,7 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 	// 当前选择推荐的职位id
 	$scope.chooseId=""
 	$scope.personalDetail={
-		chineseName:'哈',
+		chineseName:'',
 		gender: '',
 		phone: '',
 		curyearsal: '',
@@ -48480,14 +48480,19 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 	$scope.showDetail=function(id){
 
 		$scope.recommends.forEach(item=>{
-			if(item.perId == id){
+			if(item.personId == id){
 				$scope.personalDetail = item
 			}
 		})
+		console.log(
+
+			'人选详情',$scope.personalDetail
+		)
+		var personalDetailAlert = $(".personalDetailAlert").html()
 
 		layer.open({
 			title: '人选详情',
-			content: $(".personalDetailAlert"),
+			content: personalDetailAlert,
 		});
 	}
 
@@ -49178,25 +49183,14 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 					"visitNumber":proid.projectVistiNum,
 				}
 				yingpinService.addcollectionsation(param).success(function(response){
-				
+					$scope.collectionStationFindAll()
 					console.log(response)
 				})
 			}else{
-				$scope.collectionStationFindAll = function () {
-					collectionStationService.findAll().success(function (response) {
-						console.log(response,"23423423");
-						$scope.collectionStationList = response.obj;
-						$scope.collectionStationCount = response.obj;
-						response.obj.forEach(element=>{
-							console.log(element,"22134234")
-						})
-						// yingpinService.collectionsation(proid._id).success(function(response){
-						// 	// console.log(proid)
-						// })
-						
-					})
-				}
-				// console.log(proid.$$hashKey)
+				$($event.target).removeClass("on");
+
+				
+				console.log(proid.$$hashKey)
 				// $scope.collectionStationCount.forEach(element=>{
 				// 	console.log(element.$$hashKey)
 				// 	console.log(element.$$hashKey==proid.$$hashKey)
@@ -49204,14 +49198,19 @@ app.controller("yingpinController", function ($scope, yingpinService, collection
 				// 	if(element.$$hashKey==proid.$$hashKey){
 				// 			yingpinService.collectionsation(proid._id).success(function(response){
 				// 			console.log(response)
+				// 			$scope.collectionStationFindAll()
 				// 		})
 						
 				// 	}
 				// })
-				// console.log(proid)
-				// $($event.target).removeClass("on");
+				yingpinService.collectionsation(proid._id).success(function(response){
+					console.log(response)
+					$scope.collectionStationFindAll()
+				})
+				console.log(proid)
+				$($event.target).removeClass("on");
 			
-				// layer.msg("取消收藏");
+				layer.msg("取消收藏");
 				
 			}
 		}else{

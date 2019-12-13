@@ -206,20 +206,36 @@
     $(".yzPass .phoneCodeBtnlist").click(function(){
         // var b='1111'
     //   console.log("111111")
+    
         var telphone=$('.forgetPhone').val()
-        // console.log(telphone)
-        $.ajax({
+        var timeDown=60;
+
+        if(telphone){
+            $.ajax({
             type: "GET",  
              url: "/api/send/getPassword",
              data: {phone:telphone},  
              dataType: "json",  
              success: function(data){  
-                 alert('发送请求成功')
+                 layer.msg('发送请求成功')
+                 var t=setInterval(function() {
+                    timeDown--;
+                    $(".yzPass .phoneCodeBtnlist").text(timeDown+"重新发送");
+                    if (timeDown==0) {
+                        clearInterval(t);
+                        $(".yzPass .phoneCodeBtnlist").text("获取验证码");
+                    }
+                },1000)
             }, 
              error:function(e){ 
-                 alert('发送请求失败')
+                layer.msg('发送请求失败')
             }  
         })
+    } else {
+        layer.msg('请输入手机号')
+    }
+        // console.log(telphone)
+        
     });
     var password = ''
     var oldPhone = ''

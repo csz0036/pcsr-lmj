@@ -85,6 +85,7 @@ app.controller("personController",function($scope,personService,usersService){
             function(res){
                 if(res.obj.length == 0){
                     alert("请添加简历");
+                    window.location.href = '../../pages/简历-详情.html?preson=null'
                     return;
                 }
                 res.obj.forEach(item=>{
@@ -747,7 +748,7 @@ app.controller("personController",function($scope,personService,usersService){
                             if($scope.editData.incumbency !== ''){
                                 if($scope.editData.industry !== ''){
                                     $scope.editData.headPortrait[0] =  $scope.personHeadImg
-                                    personService.save($scope.editData).succes(
+                                    personService.save($scope.editData).success(
                                         function(response){
                                             if(response.success){
                                                 layer.msg("保存成功")

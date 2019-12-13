@@ -5859,9 +5859,19 @@ body.h {
   height: 120px;
   align-items: center;
   padding: 0 29px 0 20px;
-  justify-content: space-between;
   box-sizing: border-box;
   margin-bottom: 20px;
+}
+
+.jobReward .jobs .allJobs .list ul li > a .center {
+  position: absolute;
+  right: 300px;
+}
+
+.jobReward .jobs .allJobs .list ul li > a .right {
+  position: absolute;
+  right: 35px;
+  top: 15px;
 }
 
 .jobReward .jobs .allJobs .list ul li:hover {

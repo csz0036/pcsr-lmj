@@ -313,10 +313,10 @@
                                 <li ng-repeat="iterm in recommends">
                                     <div class="layui-form-item">
                                         <div class="layui-input-block">
-                                            <input lay-filter="recommendsMan" type="radio" value="{{iterm.perId}}" name="recommendsMan" >
+                                            <input lay-filter="recommendsMan" type="radio" value="{{iterm.personId}}" name="recommendsMan" >
                                         </div>
                                     </div>
-                                    <h1>人选姓名：{{iterm.chineseName}}</h1><h1>人员手机号:{{iterm.phone[0]}}</h1><a ng-click="showDetail(iterm.perId)">详情</a>
+                                    <h1>人选姓名：{{iterm.chineseName}}</h1><h1>人员手机号:{{iterm.phone[0]}}</h1><a ng-click="showDetail(iterm.personId)">详情</a>
                                 </li>
                             </div>
                         </ul>
@@ -359,7 +359,7 @@
                         人选手机号：
                     </div>
                     <div class="layui-col-md6">
-                        {{ personalDetail.phone }}
+                        {{ personalDetail.phone[0] }}
                     </div>
 
                     <div class="layui-col-md6">
@@ -384,12 +384,12 @@
                         {{ personalDetail.incumbency }}
                     </div>
 
-                    <div class="layui-col-md6">
+                    <!-- <div class="layui-col-md6">
                             人选现在行业：
                     </div>
                     <div class="layui-col-md6">
                         {{ personalDetail.industry }}
-                    </div>
+                    </div> -->
             </div>
         </div>
 

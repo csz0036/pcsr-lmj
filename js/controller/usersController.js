@@ -8,12 +8,13 @@
  */
 //判断是否登录
 var successfn = function(res){
-
 	if(res.obj.username !='anonymousUser'){
+
 		$("#welcomeName").text("欢迎你："+res.obj.username);
-		layer.closeAll();
+		// layer.closeAll();
 		$(".loginAlert").hide();
 		$(".notLogin").hide();
+
 		$(".header .nav").addClass("resume-nav");
 		$(".loggedIn").css("display","flex");
 		$(".highPost").on("click",".highPostContent .list .more a",function(){
@@ -31,8 +32,11 @@ var successfn = function(res){
 
 		if(res.obj.id){
 			window.localStorage.setItem('userId',res.obj.id)
+			window.localStorage.setItem('userInfo',JSON.stringify(res.obj))
 		}
 	}else{
+		console.log('登录信息222',res.obj.username)
+
 		$(".loggedIn").hide();
 		$(".JobDetails .recommend").hide();
         $(".header .nav").removeClass("resume-nav");
@@ -100,5 +104,28 @@ var showUserOrHide = function(){
 
 var upUsrPw = function(){
 	var json = $.getFormData("upUsrPw");
-	updateUserPassword(json);
+	if(window.localStorage.getItem('userInfo')){
+		json.username = JSON.parse(window.localStorage.getItem('userInfo')).moblie
+	}
+	$.ajax({
+		type: 'post',
+		url: "/api/userInfo/updateUserPassword",
+		// contentType: "formData",  
+		contentType: 'application/json',
+		data: json,
+		success: function(data){  
+			if(data.success == true){
+				alert('修改密码成功')
+			} else {
+				alert(data.message)
+
+			}
+		}, 
+		error:function(e){  
+			alert(e.message)
+		}  
+	});
+	// updateUserPassword(json).success(function(res){
+		
+	// })
 }
