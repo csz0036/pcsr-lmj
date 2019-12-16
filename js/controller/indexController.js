@@ -124,7 +124,7 @@ app.controller("indexController",function($scope,indexService,newsInformationSer
 
     $scope.search = function(page,rows){
         indexService.search(page,rows,$scope.searchEntity).success(function(response){
-            console.log(response.obj)
+            if(!response.obj) return
             if(response.obj.rows.length<=4){
                 $scope.list = response.obj.rows;
             } else {
@@ -191,7 +191,7 @@ app.controller("indexController",function($scope,indexService,newsInformationSer
         $scope.iNewsSearchEntity.fileType = title;
         $scope.index = index;
         newsInformationService.search(1,3,$scope.iNewsSearchEntity).success(function(response){
-            $scope.newslist = response.obj.rows;
+            $scope.newslist = response.obj.rows || [];
         });
     }
 
