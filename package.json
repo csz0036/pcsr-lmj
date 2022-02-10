@@ -148,7 +148,7 @@
     "multipipe": "^0.1.2",
     "nanomatch": "^1.2.13",
     "natives": "^1.1.6",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "object-assign": "^3.0.0",
     "object-copy": "^0.1.0",
     "object-visit": "^1.0.1",
